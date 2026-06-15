@@ -1,0 +1,1801 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Job Monitoring - Non Routine Activity | PT AT Indonesia</title>
+
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- React + ReactDOM -->
+<script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+
+<!-- Babel (for in-browser JSX transform) -->
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<!-- Lucide icons (raw icon path data) -->
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+<style>
+  body { margin: 0; background:#09090b; }
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 4px; }
+  ::-webkit-scrollbar-track { background: #18181b; }
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>
+</head>
+<body>
+<div id="root">
+  <div style="display:flex;align-items:center;justify-content:center;height:100vh;color:#a1a1aa;font-family:sans-serif;font-size:14px;">
+    Memuat Job Monitoring System...
+  </div>
+</div>
+
+<script type="text/babel" data-presets="react">
+const { useState, useMemo, useEffect } = React;
+
+
+/* =========================================================================
+   CONFIG - Koneksi ke Google Apps Script (Google Sheets + Google Drive)
+   =========================================================================
+   1. Deploy backend Code.gs sebagai Web App (lihat SETUP_GUIDE.md).
+   2. Copy URL Web App hasil deploy, paste di bawah ini.
+   ========================================================================= */
+
+const CONFIG = {
+  API_URL: "https://script.google.com/macros/s/AKfycbz51ZkN5FoequMTDLB-1-nud-FB1JjmKSdYtZgD3RSChBwLEp3kbujp7jH-YL7X6COP/exec",
+};
+
+const isConfigured = () =>
+  CONFIG.API_URL && CONFIG.API_URL.indexOf("https://script.google.com") === 0;
+
+async function apiGet(action, params = {}) {
+  const qs = new URLSearchParams({ action, ...params }).toString();
+  const res = await fetch(`${CONFIG.API_URL}?${qs}`);
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json();
+}
+
+async function apiPost(action, payload = {}) {
+  const res = await fetch(CONFIG.API_URL, {
+    method: "POST",
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+    body: JSON.stringify({ action, ...payload }),
+  });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json();
+}
+
+/* Resize foto sebelum diupload ke Google Drive agar lebih cepat & ringan */
+function resizeImage(file, maxDim = 1280, quality = 0.8) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        let { width, height } = img;
+        if (width > maxDim || height > maxDim) {
+          if (width > height) {
+            height = Math.round((height * maxDim) / width);
+            width = maxDim;
+          } else {
+            width = Math.round((width * maxDim) / height);
+            height = maxDim;
+          }
+        }
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, width, height);
+        resolve(canvas.toDataURL("image/jpeg", quality));
+      };
+      img.onerror = reject;
+      img.src = e.target.result;
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+/* =========================================================================
+   MASTER DATA
+   ========================================================================= */
+
+const MP_LIST = [
+  // Molding ACE-1 NSP
+  "Sunarno","Sumarno","Nadir","Sumardi","Rudi Andriansyah","Riyan","Agus S.P.",
+  "Teguh I.","Aang A.","M. Sonni A.","Dwi M.","Suranto","Yosef Nugraha",
+  "Ahmad Sahrul N","A. Syukur","Rohmanudin","Aji Koswara","Joni H.","Fauzi A.",
+  // Molding ACE-1 NSM
+  "Sonang F.","Sutopo","Ajis S.","Riski D.","Karim Abdulloh","Tajudin",
+  "Kusnandar","Sunoto","Yoyon","Kemal F.","Panji Satriya","Yanuardi","Totok",
+  "Farhan","Ari Sujarwo","Khaerul A.","Harun Agus S","Asep P.","Solikin",
+  // Molding ACE-2 NSP
+  "Kurniangga Y.","Adi Mulyono","Syepudin","Hafid F.","Aris PW",
+  "Rifki Ardiansyah","Ahmad Niki N","Wahyu Adik K.S","Atmam","Saripudin",
+  "Jeje M.","Ribut Mulyono","Indria Ratna G.","Satrio A","Hamidan","Resa",
+  // Molding ACE-2 NSM
+  "Agus M.","Ridwan K","Agus Surahno","Yayat H.","Mahfud","Januar A.",
+  "R. Afandi","Cucu Efendy","Sartono","Yulian Tikno","Darmanto","Khoirul A.",
+  "Kamaludin","Sopian Arip","Andi Tri Prasetyo","Alfian Budi S.",
+  // Melting ACE-1 NSP
+  "Sudimin","Suparmin","Rudi A.","Didi S.","Achmad W.","Yogaswara",
+  "Wahyudi W","Dede J.","Mandiyono","Nunung N.","Dede A.","Darta",
+  // Melting ACE-1 NSM
+  "Eko Winardi","Hermawan SP","Slamet R.","Saiful","M. Khoirul A.","Atsa",
+  "Tatang","Eko H.","Tarnado","Wahyu Eko S.","Nugroho","Hamdani",
+  // Melting ACE-2 NSP
+  "Ikhsani","Aripin","Setyo T.","Dwi H.","Ayuts H.","Siswanto","Guntur P.",
+  "Tono H.","Heri S.","M. Rizal","Sutoro","Sarnata","Imam S.",
+  // Melting ACE-2 NSM
+  "Agus Rachman","Joko W.","Husein","M. Sapi'i","M. Dwi H.","Fikri Y.",
+  "Catur","Widodo","Kayun","Warsono","Yudi Adi W.","A. Musrifin","Cucun W.",
+  // Die Making
+  "Waryono","Suryadin","Aris Nurcahyo","Endang Sumarna","Rega A","Yasir Ali",
+  "Iman R.","Ari Kustiana","Fuad","Agus Y.","Pandi","Setya Budi","Hermawan",
+  "Doni Prasetyo",
+  // HADICO
+  "Dadan","Endang S","Angkrih","Adam J.","Ade Iman","Sutrisno","Kusnadi",
+  "Rustam","Ade S.","Yahman","Oki","Nurdin",
+  // Lainnya
+  "Sudiyono","M. Syafaat","Dede M.","Suroso","Didik S.",
+  // Tambahan dari Schedule Hot Casting 2 (OT 13-14 Juni 2026)
+  "Agung Z","Endrik","Maman","Pirmansyah","Ari Risnandar","Halimun","Ade Saefudin"
+];
+
+const DEPTS = [
+  "Melting ACE-1","Melting ACE-2","Molding ACE-1","Molding ACE-2",
+  "Die Making NSP","Die Making NSM","HADICO Support"
+];
+
+const JENIS_OPTIONS = ["Maintenance","Improvement","Safety","Trial","Others"];
+const RISK_OPTIONS = ["Low","Medium","High"];
+
+const JENIS_META = {
+  Maintenance: { icon: "Wrench", color: "text-sky-400 bg-sky-500/10 border-sky-500/30" },
+  Improvement: { icon: "TrendingUp", color: "text-emerald-400 bg-emerald-500/10 border-emerald-500/30" },
+  Safety: { icon: "ShieldAlert", color: "text-rose-400 bg-rose-500/10 border-rose-500/30" },
+  Trial: { icon: "FlaskConical", color: "text-violet-400 bg-violet-500/10 border-violet-500/30" },
+  Others: { icon: "ClipboardList", color: "text-zinc-400 bg-zinc-500/10 border-zinc-500/30" },
+};
+
+const STATUS_LIST = ["WAITING APPROVAL","READY","IN PROGRESS","DELAY","HOLD","DONE"];
+
+const STATUS_META = {
+  "WAITING APPROVAL": { dot: "bg-amber-400", text: "text-amber-300", bg: "bg-amber-500/10", border: "border-amber-500/30" },
+  "READY":            { dot: "bg-zinc-400",  text: "text-zinc-300",  bg: "bg-zinc-500/10",  border: "border-zinc-500/30"  },
+  "IN PROGRESS":      { dot: "bg-amber-500", text: "text-amber-300", bg: "bg-amber-500/15", border: "border-amber-500/40" },
+  "DELAY":            { dot: "bg-rose-500",  text: "text-rose-300",  bg: "bg-rose-500/10",  border: "border-rose-500/30"  },
+  "HOLD":             { dot: "bg-rose-400",  text: "text-rose-300",  bg: "bg-rose-500/10",  border: "border-rose-500/30"  },
+  "DONE":             { dot: "bg-emerald-500", text: "text-emerald-300", bg: "bg-emerald-500/10", border: "border-emerald-500/30" },
+};
+
+const RISK_META = {
+  Low:    { level: 1, color: "bg-sky-500",  text: "text-sky-300" },
+  Medium: { level: 2, color: "bg-amber-500", text: "text-amber-300" },
+  High:   { level: 3, color: "bg-rose-500",  text: "text-rose-300" },
+};
+
+/* STOP 6 - kriteria safety pekerjaan */
+const STOP6_OPTIONS = ["A", "B", "C", "D", "E", "F"];
+const STOP6_META = {
+  A: { label: "Aparatus", desc: "Bahaya alat / perkakas kerja" },
+  B: { label: "Big Heavy", desc: "Bahaya benda berat / beban" },
+  C: { label: "Car", desc: "Bahaya kendaraan / alat angkut" },
+  D: { label: "Drop", desc: "Bahaya jatuh / terjatuh" },
+  E: { label: "Electricity", desc: "Bahaya listrik" },
+  F: { label: "Fire", desc: "Bahaya api / panas" },
+};
+
+const TODAY = new Date();
+
+const fmtDate = (d) => {
+  if (!d) return "-";
+  const dt = new Date(d);
+  return dt.toLocaleDateString("id-ID", { day: "2-digit", month: "short", year: "numeric" });
+};
+const fmtDateTime = (d) => {
+  if (!d) return "-";
+  const dt = new Date(d);
+  return dt.toLocaleString("id-ID", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" });
+};
+const diffHours = (a, b) => Math.round(((new Date(b) - new Date(a)) / 36e5) * 10) / 10;
+const sameDay = (a, b) => new Date(a).toDateString() === new Date(b).toDateString();
+
+/* =========================================================================
+   APPROVAL LOGIC
+   ========================================================================= */
+
+const requiredApprovals = (risk) => {
+  if (risk === "High") return ["foreman", "sectionHead", "deptHead"];
+  if (risk === "Medium") return ["foreman", "sectionHead"];
+  return ["foreman"];
+};
+
+const APPROVAL_LABEL = { foreman: "Foreman", sectionHead: "Section Head", deptHead: "Dept Head" };
+
+/* =========================================================================
+   LOGIN / ACCOUNTS (Foreman, Section Head, Dept Head)
+   - Daftar akun & password admin sekarang disimpan di Google Sheets
+     (sheet "Accounts"), dikelola lewat tab Settings.
+   ========================================================================= */
+
+const getApprovalStatus = (job) => {
+  const req = requiredApprovals(job.risk);
+  if (req.some((r) => job.approvals[r]?.status === "Rejected")) return "Rejected";
+  if (req.every((r) => job.approvals[r]?.status === "Approved")) return "Approved";
+  return "Waiting";
+};
+
+const getEffectiveStatus = (job) => {
+  if (job.status === "DONE") return "DONE";
+  if (job.status === "HOLD") return "HOLD";
+  const appStatus = getApprovalStatus(job);
+  if (appStatus === "Rejected") return "HOLD";
+  if (appStatus !== "Approved") return "WAITING APPROVAL";
+  if ((job.status === "READY" || job.status === "IN PROGRESS")) {
+    const plannedEnd = new Date(job.plannedDate);
+    plannedEnd.setHours(plannedEnd.getHours() + Number(job.estDuration || 0));
+    if (TODAY > plannedEnd) return "DELAY";
+  }
+  return job.status;
+};
+
+const getDelayHours = (job) => {
+  const plannedEnd = new Date(job.plannedDate);
+  plannedEnd.setHours(plannedEnd.getHours() + Number(job.estDuration || 0));
+  const ref = job.actualFinish ? new Date(job.actualFinish) : TODAY;
+  const h = diffHours(plannedEnd, ref);
+  return h > 0 ? h : 0;
+};
+
+/* =========================================================================
+   JOBS DATA
+   - Data job sekarang disimpan & dimuat dari Google Sheets (sheet "Jobs")
+     melalui Google Apps Script Web App. Tidak ada data contoh/dummy di sini.
+   ========================================================================= */
+
+
+/* =========================================================================
+   ICON HELPER (uses global `lucide` icon data, loaded via CDN)
+   ========================================================================= */
+
+function toKebab(name) {
+  return name
+    .replace(/([a-zA-Z])(\d)/g, "$1-$2")
+    .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
+    .toLowerCase();
+}
+
+function Ico({ name, size = 18, className = "", ...rest }) {
+  const L = window.lucide || {};
+  const candidates = [name, toKebab(name), name.toLowerCase()];
+  let data = null;
+  for (const c of candidates) {
+    if (L.icons && L.icons[c]) { data = L.icons[c]; break; }
+    if (L[c]) { data = L[c]; break; }
+  }
+  if (!data) return <span style={{ width: size, height: size, display: "inline-block" }} />;
+  return (
+    <svg
+      width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...rest}
+    >
+      {data.map((node, i) => {
+        const [tag, attrs] = node;
+        return React.createElement(tag, { key: i, ...attrs });
+      })}
+    </svg>
+  );
+}
+
+/* =========================================================================
+   SMALL UI PRIMITIVES
+   ========================================================================= */
+
+function RiskGauge({ risk, size = "sm" }) {
+  const meta = RISK_META[risk] || RISK_META.Low;
+  const colors = ["bg-sky-500", "bg-amber-500", "bg-rose-500"];
+  const h = size === "lg" ? "h-2" : "h-1.5";
+  const w = size === "lg" ? "w-6" : "w-4";
+  return (
+    <div className="flex items-center gap-1.5">
+      <div className="flex items-end gap-0.5">
+        {[1, 2, 3].map((i) => (
+          <div
+            key={i}
+            className={`${w} ${h} rounded-sm transition-colors ${
+              i <= meta.level ? colors[i - 1] : "bg-zinc-700"
+            }`}
+            style={{ height: `${4 + i * 3}px` }}
+          />
+        ))}
+      </div>
+      <span className={`text-xs font-semibold ${meta.text}`}>{risk}</span>
+    </div>
+  );
+}
+
+function StatusBadge({ status }) {
+  const meta = STATUS_META[status] || STATUS_META.READY;
+  return (
+    <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full border text-[11px] font-bold tracking-wide uppercase ${meta.bg} ${meta.border} ${meta.text}`}>
+      <span className={`w-1.5 h-1.5 rounded-full ${meta.dot}`} />
+      {status}
+    </span>
+  );
+}
+
+function JenisBadge({ jenis }) {
+  const meta = JENIS_META[jenis] || JENIS_META.Others;
+  return (
+    <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded border text-[11px] font-semibold ${meta.color}`}>
+      <Ico name={meta.icon} size={12} />
+      {jenis}
+    </span>
+  );
+}
+
+/* STOP 6 - badge & picker untuk kriteria safety pekerjaan */
+function Stop6Badges({ stop6, size = "sm" }) {
+  if (!stop6 || stop6.length === 0) return null;
+  const dim = size === "lg" ? "w-6 h-6 text-xs" : "w-5 h-5 text-[10px]";
+  return (
+    <div className="flex items-center gap-1">
+      {stop6.map((s) => (
+        <span
+          key={s}
+          title={`STOP 6 - ${s}: ${STOP6_META[s]?.label} (${STOP6_META[s]?.desc})`}
+          className={`flex items-center justify-center ${dim} rounded-full border border-orange-500/40 bg-orange-500/10 text-orange-300 font-bold`}
+        >
+          {s}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function Stop6Picker({ value, onChange }) {
+  const toggle = (s) => {
+    const cur = value || [];
+    onChange(cur.includes(s) ? cur.filter((x) => x !== s) : [...cur, s]);
+  };
+  return (
+    <div>
+      <div className="flex flex-wrap gap-2">
+        {STOP6_OPTIONS.map((s) => {
+          const active = (value || []).includes(s);
+          return (
+            <button
+              key={s}
+              type="button"
+              onClick={() => toggle(s)}
+              title={STOP6_META[s].desc}
+              className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-xs font-semibold transition-colors ${
+                active ? "border-orange-500 text-orange-300 bg-orange-500/10" : "border-zinc-700 text-zinc-500 hover:border-zinc-600"
+              }`}
+            >
+              <span className={`flex items-center justify-center w-5 h-5 rounded-full text-[10px] font-bold ${active ? "bg-orange-500 text-zinc-950" : "bg-zinc-800 text-zinc-400"}`}>{s}</span>
+              {STOP6_META[s].label}
+            </button>
+          );
+        })}
+      </div>
+      <p className="text-[11px] text-zinc-500 mt-1.5">STOP 6: A-Aparatus, B-Big Heavy, C-Car, D-Drop, E-Electricity, F-Fire.</p>
+    </div>
+  );
+}
+
+/* Person picker - single or multiple, searchable from MP ACE list */
+function PersonPicker({ value, onChange, multiple = false, placeholder = "Cari nama..." }) {
+  const [open, setOpen] = useState(false);
+  const [q, setQ] = useState("");
+
+  const selected = multiple ? (value || []) : (value ? [value] : []);
+
+  const filtered = useMemo(() => {
+    const term = q.trim().toLowerCase();
+    return MP_LIST
+      .filter((n) => (multiple ? !selected.includes(n) : true))
+      .filter((n) => !term || n.toLowerCase().includes(term))
+      .slice(0, 8);
+  }, [q, selected, multiple]);
+
+  const pick = (name) => {
+    if (multiple) {
+      onChange([...(value || []), name]);
+    } else {
+      onChange(name);
+      setOpen(false);
+    }
+    setQ("");
+  };
+
+  const remove = (name) => {
+    if (multiple) onChange((value || []).filter((n) => n !== name));
+    else onChange("");
+  };
+
+  return (
+    <div className="relative">
+      {multiple && selected.length > 0 && (
+        <div className="flex flex-wrap gap-1.5 mb-2">
+          {selected.map((n) => (
+            <span key={n} className="inline-flex items-center gap-1 bg-zinc-800 border border-zinc-700 text-zinc-200 text-xs rounded-full px-2 py-1">
+              {n}
+              <button onClick={() => remove(n)} className="text-zinc-500 hover:text-rose-400">
+                <Ico name="X" size={12} />
+              </button>
+            </span>
+          ))}
+        </div>
+      )}
+      {!multiple && value && (
+        <div className="flex items-center justify-between bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 mb-0">
+          <span className="text-sm text-zinc-100 flex items-center gap-2"><Ico name="UserCheck" size={14} className="text-orange-400"/> {value}</span>
+          <button onClick={() => remove(value)} className="text-zinc-500 hover:text-rose-400">
+            <Ico name="X" size={14} />
+          </button>
+        </div>
+      )}
+      {(multiple || !value) && (
+        <div>
+          <div className="flex items-center gap-2 bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 focus-within:border-orange-500/60">
+            <Ico name="Search" size={14} className="text-zinc-500" />
+            <input
+              value={q}
+              onChange={(e) => { setQ(e.target.value); setOpen(true); }}
+              onFocus={() => setOpen(true)}
+              placeholder={placeholder}
+              className="bg-transparent outline-none text-sm text-zinc-100 w-full placeholder:text-zinc-500"
+            />
+          </div>
+          {open && filtered.length > 0 && (
+            <div className="absolute z-20 mt-1 w-full bg-zinc-900 border border-zinc-700 rounded-lg shadow-xl shadow-black/50 max-h-48 overflow-y-auto">
+              {filtered.map((n) => (
+                <button
+                  key={n}
+                  onClick={() => { pick(n); setOpen(false); }}
+                  className="w-full text-left px-3 py-2 text-sm text-zinc-200 hover:bg-orange-500/10 hover:text-orange-300"
+                >
+                  {n}
+                </button>
+              ))}
+            </div>
+          )}
+          {open && (
+            <div className="fixed inset-0 z-10" onClick={() => setOpen(false)} />
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function Field({ label, required, children, hint }) {
+  return (
+    <div>
+      <label className="block text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-1.5">
+        {label} {required && <span className="text-orange-400">*</span>}
+      </label>
+      {children}
+      {hint && <p className="text-[11px] text-zinc-500 mt-1">{hint}</p>}
+    </div>
+  );
+}
+
+const inputCls = "w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-100 outline-none focus:border-orange-500/60 placeholder:text-zinc-500";
+
+/* Photo uploader - resize lalu upload ke Google Drive via Apps Script.
+   Bisa upload beberapa foto sekaligus (KY Sheet, foto before/after). */
+function PhotoUploader({ photos, onChange, hint, prefix = "foto" }) {
+  const list = photos || [];
+  const [uploading, setUploading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleFiles = async (e) => {
+    const files = Array.from(e.target.files || []);
+    if (files.length === 0) return;
+    setUploading(true);
+    setError("");
+    const uploaded = [];
+    for (const file of files) {
+      try {
+        const dataUrl = await resizeImage(file);
+        const base64 = dataUrl.split(",")[1];
+        const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
+        const filename = `${prefix}_${Date.now()}_${safeName}.jpg`;
+        const res = await apiPost("uploadPhoto", { filename, mimeType: "image/jpeg", base64 });
+        if (res.success && res.url) {
+          uploaded.push(res.url);
+        } else {
+          setError(res.error || "Upload foto gagal.");
+        }
+      } catch (err) {
+        setError("Upload foto gagal: " + (err.message || err));
+      }
+    }
+    if (uploaded.length > 0) onChange([...list, ...uploaded]);
+    setUploading(false);
+    e.target.value = "";
+  };
+
+  const remove = (idx) => onChange(list.filter((_, i) => i !== idx));
+
+  return (
+    <div>
+      <div className="flex flex-wrap gap-2">
+        {list.map((src, i) => (
+          <a key={i} href={src} target="_blank" rel="noreferrer" className="relative w-20 h-20 rounded-lg overflow-hidden border border-zinc-700 group block">
+            <img src={src} alt={`Foto ${i + 1}`} className="w-full h-full object-cover" />
+            <button
+              type="button"
+              onClick={(e) => { e.preventDefault(); e.stopPropagation(); remove(i); }}
+              className="absolute top-0.5 right-0.5 bg-black/70 text-zinc-200 rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition-opacity"
+            >
+              <Ico name="X" size={12} />
+            </button>
+          </a>
+        ))}
+        <label className="w-20 h-20 flex flex-col items-center justify-center gap-1 rounded-lg border border-dashed text-[10px] cursor-pointer transition-colors border-zinc-700 text-zinc-500 hover:border-orange-500/60 hover:text-orange-300">
+          {uploading ? <Ico name="Loader2" size={16} className="animate-spin" /> : <Ico name="Upload" size={16} />}
+          {uploading ? "Mengupload..." : "Tambah Foto"}
+          <input type="file" accept="image/*" multiple className="hidden" onChange={handleFiles} disabled={uploading} />
+        </label>
+      </div>
+      {error && <p className="text-[11px] text-rose-400 mt-1.5">{error}</p>}
+      {hint && <p className="text-[11px] text-zinc-500 mt-1.5">{hint}</p>}
+    </div>
+  );
+}
+
+/* =========================================================================
+   DASHBOARD
+   ========================================================================= */
+
+function KpiCard({ icon, label, value, sub, accent }) {
+  return (
+    <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-4 flex items-start gap-3">
+      <div className={`p-2 rounded-lg ${accent}`}>
+        <Ico name={icon} size={18} />
+      </div>
+      <div>
+        <p className="text-2xl font-extrabold text-zinc-50 leading-none">{value}</p>
+        <p className="text-xs text-zinc-400 mt-1 font-medium">{label}</p>
+        {sub && <p className="text-[11px] text-zinc-500 mt-0.5">{sub}</p>}
+      </div>
+    </div>
+  );
+}
+
+function Dashboard({ jobs }) {
+  const data = useMemo(() => {
+    const withEff = jobs.map((j) => ({ ...j, eff: getEffectiveStatus(j) }));
+
+    const counts = {};
+    STATUS_LIST.forEach((s) => (counts[s] = 0));
+    withEff.forEach((j) => counts[j.eff]++);
+
+    const waitingTooLong = withEff.filter((j) => {
+      if (getApprovalStatus(j) === "Approved" || getApprovalStatus(j) === "Rejected") return false;
+      const hrs = diffHours(j.requestDate, TODAY);
+      return hrs > 24;
+    });
+
+    const overdue = withEff.filter((j) => j.eff === "DELAY");
+
+    const doneToday = withEff.filter((j) => j.eff === "DONE" && j.actualFinish && sameDay(j.actualFinish, TODAY));
+
+    const doneJobs = withEff.filter((j) => j.eff === "DONE" && j.actualFinish);
+    const onTime = doneJobs.filter((j) => {
+      const plannedEnd = new Date(j.plannedDate);
+      plannedEnd.setHours(plannedEnd.getHours() + Number(j.estDuration || 0));
+      return new Date(j.actualFinish) <= plannedEnd;
+    });
+    const onTimeRate = doneJobs.length ? Math.round((onTime.length / doneJobs.length) * 100) : 0;
+
+    const approvedJobs = withEff.filter((j) => getApprovalStatus(j) === "Approved");
+    const leadTimes = approvedJobs.map((j) => {
+      const req = requiredApprovals(j.risk);
+      const dates = req.map((r) => j.approvals[r]?.date).filter(Boolean);
+      const last = dates.sort().slice(-1)[0];
+      return diffHours(j.requestDate, last || j.requestDate);
+    });
+    const avgLeadTime = leadTimes.length ? (leadTimes.reduce((a, b) => a + b, 0) / leadTimes.length).toFixed(1) : "-";
+
+    const completionTimes = doneJobs.filter((j) => j.actualStart).map((j) => diffHours(j.actualStart, j.actualFinish));
+    const avgCompletion = completionTimes.length ? (completionTimes.reduce((a, b) => a + b, 0) / completionTimes.length).toFixed(1) : "-";
+
+    const jobsWithoutDelay = withEff.filter((j) => j.eff !== "DELAY" && !(j.delayNote)).length;
+
+    const delayByPic = {};
+    withEff.forEach((j) => {
+      if (j.eff === "DELAY" || j.delayNote) {
+        delayByPic[j.pic] = (delayByPic[j.pic] || 0) + 1;
+      }
+    });
+    const topDelayPic = Object.entries(delayByPic).sort((a, b) => b[1] - a[1])[0];
+
+    const riskOrder = { High: 0, Medium: 1, Low: 2 };
+    const riskRanking = [...withEff]
+      .filter((j) => j.eff !== "DONE")
+      .sort((a, b) => (riskOrder[a.risk] - riskOrder[b.risk]) || (a.eff === "WAITING APPROVAL" ? -1 : 1))
+      .slice(0, 5);
+
+    return { counts, waitingTooLong, overdue, doneToday, onTimeRate, avgLeadTime, avgCompletion, jobsWithoutDelay, topDelayPic, riskRanking, total: withEff.length };
+  }, [jobs]);
+
+  return (
+    <div className="space-y-6">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+        <KpiCard icon="LayoutGrid" label="Total Job Aktif" value={data.total} accent="bg-zinc-700/40 text-zinc-300" />
+        <KpiCard icon="Clock" label="Waiting Approval" value={data.counts["WAITING APPROVAL"]} accent="bg-amber-500/15 text-amber-400" />
+        <KpiCard icon="Flame" label="In Progress" value={data.counts["IN PROGRESS"]} accent="bg-amber-500/15 text-amber-400" />
+        <KpiCard icon="AlertTriangle" label="Delay / Overdue" value={data.counts["DELAY"]} accent="bg-rose-500/15 text-rose-400" />
+        <KpiCard icon="PauseCircle" label="Hold / Rejected" value={data.counts["HOLD"]} accent="bg-rose-500/15 text-rose-400" />
+        <KpiCard icon="CheckCircle2" label="Selesai Hari Ini" value={data.doneToday.length} accent="bg-emerald-500/15 text-emerald-400" />
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        {/* Alerts */}
+        <div className="lg:col-span-1 bg-zinc-900 border border-zinc-800 rounded-xl p-4">
+          <h3 className="text-sm font-bold text-zinc-100 uppercase tracking-wide flex items-center gap-2 mb-3">
+            <Ico name="AlertTriangle" size={16} className="text-rose-400" /> Alert & Perhatian
+          </h3>
+          <div className="space-y-3">
+            <div>
+              <p className="text-xs font-semibold text-amber-300 mb-1.5">Belum di-approve &gt; 24 jam</p>
+              {data.waitingTooLong.length === 0 ? (
+                <p className="text-xs text-zinc-500">Tidak ada job.</p>
+              ) : data.waitingTooLong.map((j) => (
+                <div key={j.id} className="text-xs text-zinc-300 bg-zinc-800/60 rounded px-2 py-1.5 mb-1 flex justify-between">
+                  <span className="font-mono text-zinc-400">{j.id}</span>
+                  <span className="truncate ml-2">{j.deskripsi.slice(0, 28)}...</span>
+                </div>
+              ))}
+            </div>
+            <div>
+              <p className="text-xs font-semibold text-rose-300 mb-1.5">Melewati planned date</p>
+              {data.overdue.length === 0 ? (
+                <p className="text-xs text-zinc-500">Tidak ada job overdue.</p>
+              ) : data.overdue.map((j) => (
+                <div key={j.id} className="text-xs text-zinc-300 bg-zinc-800/60 rounded px-2 py-1.5 mb-1 flex justify-between">
+                  <span className="font-mono text-zinc-400">{j.id}</span>
+                  <span className="text-rose-300 font-semibold ml-2">+{getDelayHours(j)} jam</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* KPI lanjutan */}
+        <div className="lg:col-span-1 bg-zinc-900 border border-zinc-800 rounded-xl p-4">
+          <h3 className="text-sm font-bold text-zinc-100 uppercase tracking-wide flex items-center gap-2 mb-3">
+            <Ico name="Gauge" size={16} className="text-orange-400" /> KPI Monitoring
+          </h3>
+          <div className="space-y-3 text-sm">
+            <div className="flex justify-between items-center">
+              <span className="text-zinc-400">% Job selesai tepat waktu</span>
+              <span className="font-bold text-emerald-400">{data.onTimeRate}%</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-zinc-400">Approval lead time (avg)</span>
+              <span className="font-bold text-zinc-100">{data.avgLeadTime} jam</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-zinc-400">Avg completion time</span>
+              <span className="font-bold text-zinc-100">{data.avgCompletion} jam</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-zinc-400">Job tanpa delay</span>
+              <span className="font-bold text-zinc-100">{data.jobsWithoutDelay} / {data.total}</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-zinc-400">PIC paling sering delay</span>
+              <span className="font-bold text-rose-300">{data.topDelayPic ? `${data.topDelayPic[0]} (${data.topDelayPic[1]}x)` : "-"}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Risk ranking */}
+        <div className="lg:col-span-1 bg-zinc-900 border border-zinc-800 rounded-xl p-4">
+          <h3 className="text-sm font-bold text-zinc-100 uppercase tracking-wide flex items-center gap-2 mb-3">
+            <Ico name="Flame" size={16} className="text-rose-400" /> Ranking Risiko Job Aktif
+          </h3>
+          <div className="space-y-2">
+            {data.riskRanking.map((j) => (
+              <div key={j.id} className="flex items-center justify-between bg-zinc-800/60 rounded-lg px-3 py-2">
+                <div className="min-w-0">
+                  <p className="font-mono text-[11px] text-zinc-500">{j.id}</p>
+                  <p className="text-xs text-zinc-200 truncate max-w-[160px]">{j.deskripsi}</p>
+                </div>
+                <RiskGauge risk={j.risk} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* =========================================================================
+   KANBAN BOARD
+   ========================================================================= */
+
+function KanbanCard({ job, onOpen }) {
+  const eff = getEffectiveStatus(job);
+  const meta = STATUS_META[eff];
+  const appStatus = getApprovalStatus(job);
+  const req = requiredApprovals(job.risk);
+
+  return (
+    <div
+      draggable
+      onDragStart={(e) => e.dataTransfer.setData("jobId", job.id)}
+      onClick={() => onOpen(job.id)}
+      className={`bg-zinc-900 border ${meta.border} rounded-xl p-3 cursor-pointer hover:border-orange-500/50 transition-colors`}
+    >
+      <div className="flex items-center justify-between mb-2">
+        <span className="font-mono text-[11px] text-zinc-500">{job.id}</span>
+        <RiskGauge risk={job.risk} />
+      </div>
+      <div className="mb-2 flex items-center justify-between gap-2">
+        <JenisBadge jenis={job.jenis} />
+        <Stop6Badges stop6={job.stop6} />
+      </div>
+      <p className="text-sm text-zinc-100 font-medium leading-snug mb-2 line-clamp-2">{job.deskripsi}</p>
+      <p className="text-[11px] text-zinc-500 mb-2">{job.lokasi}</p>
+      <div className="flex items-center justify-between text-[11px] text-zinc-400">
+        <span className="flex items-center gap-1"><Ico name="CalendarClock" size={12} /> {fmtDate(job.plannedDate)}</span>
+        <span className="flex items-center gap-1"><Ico name="Users" size={12} /> {job.pic || "-"}</span>
+      </div>
+      <div className="flex items-center gap-1 mt-2">
+        {req.map((r) => {
+          const st = job.approvals[r]?.status;
+          const color = st === "Approved" ? "bg-emerald-500" : st === "Rejected" ? "bg-rose-500" : "bg-zinc-600";
+          return <span key={r} title={`${APPROVAL_LABEL[r]}: ${st || "Pending"}`} className={`w-2 h-2 rounded-full ${color}`} />;
+        })}
+        <span className="text-[10px] text-zinc-500 ml-1">
+          {appStatus === "Approved" ? "Approved" : appStatus === "Rejected" ? "Rejected" : "Approval pending"}
+        </span>
+      </div>
+      {(eff === "DELAY") && (
+        <p className="text-[11px] text-rose-300 font-semibold mt-2 flex items-center gap-1"><Ico name="AlertTriangle" size={12}/> Delay {getDelayHours(job)} jam</p>
+      )}
+    </div>
+  );
+}
+
+function KanbanBoard({ jobs, onMove, onOpen }) {
+  const [dragOver, setDragOver] = useState(null);
+
+  const handleDrop = (e, status) => {
+    e.preventDefault();
+    setDragOver(null);
+    const jobId = e.dataTransfer.getData("jobId");
+    onMove(jobId, status);
+  };
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-3">
+      {STATUS_LIST.map((status) => {
+        const list = jobs.filter((j) => getEffectiveStatus(j) === status);
+        const meta = STATUS_META[status];
+        return (
+          <div
+            key={status}
+            onDragOver={(e) => { e.preventDefault(); setDragOver(status); }}
+            onDragLeave={() => setDragOver(null)}
+            onDrop={(e) => handleDrop(e, status)}
+            className={`rounded-xl border ${dragOver === status ? "border-orange-500 bg-orange-500/5" : "border-zinc-800 bg-zinc-950/40"} p-2 min-h-[200px]`}
+          >
+            <div className={`flex items-center justify-between px-2 py-1.5 mb-2 rounded-lg ${meta.bg}`}>
+              <span className={`text-xs font-bold uppercase tracking-wide flex items-center gap-1.5 ${meta.text}`}>
+                <span className={`w-2 h-2 rounded-full ${meta.dot}`} /> {status}
+              </span>
+              <span className="text-xs font-mono text-zinc-400">{list.length}</span>
+            </div>
+            <div className="space-y-2">
+              {list.map((j) => <KanbanCard key={j.id} job={j} onOpen={onOpen} />)}
+              {list.length === 0 && <p className="text-center text-[11px] text-zinc-600 py-6">Tidak ada job</p>}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+/* =========================================================================
+   JOB DETAIL / APPROVAL PANEL
+   ========================================================================= */
+
+function ApprovalStep({ role, approval, required, job, onAct, currentUser }) {
+  if (!required) {
+    return (
+      <div className="flex-1 bg-zinc-800/40 border border-zinc-800 rounded-lg p-3 opacity-50">
+        <p className="text-xs font-bold uppercase text-zinc-500">{APPROVAL_LABEL[role]}</p>
+        <p className="text-xs text-zinc-600 mt-1">Tidak diperlukan untuk risiko {job.risk}</p>
+      </div>
+    );
+  }
+  const status = approval?.status || "Pending";
+  const color = status === "Approved" ? "border-emerald-500/40 bg-emerald-500/5" : status === "Rejected" ? "border-rose-500/40 bg-rose-500/5" : "border-amber-500/30 bg-amber-500/5";
+  const canAct = currentUser && currentUser.role === role;
+
+  return (
+    <div className={`flex-1 border rounded-lg p-3 ${color}`}>
+      <div className="flex items-center justify-between mb-1">
+        <p className="text-xs font-bold uppercase text-zinc-200">{APPROVAL_LABEL[role]}</p>
+        <StatusBadge status={status === "Pending" ? "WAITING APPROVAL" : status === "Approved" ? "DONE" : "HOLD"} />
+      </div>
+      {status !== "Pending" ? (
+        <div className="text-xs text-zinc-400 mt-1">
+          <p>{approval.name}</p>
+          <p className="text-zinc-500">{fmtDate(approval.date)}</p>
+        </div>
+      ) : canAct ? (
+        <div className="mt-2 flex gap-2">
+          <button
+            onClick={() => onAct(role, "Approved")}
+            className="flex-1 text-xs font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 rounded-md py-1.5 hover:bg-emerald-500/25"
+          >
+            Approve
+          </button>
+          <button
+            onClick={() => onAct(role, "Rejected")}
+            className="flex-1 text-xs font-semibold bg-rose-500/15 text-rose-300 border border-rose-500/30 rounded-md py-1.5 hover:bg-rose-500/25"
+          >
+            Reject
+          </button>
+        </div>
+      ) : (
+        <p className="text-[11px] text-zinc-500 mt-2">Login sebagai {APPROVAL_LABEL[role]} untuk approve/reject.</p>
+      )}
+      <p className="text-[10px] text-zinc-500 mt-1.5">
+        {canAct ? `Sebagai: ${currentUser.name}` : "Belum login sesuai role ini."}
+      </p>
+    </div>
+  );
+}
+
+function JobDetail({ job, onUpdate, onClose, currentUser }) {
+  const [local, setLocal] = useState(job);
+  const [saving, setSaving] = useState(false);
+  const [saveMsg, setSaveMsg] = useState("");
+  const eff = getEffectiveStatus(local);
+  const req = requiredApprovals(local.risk);
+
+  const save = (patch) => setLocal((l) => ({ ...l, ...patch }));
+
+  const persist = async (jobToSave) => {
+    setSaving(true);
+    setSaveMsg("");
+    try {
+      const res = await apiPost("updateJob", { job: jobToSave });
+      if (res.success) {
+        onUpdate(jobToSave);
+        setSaveMsg("Tersimpan ke spreadsheet.");
+      } else {
+        setSaveMsg("Gagal menyimpan: " + (res.error || "unknown error"));
+      }
+    } catch (err) {
+      setSaveMsg("Gagal menyimpan: " + (err.message || err));
+    }
+    setSaving(false);
+  };
+
+  const handleManualSave = () => persist(local);
+
+  const act = (role, decision) => {
+    if (!currentUser || currentUser.role !== role) return;
+    const next = {
+      ...local,
+      approvals: {
+        ...local.approvals,
+        [role]: { status: decision, name: currentUser.name, date: new Date().toISOString().slice(0, 10) },
+      },
+      status: decision === "Rejected" ? "HOLD" : local.status === "WAITING APPROVAL" ? "READY" : local.status,
+    };
+    setLocal(next);
+    persist(next);
+  };
+
+  const handlePhotos = (field, photos) => {
+    const next = { ...local, [field]: photos };
+    setLocal(next);
+    persist(next);
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black/60 z-30 flex items-center justify-center p-4" onClick={onClose}>
+      <div className="bg-zinc-950 border border-zinc-800 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+        <div className="p-5 border-b border-zinc-800 flex items-start justify-between sticky top-0 bg-zinc-950">
+          <div>
+            <p className="font-mono text-xs text-zinc-500">{local.id}</p>
+            <h2 className="text-lg font-bold text-zinc-50 mt-0.5">{local.deskripsi}</h2>
+            <div className="flex items-center gap-2 mt-2 flex-wrap">
+              <JenisBadge jenis={local.jenis} />
+              <StatusBadge status={eff} />
+              <RiskGauge risk={local.risk} size="lg" />
+              <Stop6Badges stop6={local.stop6} size="lg" />
+            </div>
+          </div>
+          <button onClick={onClose} className="text-zinc-500 hover:text-zinc-200"><Ico name="X" size={20} /></button>
+        </div>
+
+        <div className="p-5 space-y-5">
+          {/* Info */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+            <div><p className="text-[11px] text-zinc-500 uppercase">Departemen</p><p className="text-zinc-100 font-medium">{local.dept}</p></div>
+            <div><p className="text-[11px] text-zinc-500 uppercase">Lokasi</p><p className="text-zinc-100 font-medium">{local.lokasi}</p></div>
+            <div><p className="text-[11px] text-zinc-500 uppercase">Requester</p><p className="text-zinc-100 font-medium">{local.requester}</p></div>
+            <div><p className="text-[11px] text-zinc-500 uppercase">Tgl Request</p><p className="text-zinc-100 font-medium">{fmtDate(local.requestDate)}</p></div>
+            <div><p className="text-[11px] text-zinc-500 uppercase">Planned Date</p><p className="text-zinc-100 font-medium">{fmtDateTime(local.plannedDate)}</p></div>
+            <div><p className="text-[11px] text-zinc-500 uppercase">Estimasi Durasi</p><p className="text-zinc-100 font-medium">{local.estDuration} jam</p></div>
+            <div><p className="text-[11px] text-zinc-500 uppercase">Dampak Produksi</p><p className="text-zinc-100 font-medium">{local.dampakProduksi}</p></div>
+            <div><p className="text-[11px] text-zinc-500 uppercase">Need Shutdown</p><p className="text-zinc-100 font-medium">{local.needShutdown}</p></div>
+          </div>
+
+          {local.stop6 && local.stop6.length > 0 && (
+            <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-3">
+              <p className="text-[11px] text-zinc-500 uppercase mb-1.5">Kriteria Safety (STOP 6)</p>
+              <div className="flex flex-wrap gap-2">
+                {local.stop6.map((s) => (
+                  <span key={s} className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full border border-orange-500/40 bg-orange-500/10 text-orange-300 text-xs font-semibold">
+                    <span className="flex items-center justify-center w-5 h-5 rounded-full bg-orange-500 text-zinc-950 text-[10px] font-bold">{s}</span>
+                    {STOP6_META[s].label}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div>
+            <p className="text-[11px] text-zinc-500 uppercase mb-1">Pelaksana Pekerjaan</p>
+            <div className="flex flex-wrap gap-1.5">
+              {local.pelaksana.map((p) => (
+                <span key={p} className="text-xs bg-zinc-800 border border-zinc-700 rounded-full px-2 py-1 text-zinc-200">{p}</span>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-3">
+            <p className="text-sm font-semibold text-zinc-100 flex items-center gap-2 mb-1">
+              <Ico name="Image" size={16} className="text-orange-400" /> Foto KY Sheet (Low Frequency &amp; Non Routine)
+            </p>
+            <p className="text-xs text-zinc-500 mb-2">
+              {local.risk !== "Low" || local.needShutdown === "Yes"
+                ? "Wajib dilampirkan sebelum approval Section Head / Dept Head. Foto bisa lebih dari 1 (misal: halaman KY & sketsa area)."
+                : "Lampirkan foto KY Sheet jika tersedia (opsional untuk risiko Low)."}
+            </p>
+            <PhotoUploader photos={local.kySheetPhotos} onChange={(photos) => handlePhotos("kySheetPhotos", photos)} prefix={`${local.id}_KY`} />
+          </div>
+
+          {/* Approval workflow */}
+          <div>
+            <p className="text-xs font-bold uppercase text-zinc-300 mb-2 flex items-center gap-2"><Ico name="CheckCircle2" size={14} className="text-orange-400"/> Approval Workflow</p>
+            <div className="flex flex-col sm:flex-row gap-2">
+              {["foreman", "sectionHead", "deptHead"].map((role) => (
+                <ApprovalStep
+                  key={role}
+                  role={role}
+                  approval={local.approvals[role]}
+                  required={req.includes(role)}
+                  job={local}
+                  onAct={act}
+                  currentUser={currentUser}
+                />
+              ))}
+            </div>
+            <p className="text-[11px] text-zinc-500 mt-2">Approval boleh dilakukan tidak berurutan (loncat). Job dapat dieksekusi ("READY") setelah seluruh approval wajib berstatus Approved.</p>
+          </div>
+
+          {/* Execution */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-3">
+              <p className="text-xs font-bold uppercase text-zinc-300 flex items-center gap-2"><Ico name="Wrench" size={14} className="text-orange-400"/> Execution</p>
+              <Field label="PIC">
+                <PersonPicker value={local.pic} onChange={(v) => save({ pic: v })} multiple={false} placeholder="Pilih PIC" />
+              </Field>
+              <div className="grid grid-cols-2 gap-2">
+                <Field label="Actual Start">
+                  <input type="datetime-local" className={inputCls} value={local.actualStart} onChange={(e) => save({ actualStart: e.target.value, status: local.status === "READY" ? "IN PROGRESS" : local.status })} />
+                </Field>
+                <Field label="Actual Finish">
+                  <input type="datetime-local" className={inputCls} value={local.actualFinish} onChange={(e) => save({ actualFinish: e.target.value, status: e.target.value ? "DONE" : local.status })} />
+                </Field>
+              </div>
+              <Field label="Status Pekerjaan">
+                <select className={inputCls} value={local.status} onChange={(e) => save({ status: e.target.value })}>
+                  {STATUS_LIST.filter((s) => s !== "DELAY").map((s) => <option key={s}>{s}</option>)}
+                </select>
+              </Field>
+              <Field label="Keterangan Delay / Hold">
+                <textarea className={inputCls} rows={2} value={local.delayNote} onChange={(e) => save({ delayNote: e.target.value })} placeholder="Isi jika ada delay / hold..." />
+              </Field>
+              {eff === "DELAY" && (
+                <p className="text-xs text-rose-300 font-semibold">⚠ Delay otomatis terdeteksi: +{getDelayHours(local)} jam dari rencana.</p>
+              )}
+              <Field label="Foto Pekerjaan - Before" hint="Bisa upload lebih dari 1 foto.">
+                <PhotoUploader photos={local.fotoBefore} onChange={(photos) => handlePhotos("fotoBefore", photos)} prefix={`${local.id}_BEFORE`} />
+              </Field>
+              <Field label="Foto Pekerjaan - After" hint="Bisa upload lebih dari 1 foto.">
+                <PhotoUploader photos={local.fotoAfter} onChange={(photos) => handlePhotos("fotoAfter", photos)} prefix={`${local.id}_AFTER`} />
+              </Field>
+            </div>
+
+            <div className="space-y-3">
+              <p className="text-xs font-bold uppercase text-zinc-300 flex items-center gap-2"><Ico name="ClipboardList" size={14} className="text-orange-400"/> Result & Evaluation</p>
+              <Field label="Hasil Pekerjaan">
+                <select className={inputCls} value={local.hasil} onChange={(e) => save({ hasil: e.target.value })}>
+                  <option value="">- Pilih -</option>
+                  <option value="OK">OK</option>
+                  <option value="NG">NG</option>
+                </select>
+              </Field>
+              <Field label="Catatan Hasil">
+                <textarea className={inputCls} rows={2} value={local.catatanHasil} onChange={(e) => save({ catatanHasil: e.target.value })} />
+              </Field>
+              <Field label="Problem Ditemukan">
+                <textarea className={inputCls} rows={2} value={local.problem} onChange={(e) => save({ problem: e.target.value })} />
+              </Field>
+              <Field label="Action / Follow Up">
+                <textarea className={inputCls} rows={2} value={local.followUp} onChange={(e) => save({ followUp: e.target.value })} />
+              </Field>
+            </div>
+          </div>
+        </div>
+
+        {/* Save bar */}
+        <div className="p-4 border-t border-zinc-800 sticky bottom-0 bg-zinc-950 flex items-center justify-between gap-3">
+          <p className="text-xs text-zinc-500">
+            {saveMsg
+              ? saveMsg
+              : "Foto & approval tersimpan otomatis. Klik \"Simpan Perubahan\" untuk menyimpan field lainnya ke spreadsheet."}
+          </p>
+          <button
+            onClick={handleManualSave}
+            disabled={saving}
+            className="px-5 py-2 rounded-lg bg-orange-500 text-zinc-950 text-sm font-bold hover:bg-orange-400 disabled:opacity-50 flex items-center gap-2 whitespace-nowrap"
+          >
+            {saving ? <Ico name="Loader2" size={14} className="animate-spin" /> : <Ico name="Save" size={14} />}
+            {saving ? "Menyimpan..." : "Simpan Perubahan"}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* =========================================================================
+   LOGIN MODAL
+   ========================================================================= */
+
+function LoginModal({ accounts, onLogin, onClose }) {
+  const [role, setRole] = useState("foreman");
+  const [name, setName] = useState((accounts.foreman || [])[0]?.name || "");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [checking, setChecking] = useState(false);
+
+  const people = accounts[role] || [];
+
+  const changeRole = (r) => {
+    setRole(r);
+    setName((accounts[r] || [])[0]?.name || "");
+    setPassword("");
+    setError("");
+  };
+
+  const submit = async () => {
+    if (!name || !password) {
+      setError("Pilih nama & isi password.");
+      return;
+    }
+    setChecking(true);
+    setError("");
+    try {
+      const res = await apiPost("login", { role, name, password });
+      if (res.success) {
+        onLogin({ role, name });
+      } else {
+        setError(res.error || "Nama atau password salah.");
+      }
+    } catch (err) {
+      setError("Gagal terhubung ke server: " + (err.message || err));
+    }
+    setChecking(false);
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black/60 z-40 flex items-center justify-center p-4" onClick={onClose}>
+      <div className="bg-zinc-950 border border-zinc-800 rounded-2xl max-w-sm w-full p-5" onClick={(e) => e.stopPropagation()}>
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-lg font-bold text-zinc-50 flex items-center gap-2">
+            <Ico name="LogIn" size={18} className="text-orange-400" /> Login
+          </h2>
+          <button onClick={onClose} className="text-zinc-500 hover:text-zinc-200"><Ico name="X" size={18} /></button>
+        </div>
+        <div className="space-y-3">
+          <Field label="Login sebagai">
+            <div className="grid grid-cols-3 gap-2">
+              {["foreman", "sectionHead", "deptHead"].map((r) => (
+                <button
+                  key={r}
+                  onClick={() => changeRole(r)}
+                  className={`px-2 py-2 rounded-lg border text-xs font-semibold ${role === r ? "border-orange-500 text-orange-300 bg-orange-500/10" : "border-zinc-700 text-zinc-400 hover:border-zinc-600"}`}
+                >
+                  {APPROVAL_LABEL[r]}
+                </button>
+              ))}
+            </div>
+          </Field>
+          <Field label="Nama">
+            {people.length > 0 ? (
+              <select className={inputCls} value={name} onChange={(e) => { setName(e.target.value); setError(""); }}>
+                {people.map((p) => <option key={p.name} value={p.name}>{p.name}</option>)}
+              </select>
+            ) : (
+              <p className="text-xs text-zinc-500 bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2">
+                Belum ada akun {APPROVAL_LABEL[role]}. Minta admin menambahkan di tab Settings.
+              </p>
+            )}
+          </Field>
+          <Field label="Password">
+            <input
+              type="password"
+              className={inputCls}
+              value={password}
+              onChange={(e) => { setPassword(e.target.value); setError(""); }}
+              onKeyDown={(e) => e.key === "Enter" && submit()}
+              placeholder="Masukkan password..."
+            />
+          </Field>
+          {error && (
+            <div className="flex items-center gap-2 text-xs text-rose-300 bg-rose-500/10 border border-rose-500/30 rounded-lg px-3 py-2">
+              <Ico name="AlertTriangle" size={14} /> {error}
+            </div>
+          )}
+          <button onClick={submit} disabled={checking || people.length === 0} className="w-full px-4 py-2 rounded-lg bg-orange-500 text-zinc-950 text-sm font-bold hover:bg-orange-400 disabled:opacity-50 flex items-center justify-center gap-2">
+            {checking && <Ico name="Loader2" size={14} className="animate-spin" />}
+            {checking ? "Memeriksa..." : "Masuk"}
+          </button>
+          <p className="text-[11px] text-zinc-500 text-center">Approval pekerjaan akan tercatat atas nama akun yang login.</p>
+        </div>
+      </div>
+    </div>
+  );
+
+}
+
+/* =========================================================================
+   ADMIN SETTINGS - kelola akun Foreman / Section Head / Dept Head
+   ========================================================================= */
+
+function AdminSettings({ accounts, setAccounts }) {
+  const [unlocked, setUnlocked] = useState(false);
+  const [adminPassword, setAdminPassword] = useState("");
+  const [pwdInput, setPwdInput] = useState("");
+  const [error, setError] = useState("");
+  const [checking, setChecking] = useState(false);
+  const [saveMsg, setSaveMsg] = useState("");
+
+  const tryUnlock = async () => {
+    if (!pwdInput) return;
+    setChecking(true);
+    setError("");
+    try {
+      // "No-op save" trik: kirim accounts saat ini untuk validasi password admin di server
+      const res = await apiPost("updateAccounts", { adminPassword: pwdInput, accounts });
+      if (res.success) {
+        setAdminPassword(pwdInput);
+        setUnlocked(true);
+      } else {
+        setError(res.error || "Password admin salah.");
+      }
+    } catch (err) {
+      setError("Gagal terhubung ke server: " + (err.message || err));
+    }
+    setChecking(false);
+  };
+
+  if (!unlocked) {
+    return (
+      <div className="max-w-sm mx-auto bg-zinc-900 border border-zinc-800 rounded-xl p-5 space-y-3">
+        <h2 className="text-lg font-bold text-zinc-50 flex items-center gap-2">
+          <Ico name="ShieldAlert" size={18} className="text-orange-400" /> Settings (Admin Only)
+        </h2>
+        <p className="text-xs text-zinc-500">Masukkan password admin untuk mengatur akun Foreman, Section Head, dan Dept Head.</p>
+        <input
+          type="password"
+          className={inputCls}
+          value={pwdInput}
+          onChange={(e) => { setPwdInput(e.target.value); setError(""); }}
+          onKeyDown={(e) => e.key === "Enter" && tryUnlock()}
+          placeholder="Password admin..."
+        />
+        {error && (
+          <div className="flex items-center gap-2 text-xs text-rose-300 bg-rose-500/10 border border-rose-500/30 rounded-lg px-3 py-2">
+            <Ico name="AlertTriangle" size={14} /> {error}
+          </div>
+        )}
+        <button
+          onClick={tryUnlock}
+          disabled={checking}
+          className="w-full px-4 py-2 rounded-lg bg-orange-500 text-zinc-950 text-sm font-bold hover:bg-orange-400 disabled:opacity-50 flex items-center justify-center gap-2"
+        >
+          {checking && <Ico name="Loader2" size={14} className="animate-spin" />}
+          {checking ? "Memeriksa..." : "Unlock"}
+        </button>
+      </div>
+    );
+  }
+
+  const saveAccounts = async (next) => {
+    setAccounts(next);
+    setSaveMsg("Menyimpan...");
+    try {
+      const res = await apiPost("updateAccounts", { adminPassword, accounts: next });
+      setSaveMsg(res.success ? "Tersimpan ke spreadsheet." : "Gagal: " + (res.error || "unknown"));
+    } catch (err) {
+      setSaveMsg("Gagal menyimpan: " + (err.message || err));
+    }
+  };
+
+  const updateRole = (role, list) => saveAccounts({ ...accounts, [role]: list });
+
+  return (
+    <div className="max-w-3xl mx-auto space-y-4">
+      <div className="flex items-center gap-2">
+        <Ico name="ShieldAlert" size={18} className="text-orange-400" />
+        <h2 className="text-lg font-bold text-zinc-50">Settings - Kelola Akun Approval</h2>
+      </div>
+      <p className="text-xs text-zinc-500">
+        Tiap role (Foreman, Section Head, Dept Head) bisa diisi lebih dari satu orang. Akun ini dipakai untuk login & menjadi penanda siapa yang melakukan approval. Perubahan otomatis tersimpan ke Google Sheets.
+      </p>
+      {saveMsg && <p className="text-xs text-zinc-400">{saveMsg}</p>}
+      {["foreman", "sectionHead", "deptHead"].map((role) => (
+        <AccountRoleEditor key={role} role={role} list={accounts[role] || []} onChange={(list) => updateRole(role, list)} />
+      ))}
+    </div>
+  );
+}
+
+function AccountRoleEditor({ role, list, onChange }) {
+  const [newName, setNewName] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [showPwd, setShowPwd] = useState({});
+
+  const add = () => {
+    if (!newName || !newPassword) return;
+    onChange([...list, { name: newName, password: newPassword }]);
+    setNewName("");
+    setNewPassword("");
+  };
+
+  const remove = (idx) => onChange(list.filter((_, i) => i !== idx));
+  const updatePassword = (idx, value) => onChange(list.map((p, i) => (i === idx ? { ...p, password: value } : p)));
+
+  return (
+    <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-4">
+      <h3 className="text-sm font-bold text-zinc-100 uppercase tracking-wide mb-3">{APPROVAL_LABEL[role]}</h3>
+      <div className="space-y-2 mb-3">
+        {list.map((p, i) => (
+          <div key={i} className="flex items-center gap-2 bg-zinc-800/60 rounded-lg px-3 py-2">
+            <span className="text-sm text-zinc-100 flex-1">{p.name}</span>
+            <input
+              type={showPwd[i] ? "text" : "password"}
+              className="bg-zinc-800 border border-zinc-700 rounded-lg px-2 py-1 text-xs text-zinc-100 outline-none w-32"
+              value={p.password}
+              onChange={(e) => updatePassword(i, e.target.value)}
+            />
+            <button onClick={() => setShowPwd((s) => ({ ...s, [i]: !s[i] }))} className="text-zinc-500 hover:text-orange-400">
+              <Ico name={showPwd[i] ? "EyeOff" : "Eye"} size={14} />
+            </button>
+            <button onClick={() => remove(i)} className="text-zinc-500 hover:text-rose-400">
+              <Ico name="Trash2" size={14} />
+            </button>
+          </div>
+        ))}
+        {list.length === 0 && <p className="text-xs text-zinc-500">Belum ada akun {APPROVAL_LABEL[role]}.</p>}
+      </div>
+      <div className="flex flex-col sm:flex-row gap-2">
+        <div className="flex-1">
+          <PersonPicker value={newName} onChange={setNewName} placeholder={`Tambah nama ${APPROVAL_LABEL[role]}...`} />
+        </div>
+        <input
+          type="text"
+          className={`${inputCls} sm:max-w-[160px]`}
+          placeholder="Password"
+          value={newPassword}
+          onChange={(e) => setNewPassword(e.target.value)}
+        />
+        <button onClick={add} className="px-4 py-2 rounded-lg bg-orange-500 text-zinc-950 text-sm font-bold hover:bg-orange-400 whitespace-nowrap">
+          + Tambah
+        </button>
+      </div>
+    </div>
+  );
+}
+
+
+/* =========================================================================
+   JOB LIST + FILTERS
+   ========================================================================= */
+
+function JobList({ jobs, onOpen }) {
+  const [filters, setFilters] = useState({ dept: "", status: "", pic: "", q: "" });
+
+  const filtered = useMemo(() => {
+    return jobs.filter((j) => {
+      const eff = getEffectiveStatus(j);
+      if (filters.dept && j.dept !== filters.dept) return false;
+      if (filters.status && eff !== filters.status) return false;
+      if (filters.pic && j.pic !== filters.pic) return false;
+      if (filters.q && !(`${j.id} ${j.deskripsi}`.toLowerCase().includes(filters.q.toLowerCase()))) return false;
+      return true;
+    });
+  }, [jobs, filters]);
+
+  const pics = useMemo(() => Array.from(new Set(jobs.map((j) => j.pic).filter(Boolean))), [jobs]);
+
+  return (
+    <div className="space-y-3">
+      <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-3 flex flex-wrap gap-2 items-center">
+        <Ico name="Filter" size={14} className="text-orange-400" />
+        <input placeholder="Cari ID / deskripsi..." value={filters.q} onChange={(e) => setFilters((f) => ({ ...f, q: e.target.value }))} className={`${inputCls} max-w-[220px]`} />
+        <select className={`${inputCls} max-w-[180px]`} value={filters.dept} onChange={(e) => setFilters((f) => ({ ...f, dept: e.target.value }))}>
+          <option value="">Semua Departemen</option>
+          {DEPTS.map((d) => <option key={d}>{d}</option>)}
+        </select>
+        <select className={`${inputCls} max-w-[180px]`} value={filters.status} onChange={(e) => setFilters((f) => ({ ...f, status: e.target.value }))}>
+          <option value="">Semua Status</option>
+          {STATUS_LIST.map((s) => <option key={s}>{s}</option>)}
+        </select>
+        <select className={`${inputCls} max-w-[160px]`} value={filters.pic} onChange={(e) => setFilters((f) => ({ ...f, pic: e.target.value }))}>
+          <option value="">Semua PIC</option>
+          {pics.map((p) => <option key={p}>{p}</option>)}
+        </select>
+        {(filters.dept || filters.status || filters.pic || filters.q) && (
+          <button onClick={() => setFilters({ dept: "", status: "", pic: "", q: "" })} className="text-xs text-zinc-400 hover:text-orange-400 flex items-center gap-1">
+            <Ico name="RotateCcw" size={12} /> Reset
+          </button>
+        )}
+        <span className="ml-auto text-xs text-zinc-500">{filtered.length} job</span>
+      </div>
+
+      <div className="bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="bg-zinc-800/60 text-left text-[11px] uppercase tracking-wider text-zinc-400">
+              <th className="px-3 py-2.5">Job ID</th>
+              <th className="px-3 py-2.5">Jenis</th>
+              <th className="px-3 py-2.5 hidden md:table-cell">Deskripsi</th>
+              <th className="px-3 py-2.5 hidden lg:table-cell">Dept</th>
+              <th className="px-3 py-2.5">Risk</th>
+              <th className="px-3 py-2.5">PIC</th>
+              <th className="px-3 py-2.5 hidden sm:table-cell">Planned</th>
+              <th className="px-3 py-2.5">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filtered.map((j) => {
+              const eff = getEffectiveStatus(j);
+              return (
+                <tr key={j.id} onClick={() => onOpen(j.id)} className="border-t border-zinc-800 hover:bg-zinc-800/40 cursor-pointer">
+                  <td className="px-3 py-2.5 font-mono text-xs text-zinc-400">{j.id}</td>
+                  <td className="px-3 py-2.5"><JenisBadge jenis={j.jenis} /></td>
+                  <td className="px-3 py-2.5 hidden md:table-cell text-zinc-200 max-w-[260px] truncate">{j.deskripsi}</td>
+                  <td className="px-3 py-2.5 hidden lg:table-cell text-zinc-400 text-xs">{j.dept}</td>
+                  <td className="px-3 py-2.5"><RiskGauge risk={j.risk} /></td>
+                  <td className="px-3 py-2.5 text-zinc-300 text-xs">{j.pic || "-"}</td>
+                  <td className="px-3 py-2.5 hidden sm:table-cell text-zinc-400 text-xs">{fmtDate(j.plannedDate)}</td>
+                  <td className="px-3 py-2.5"><StatusBadge status={eff} /></td>
+                </tr>
+              );
+            })}
+            {filtered.length === 0 && (
+              <tr><td colSpan={8} className="text-center text-zinc-500 text-sm py-8">Tidak ada job yang sesuai filter.</td></tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+/* =========================================================================
+   NEW JOB FORM
+   ========================================================================= */
+
+const emptyForm = {
+  requester: "",
+  dept: DEPTS[0],
+  jenis: "Maintenance",
+  deskripsi: "",
+  lokasi: "",
+  pelaksana: [],
+  plannedDate: "",
+  estDuration: "",
+  risk: "Low",
+  dampakProduksi: "No",
+  needShutdown: "No",
+  stop6: [],
+  kySheetPhotos: [],
+};
+
+function NewJobForm({ onSubmit }) {
+  const [form, setForm] = useState(emptyForm);
+  const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+
+  const set = (patch) => setForm((f) => ({ ...f, ...patch }));
+
+  const submit = async () => {
+    if (!form.requester || !form.deskripsi || !form.lokasi || !form.plannedDate || !form.estDuration) {
+      setError("Lengkapi seluruh field wajib (*) sebelum submit.");
+      return;
+    }
+    if ((form.risk !== "Low" || form.needShutdown === "Yes") && form.kySheetPhotos.length === 0) {
+      setError("Pekerjaan dengan risiko Medium/High atau yang memerlukan shutdown wajib upload foto KY Sheet terlebih dahulu.");
+      return;
+    }
+    setError("");
+    setSubmitting(true);
+    const res = await onSubmit({
+      ...form,
+      requestDate: new Date().toISOString().slice(0, 10),
+      approvals: { foreman: { status: "Pending", name: "", date: "" } },
+      pic: form.pelaksana[0] || "",
+      actualStart: "",
+      actualFinish: "",
+      status: "WAITING APPROVAL",
+      delayNote: "",
+      hasil: "",
+      catatanHasil: "",
+      problem: "",
+      followUp: "",
+      fotoBefore: [],
+      fotoAfter: [],
+    });
+    setSubmitting(false);
+    if (res && res.success) {
+      setForm(emptyForm);
+    } else {
+      setError("Gagal menyimpan job: " + ((res && res.error) || "unknown error"));
+    }
+  };
+
+  return (
+    <div className="max-w-3xl mx-auto bg-zinc-900 border border-zinc-800 rounded-xl p-5 space-y-5">
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-lg font-bold text-zinc-50">Input Job Non-Routine Baru</h2>
+          <p className="text-xs text-zinc-500">Job ID akan dibuat otomatis oleh sistem setelah disimpan.</p>
+        </div>
+        <Ico name="Plus" className="text-orange-400" />
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <Field label="Requester (Operator/Staff)" required>
+          <PersonPicker value={form.requester} onChange={(v) => set({ requester: v })} placeholder="Pilih nama requester" />
+        </Field>
+        <Field label="Departemen" required>
+          <select className={inputCls} value={form.dept} onChange={(e) => set({ dept: e.target.value })}>
+            {DEPTS.map((d) => <option key={d}>{d}</option>)}
+          </select>
+        </Field>
+      </div>
+
+      <Field label="Jenis Pekerjaan" required>
+        <div className="flex flex-wrap gap-2">
+          {JENIS_OPTIONS.map((j) => {
+            const meta = JENIS_META[j];
+                      const active = form.jenis === j;
+            return (
+              <button key={j} onClick={() => set({ jenis: j })} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-semibold transition-colors ${active ? meta.color + " ring-1 ring-inset ring-current" : "border-zinc-700 text-zinc-400 hover:border-zinc-600"}`}>
+                <Ico name={meta.icon} size={14} /> {j}
+              </button>
+            );
+          })}
+        </div>
+      </Field>
+
+      <Field label="Kriteria Safety (STOP 6)" hint="Pilih semua potensi bahaya yang relevan dengan pekerjaan ini.">
+        <Stop6Picker value={form.stop6} onChange={(v) => set({ stop6: v })} />
+      </Field>
+
+
+      <Field label="Deskripsi Pekerjaan" required>
+        <textarea className={inputCls} rows={3} placeholder="Jelaskan pekerjaan secara spesifik (apa, mengapa, kondisi saat ini)..." value={form.deskripsi} onChange={(e) => set({ deskripsi: e.target.value })} />
+      </Field>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <Field label="Lokasi Pekerjaan" required>
+          <input className={inputCls} placeholder="Contoh: Melting ACE-1 - Area Pouring" value={form.lokasi} onChange={(e) => set({ lokasi: e.target.value })} />
+        </Field>
+        <Field label="Pelaksana Pekerjaan" hint="Bisa pilih lebih dari satu, ambil dari List MP ACE">
+          <PersonPicker value={form.pelaksana} onChange={(v) => set({ pelaksana: v })} multiple placeholder="Cari & tambah pelaksana..." />
+        </Field>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <Field label="Planned Date" required>
+          <input type="datetime-local" className={inputCls} value={form.plannedDate} onChange={(e) => set({ plannedDate: e.target.value })} />
+        </Field>
+        <Field label="Estimasi Durasi (jam)" required>
+          <input type="number" min="0" step="0.5" className={inputCls} value={form.estDuration} onChange={(e) => set({ estDuration: e.target.value })} />
+        </Field>
+        <Field label="Risiko Pekerjaan" required>
+          <div className="flex gap-2">
+            {RISK_OPTIONS.map((r) => (
+              <button key={r} onClick={() => set({ risk: r })} className={`flex-1 px-2 py-2 rounded-lg border text-xs font-bold ${form.risk === r ? RISK_META[r].text + " border-current bg-current/10" : "border-zinc-700 text-zinc-500"}`}>
+                {r}
+              </button>
+            ))}
+          </div>
+        </Field>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <Field label="Dampak ke Produksi?" required>
+          <div className="flex gap-2">
+            {["Yes", "No"].map((v) => (
+              <button key={v} onClick={() => set({ dampakProduksi: v })} className={`flex-1 px-3 py-2 rounded-lg border text-sm font-semibold ${form.dampakProduksi === v ? "border-orange-500 text-orange-400 bg-orange-500/10" : "border-zinc-700 text-zinc-400"}`}>{v}</button>
+            ))}
+          </div>
+        </Field>
+        <Field label="Perlu Shutdown?" required hint={form.needShutdown === "Yes" ? "Wajib upload foto KY Sheet (lihat di bawah)" : undefined}>
+          <div className="flex gap-2">
+            {["Yes", "No"].map((v) => (
+              <button key={v} onClick={() => set({ needShutdown: v })} className={`flex-1 px-3 py-2 rounded-lg border text-sm font-semibold ${form.needShutdown === v ? "border-orange-500 text-orange-400 bg-orange-500/10" : "border-zinc-700 text-zinc-400"}`}>{v}</button>
+            ))}
+          </div>
+        </Field>
+      </div>
+
+      <Field
+        label="Upload Foto KY Sheet (Low Frequency &amp; Non Routine)"
+        required={form.risk !== "Low" || form.needShutdown === "Yes"}
+        hint={
+          form.risk !== "Low" || form.needShutdown === "Yes"
+            ? "Wajib: isi & foto KY Sheet (sesuai form 'KY Sheet Pekerjaan Low Frequency & Non Routine') sebelum job bisa di-approve."
+            : "Disarankan tetap melampirkan foto KY Sheet meskipun risiko Low."
+        }
+      >
+        <PhotoUploader photos={form.kySheetPhotos} onChange={(photos) => set({ kySheetPhotos: photos })} prefix="NEWJOB_KY" />
+      </Field>
+
+      {error && (
+        <div className="flex items-center gap-2 text-xs text-rose-300 bg-rose-500/10 border border-rose-500/30 rounded-lg px-3 py-2">
+          <Ico name="AlertTriangle" size={14} /> {error}
+        </div>
+      )}
+
+      <div className="flex justify-end gap-2">
+        <button onClick={() => { setForm(emptyForm); setError(""); }} className="px-4 py-2 rounded-lg border border-zinc-700 text-zinc-300 text-sm font-semibold hover:border-zinc-600">Reset</button>
+        <button onClick={submit} disabled={submitting} className="px-5 py-2 rounded-lg bg-orange-500 text-zinc-950 text-sm font-bold hover:bg-orange-400 disabled:opacity-50 flex items-center gap-2">
+          {submitting ? <Ico name="Loader2" size={14} className="animate-spin" /> : <Ico name="ArrowRight" size={14} />}
+          {submitting ? "Menyimpan..." : "Submit Job"}
+        </button>
+      </div>
+      <p className="text-[11px] text-zinc-500">Job akan masuk dengan status <span className="font-semibold text-amber-300">WAITING APPROVAL</span> dan menunggu approval Foreman{form.risk !== "Low" && " → Section Head"}{form.risk === "High" && " → Dept Head"}. Approval boleh diberikan tidak berurutan.</p>
+    </div>
+  );
+}
+
+/* =========================================================================
+   ROOT APP
+   ========================================================================= */
+
+function App() {
+  const [jobs, setJobs] = useState([]);
+  const [accounts, setAccounts] = useState({ foreman: [], sectionHead: [], deptHead: [] });
+  const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState("");
+  const [tab, setTab] = useState("dashboard");
+  const [openJobId, setOpenJobId] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [showLogin, setShowLogin] = useState(false);
+
+  const loadData = async () => {
+    setLoading(true);
+    setLoadError("");
+    try {
+      const data = await apiGet("getData");
+      if (data.error) throw new Error(data.error);
+      setJobs(data.jobs || []);
+      setAccounts(data.accounts || { foreman: [], sectionHead: [], deptHead: [] });
+    } catch (err) {
+      setLoadError(err.message || String(err));
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    if (isConfigured()) loadData();
+    else setLoading(false);
+  }, []);
+
+  const updateJob = (next) => setJobs((js) => js.map((j) => (j.id === next.id ? next : j)));
+
+  const moveJob = (jobId, status) => {
+    const job = jobs.find((j) => j.id === jobId);
+    if (!job) return;
+    if (["READY", "IN PROGRESS", "DONE"].includes(status) && getApprovalStatus(job) !== "Approved") {
+      return; // block: belum approve
+    }
+    const patch = { status };
+    if (status === "IN PROGRESS" && !job.actualStart) patch.actualStart = new Date().toISOString().slice(0, 16);
+    if (status === "DONE" && !job.actualFinish) patch.actualFinish = new Date().toISOString().slice(0, 16);
+    const next = { ...job, ...patch };
+    updateJob(next);
+    apiPost("updateJob", { job: next }).catch(() => {});
+  };
+
+  const addJob = async (job) => {
+    try {
+      const res = await apiPost("addJob", { job });
+      if (res.success && res.job) setJobs((js) => [res.job, ...js]);
+      return res;
+    } catch (err) {
+      return { success: false, error: err.message || String(err) };
+    }
+  };
+
+  const openJob = jobs.find((j) => j.id === openJobId);
+
+  const TABS = [
+    { id: "dashboard", label: "Dashboard", icon: "Gauge" },
+    { id: "kanban", label: "Kanban Board", icon: "LayoutGrid" },
+    { id: "list", label: "Daftar Job & Approval", icon: "ClipboardList" },
+    { id: "form", label: "Input Job Baru", icon: "Plus" },
+    { id: "settings", label: "Settings", icon: "Settings" },
+  ];
+
+  /* Belum dikonfigurasi -> tampilkan instruksi setup */
+  if (!isConfigured()) {
+    return (
+      <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans flex items-center justify-center p-4">
+        <div className="max-w-lg bg-zinc-900 border border-zinc-800 rounded-2xl p-6 space-y-3">
+          <h1 className="text-lg font-bold text-zinc-50 flex items-center gap-2">
+            <Ico name="AlertTriangle" size={18} className="text-orange-400" /> Belum Terhubung ke Backend
+          </h1>
+          <p className="text-sm text-zinc-400">
+            Sistem ini membutuhkan backend Google Apps Script (Google Sheets + Google Drive) agar data job, akun, dan foto bisa tersimpan permanen.
+          </p>
+          <p className="text-sm text-zinc-400">
+            Ikuti <span className="font-semibold text-zinc-200">SETUP_GUIDE.md</span>, lalu isi <code className="bg-zinc-800 px-1.5 py-0.5 rounded text-orange-300">CONFIG.API_URL</code> di bagian atas file HTML ini dengan URL Web App hasil deploy Apps Script.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-zinc-950 text-zinc-400 font-sans flex items-center justify-center text-sm gap-2">
+        <Ico name="Loader2" size={18} className="animate-spin text-orange-400" /> Memuat data dari Google Sheets...
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans">
+      {/* Hazard stripe */}
+      <div className="h-1.5 w-full" style={{ backgroundImage: "repeating-linear-gradient(45deg, #f97316 0 14px, #18181b 14px 28px)" }} />
+
+      {/* Header */}
+      <header className="border-b border-zinc-800 bg-zinc-900/60">
+        <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <div className="bg-orange-500 text-zinc-950 font-black text-lg w-11 h-11 rounded-xl flex items-center justify-center">
+              <Ico name="Factory" size={22} />
+            </div>
+            <div>
+              <h1 className="text-base md:text-lg font-extrabold tracking-tight uppercase">Job Monitoring — Non Routine Activity</h1>
+              <p className="text-xs text-zinc-400">PT AT Indonesia · Section Melting &amp; Molding ACE</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 text-xs">
+            <button onClick={loadData} title="Muat ulang data" className="text-zinc-500 hover:text-orange-400 p-1.5">
+              <Ico name="RotateCcw" size={14} />
+            </button>
+            {currentUser ? (
+              <div className="flex items-center gap-2 bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-1.5">
+                <Ico name="UserCheck" size={14} className="text-orange-400" />
+                <span className="text-zinc-100 font-semibold">{currentUser.name}</span>
+                <span className="text-zinc-500">· {APPROVAL_LABEL[currentUser.role]}</span>
+                <button onClick={() => setCurrentUser(null)} className="text-zinc-500 hover:text-rose-400 ml-1" title="Logout">
+                  <Ico name="LogOut" size={14} />
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => setShowLogin(true)}
+                className="flex items-center gap-2 bg-orange-500 text-zinc-950 font-bold rounded-lg px-3 py-1.5 hover:bg-orange-400"
+              >
+                <Ico name="LogIn" size={14} /> Login
+              </button>
+            )}
+          </div>
+        </div>
+      </header>
+
+      {loadError && (
+        <div className="max-w-7xl mx-auto px-4 pt-3">
+          <div className="flex items-center gap-2 text-xs text-rose-300 bg-rose-500/10 border border-rose-500/30 rounded-lg px-3 py-2">
+            <Ico name="AlertTriangle" size={14} /> Gagal memuat data: {loadError}
+            <button onClick={loadData} className="ml-auto underline hover:text-rose-200">Coba lagi</button>
+          </div>
+        </div>
+      )}
+
+      {/* Tabs */}
+      <nav className="border-b border-zinc-800 bg-zinc-950 sticky top-0 z-10">
+        <div className="max-w-7xl mx-auto px-4 flex gap-1 overflow-x-auto">
+          {TABS.map((t) => {
+            const active = tab === t.id;
+            return (
+              <button
+                key={t.id}
+                onClick={() => setTab(t.id)}
+                className={`flex items-center gap-2 px-4 py-3 text-sm font-semibold border-b-2 whitespace-nowrap transition-colors ${
+                  active ? "border-orange-500 text-orange-400" : "border-transparent text-zinc-500 hover:text-zinc-300"
+                }`}
+              >
+                <Ico name={t.icon} size={15} /> {t.label}
+              </button>
+            );
+          })}
+        </div>
+      </nav>
+
+      <main className="max-w-7xl mx-auto px-4 py-6">
+        {tab === "dashboard" && <Dashboard jobs={jobs} />}
+        {tab === "kanban" && <KanbanBoard jobs={jobs} onMove={moveJob} onOpen={setOpenJobId} />}
+        {tab === "list" && <JobList jobs={jobs} onOpen={setOpenJobId} />}
+        {tab === "form" && <NewJobForm onSubmit={addJob} />}
+        {tab === "settings" && <AdminSettings accounts={accounts} setAccounts={setAccounts} />}
+      </main>
+
+      {openJob && (
+        <JobDetail
+          job={openJob}
+          onUpdate={updateJob}
+          onClose={() => setOpenJobId(null)}
+          currentUser={currentUser}
+        />
+      )}
+
+      {showLogin && (
+        <LoginModal
+          accounts={accounts}
+          onLogin={(u) => { setCurrentUser(u); setShowLogin(false); }}
+          onClose={() => setShowLogin(false)}
+        />
+      )}
+
+      <footer className="border-t border-zinc-800 py-4 text-center text-[11px] text-zinc-600">
+        Sistem Job Monitoring Non-Routine / Irregular Job — Melting &amp; Molding ACE, PT AT Indonesia. Data tersimpan di Google Sheets, foto di Google Drive.
+      </footer>
+    </div>
+  );
+}
+
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);
+</script>
+</body>
+</html>
