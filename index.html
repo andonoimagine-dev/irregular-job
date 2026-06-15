@@ -50,7 +50,7 @@ const { useState, useMemo, useEffect } = React;
    ========================================================================= */
 
 const CONFIG = {
-  API_URL: "https://script.google.com/macros/s/AKfycbz51ZkN5FoequMTDLB-1-nud-FB1JjmKSdYtZgD3RSChBwLEp3kbujp7jH-YL7X6COP/exec",
+  API_URL: "PASTE_URL_WEB_APP_GOOGLE_APPS_SCRIPT_DI_SINI",
 };
 
 const isConfigured = () =>
@@ -929,15 +929,28 @@ function JobDetail({ job, onUpdate, onClose, currentUser }) {
           </div>
 
           <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-3">
-            <p className="text-sm font-semibold text-zinc-100 flex items-center gap-2 mb-1">
-              <Ico name="Image" size={16} className="text-orange-400" /> Foto KY Sheet (Low Frequency &amp; Non Routine)
-            </p>
-            <p className="text-xs text-zinc-500 mb-2">
-              {local.risk !== "Low" || local.needShutdown === "Yes"
-                ? "Wajib dilampirkan sebelum approval Section Head / Dept Head. Foto bisa lebih dari 1 (misal: halaman KY & sketsa area)."
-                : "Lampirkan foto KY Sheet jika tersedia (opsional untuk risiko Low)."}
-            </p>
-            <PhotoUploader photos={local.kySheetPhotos} onChange={(photos) => handlePhotos("kySheetPhotos", photos)} prefix={`${local.id}_KY`} />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <p className="text-sm font-semibold text-zinc-100 flex items-center gap-2 mb-1">
+                  <Ico name="Image" size={16} className="text-orange-400" /> Foto KY Sheet - Sebelum Bekerja
+                </p>
+                <p className="text-xs text-zinc-500 mb-2">
+                  {local.risk !== "Low" || local.needShutdown === "Yes"
+                    ? "Wajib dilampirkan sebelum approval Section Head / Dept Head. Foto bisa lebih dari 1 (misal: halaman KY & sketsa area)."
+                    : "Lampirkan foto KY Sheet jika tersedia (opsional untuk risiko Low)."}
+                </p>
+                <PhotoUploader photos={local.kySheetBefore} onChange={(photos) => handlePhotos("kySheetBefore", photos)} prefix={`${local.id}_KY_BEFORE`} />
+              </div>
+              <div className="md:border-l md:border-zinc-800 md:pl-4 pt-3 md:pt-0 border-t md:border-t-0 border-zinc-800">
+                <p className="text-sm font-semibold text-zinc-100 flex items-center gap-2 mb-1">
+                  <Ico name="Image" size={16} className="text-orange-400" /> Foto KY Sheet - Setelah Selesai Bekerja
+                </p>
+                <p className="text-xs text-zinc-500 mb-2">
+                  Lampirkan foto KY Sheet bagian "Konfirmasi Setelah Selesai Bekerja" (cek fence/cover, sisa alat, sampah, dll) setelah pekerjaan selesai.
+                </p>
+                <PhotoUploader photos={local.kySheetAfter} onChange={(photos) => handlePhotos("kySheetAfter", photos)} prefix={`${local.id}_KY_AFTER`} />
+              </div>
+            </div>
           </div>
 
           {/* Approval workflow */}
@@ -1408,7 +1421,7 @@ const emptyForm = {
   dampakProduksi: "No",
   needShutdown: "No",
   stop6: [],
-  kySheetPhotos: [],
+  kySheetBefore: [],
 };
 
 function NewJobForm({ onSubmit }) {
@@ -1423,8 +1436,8 @@ function NewJobForm({ onSubmit }) {
       setError("Lengkapi seluruh field wajib (*) sebelum submit.");
       return;
     }
-    if ((form.risk !== "Low" || form.needShutdown === "Yes") && form.kySheetPhotos.length === 0) {
-      setError("Pekerjaan dengan risiko Medium/High atau yang memerlukan shutdown wajib upload foto KY Sheet terlebih dahulu.");
+    if ((form.risk !== "Low" || form.needShutdown === "Yes") && form.kySheetBefore.length === 0) {
+      setError("Pekerjaan dengan risiko Medium/High atau yang memerlukan shutdown wajib upload foto KY Sheet (Sebelum Bekerja) terlebih dahulu.");
       return;
     }
     setError("");
@@ -1444,6 +1457,7 @@ function NewJobForm({ onSubmit }) {
       followUp: "",
       fotoBefore: [],
       fotoAfter: [],
+      kySheetAfter: [],
     });
     setSubmitting(false);
     if (res && res.success) {
@@ -1542,16 +1556,17 @@ function NewJobForm({ onSubmit }) {
       </div>
 
       <Field
-        label="Upload Foto KY Sheet (Low Frequency &amp; Non Routine)"
+        label="Upload Foto KY Sheet - Sebelum Bekerja (Low Frequency &amp; Non Routine)"
         required={form.risk !== "Low" || form.needShutdown === "Yes"}
         hint={
           form.risk !== "Low" || form.needShutdown === "Yes"
-            ? "Wajib: isi & foto KY Sheet (sesuai form 'KY Sheet Pekerjaan Low Frequency & Non Routine') sebelum job bisa di-approve."
+            ? "Wajib: isi & foto KY Sheet bagian 'Konfirmasi Sebelum Bekerja' (sesuai form 'KY Sheet Pekerjaan Low Frequency & Non Routine') sebelum job bisa di-approve."
             : "Disarankan tetap melampirkan foto KY Sheet meskipun risiko Low."
         }
       >
-        <PhotoUploader photos={form.kySheetPhotos} onChange={(photos) => set({ kySheetPhotos: photos })} prefix="NEWJOB_KY" />
+        <PhotoUploader photos={form.kySheetBefore} onChange={(photos) => set({ kySheetBefore: photos })} prefix="NEWJOB_KY_BEFORE" />
       </Field>
+      <p className="text-[11px] text-zinc-500">Foto KY Sheet bagian "Konfirmasi Setelah Selesai Bekerja" dapat diupload nanti lewat detail job setelah pekerjaan selesai.</p>
 
       {error && (
         <div className="flex items-center gap-2 text-xs text-rose-300 bg-rose-500/10 border border-rose-500/30 rounded-lg px-3 py-2">
