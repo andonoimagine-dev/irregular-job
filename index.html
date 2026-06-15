@@ -50,7 +50,7 @@ const { useState, useMemo, useEffect } = React;
    ========================================================================= */
 
 const CONFIG = {
-  API_URL: "https://script.google.com/macros/s/AKfycbz51ZkN5FoequMTDLB-1-nud-FB1JjmKSdYtZgD3RSChBwLEp3kbujp7jH-YL7X6COP/exec",
+  API_URL: "PASTE_URL_WEB_APP_GOOGLE_APPS_SCRIPT_DI_SINI",
 };
 
 const isConfigured = () =>
@@ -884,7 +884,7 @@ function JobDetail({ job, onUpdate, onClose, currentUser }) {
       const res = await apiPost("updateJob", { job: jobToSave });
       if (res.success) {
         onUpdate(jobToSave);
-        setSaveMsg("Tersimpan ke spreadsheet.");
+        setSaveMsg("Tersimpan ke server.");
       } else {
         setSaveMsg("Gagal menyimpan: " + (res.error || "unknown error"));
       }
@@ -1061,7 +1061,7 @@ function JobDetail({ job, onUpdate, onClose, currentUser }) {
           <p className="text-xs text-zinc-500">
             {saveMsg
               ? saveMsg
-              : "Foto & approval tersimpan otomatis. Klik \"Simpan Perubahan\" untuk menyimpan field lainnya ke spreadsheet."}
+              : "Foto & approval tersimpan otomatis. Klik \"Simpan Perubahan\" untuk menyimpan field lainnya ke server."}
           </p>
           <button
             onClick={handleManualSave}
@@ -1246,7 +1246,7 @@ function AdminSettings({ accounts, setAccounts }) {
     setSaveMsg("Menyimpan...");
     try {
       const res = await apiPost("updateAccounts", { adminPassword, accounts: next });
-      setSaveMsg(res.success ? "Tersimpan ke spreadsheet." : "Gagal: " + (res.error || "unknown"));
+      setSaveMsg(res.success ? "Tersimpan ke server." : "Gagal: " + (res.error || "unknown"));
     } catch (err) {
       setSaveMsg("Gagal menyimpan: " + (err.message || err));
     }
@@ -1261,8 +1261,11 @@ function AdminSettings({ accounts, setAccounts }) {
         <h2 className="text-lg font-bold text-zinc-50">Settings - Kelola Akun Approval</h2>
       </div>
       <p className="text-xs text-zinc-500">
-        Tiap role (Foreman, Section Head, Dept Head) bisa diisi lebih dari satu orang. Akun ini dipakai untuk login & menjadi penanda siapa yang melakukan approval. Perubahan otomatis tersimpan ke Google Sheets.
+        Tiap role (Foreman, Section Head, Dept Head) bisa diisi lebih dari satu orang. Akun ini dipakai untuk login & menjadi penanda siapa yang melakukan approval. Perubahan otomatis tersimpan ke server.
       </p>
+      <datalist id="mp-name-suggestions">
+        {MP_LIST.map((n) => <option key={n} value={n} />)}
+      </datalist>
       {saveMsg && <p className="text-xs text-zinc-400">{saveMsg}</p>}
       {["foreman", "sectionHead", "deptHead"].map((role) => (
         <AccountRoleEditor key={role} role={role} list={accounts[role] || []} onChange={(list) => updateRole(role, list)} />
@@ -1275,10 +1278,20 @@ function AccountRoleEditor({ role, list, onChange }) {
   const [newName, setNewName] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [showPwd, setShowPwd] = useState({});
+  const [error, setError] = useState("");
 
   const add = () => {
-    if (!newName || !newPassword) return;
-    onChange([...list, { name: newName, password: newPassword }]);
+    const name = newName.trim();
+    if (!name || !newPassword) {
+      setError("Isi nama dan password terlebih dahulu.");
+      return;
+    }
+    if (list.some((p) => p.name.toLowerCase() === name.toLowerCase())) {
+      setError(`Akun "${name}" sudah ada.`);
+      return;
+    }
+    setError("");
+    onChange([...list, { name, password: newPassword }]);
     setNewName("");
     setNewPassword("");
   };
@@ -1310,20 +1323,28 @@ function AccountRoleEditor({ role, list, onChange }) {
         {list.length === 0 && <p className="text-xs text-zinc-500">Belum ada akun {APPROVAL_LABEL[role]}.</p>}
       </div>
       <div className="flex flex-col sm:flex-row gap-2">
-        <div className="flex-1">
-          <PersonPicker value={newName} onChange={setNewName} placeholder={`Tambah nama ${APPROVAL_LABEL[role]}...`} />
-        </div>
+        <input
+          type="text"
+          list="mp-name-suggestions"
+          className={`${inputCls} flex-1`}
+          placeholder={`Tambah nama ${APPROVAL_LABEL[role]}...`}
+          value={newName}
+          onChange={(e) => { setNewName(e.target.value); setError(""); }}
+          onKeyDown={(e) => e.key === "Enter" && add()}
+        />
         <input
           type="text"
           className={`${inputCls} sm:max-w-[160px]`}
           placeholder="Password"
           value={newPassword}
-          onChange={(e) => setNewPassword(e.target.value)}
+          onChange={(e) => { setNewPassword(e.target.value); setError(""); }}
+          onKeyDown={(e) => e.key === "Enter" && add()}
         />
         <button onClick={add} className="px-4 py-2 rounded-lg bg-orange-500 text-zinc-950 text-sm font-bold hover:bg-orange-400 whitespace-nowrap">
           + Tambah
         </button>
       </div>
+      {error && <p className="text-[11px] text-rose-400 mt-1.5">{error}</p>}
     </div>
   );
 }
@@ -1672,7 +1693,7 @@ function App() {
             <Ico name="AlertTriangle" size={18} className="text-orange-400" /> Belum Terhubung ke Backend
           </h1>
           <p className="text-sm text-zinc-400">
-            Sistem ini membutuhkan backend Google Apps Script (Google Sheets + Google Drive) agar data job, akun, dan foto bisa tersimpan permanen.
+            Sistem ini membutuhkan koneksi ke server agar data job, akun, dan foto bisa tersimpan permanen.
           </p>
           <p className="text-sm text-zinc-400">
             Ikuti <span className="font-semibold text-zinc-200">SETUP_GUIDE.md</span>, lalu isi <code className="bg-zinc-800 px-1.5 py-0.5 rounded text-orange-300">CONFIG.API_URL</code> di bagian atas file HTML ini dengan URL Web App hasil deploy Apps Script.
@@ -1685,7 +1706,7 @@ function App() {
   if (loading) {
     return (
       <div className="min-h-screen bg-zinc-950 text-zinc-400 font-sans flex items-center justify-center text-sm gap-2">
-        <Ico name="Loader2" size={18} className="animate-spin text-orange-400" /> Memuat data dari Google Sheets...
+        <Ico name="Loader2" size={18} className="animate-spin text-orange-400" /> Memuat data dari server...
       </div>
     );
   }
@@ -1787,7 +1808,7 @@ function App() {
       )}
 
       <footer className="border-t border-zinc-800 py-4 text-center text-[11px] text-zinc-600">
-        Sistem Job Monitoring Non-Routine / Irregular Job — Melting &amp; Molding ACE, PT AT Indonesia. Data tersimpan di Google Sheets, foto di Google Drive.
+        Sistem Job Monitoring Non-Routine / Irregular Job — Melting &amp; Molding ACE, PT AT Indonesia. Data &amp; foto tersimpan otomatis di server.
       </footer>
     </div>
   );
