@@ -5,17 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Job Monitoring - Non Routine Activity | PT AT Indonesia</title>
 
-<!-- Tailwind CSS -->
 <script src="https://cdn.tailwindcss.com"></script>
-
-<!-- React + ReactDOM -->
-<script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-
-<!-- Babel (for in-browser JSX transform) -->
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
-<!-- Lucide icons (raw icon path data) -->
+<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
 <style>
@@ -38,9 +30,37 @@
   </div>
 </div>
 
-<script type="text/babel" data-presets="react">
-const { useState, useMemo, useEffect } = React;
+<script>
+"use strict";
 
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+var _excluded = ["name", "size", "className"];
+function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+function _objectWithoutProperties(e, t) { if (null == e) return {}; var o, r, i = _objectWithoutPropertiesLoose(e, t); if (Object.getOwnPropertySymbols) { var n = Object.getOwnPropertySymbols(e); for (r = 0; r < n.length; r++) o = n[r], -1 === t.indexOf(o) && {}.propertyIsEnumerable.call(e, o) && (i[o] = e[o]); } return i; }
+function _objectWithoutPropertiesLoose(r, e) { if (null == r) return {}; var t = {}; for (var n in r) if ({}.hasOwnProperty.call(r, n)) { if (-1 !== e.indexOf(n)) continue; t[n] = r[n]; } return t; }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+var _React = React,
+  useState = _React.useState,
+  useMemo = _React.useMemo,
+  useEffect = _React.useEffect;
 
 /* =========================================================================
    CONFIG - Koneksi ke Google Apps Script (Google Sheets + Google Drive)
@@ -49,51 +69,104 @@ const { useState, useMemo, useEffect } = React;
    2. Copy URL Web App hasil deploy, paste di bawah ini.
    ========================================================================= */
 
-const CONFIG = {
-  API_URL: "https://script.google.com/macros/s/AKfycbz51ZkN5FoequMTDLB-1-nud-FB1JjmKSdYtZgD3RSChBwLEp3kbujp7jH-YL7X6COP/exec",
+var CONFIG = {
+  API_URL: "PASTE_URL_WEB_APP_GOOGLE_APPS_SCRIPT_DI_SINI"
 };
-
-const isConfigured = () =>
-  CONFIG.API_URL && CONFIG.API_URL.indexOf("https://script.google.com") === 0;
-
-async function apiGet(action, params = {}) {
-  const qs = new URLSearchParams({ action, ...params }).toString();
-  const res = await fetch(`${CONFIG.API_URL}?${qs}`);
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  return res.json();
+var isConfigured = function isConfigured() {
+  return CONFIG.API_URL && CONFIG.API_URL.indexOf("https://script.google.com") === 0;
+};
+function apiGet(_x) {
+  return _apiGet.apply(this, arguments);
 }
-
-async function apiPost(action, payload = {}) {
-  const res = await fetch(CONFIG.API_URL, {
-    method: "POST",
-    headers: { "Content-Type": "text/plain;charset=utf-8" },
-    body: JSON.stringify({ action, ...payload }),
-  });
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  return res.json();
+function _apiGet() {
+  _apiGet = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee9(action) {
+    var params,
+      qs,
+      res,
+      _args9 = arguments;
+    return _regenerator().w(function (_context9) {
+      while (1) switch (_context9.n) {
+        case 0:
+          params = _args9.length > 1 && _args9[1] !== undefined ? _args9[1] : {};
+          qs = new URLSearchParams(_objectSpread({
+            action: action
+          }, params)).toString();
+          _context9.n = 1;
+          return fetch("".concat(CONFIG.API_URL, "?").concat(qs));
+        case 1:
+          res = _context9.v;
+          if (res.ok) {
+            _context9.n = 2;
+            break;
+          }
+          throw new Error("HTTP ".concat(res.status));
+        case 2:
+          return _context9.a(2, res.json());
+      }
+    }, _callee9);
+  }));
+  return _apiGet.apply(this, arguments);
 }
-
+function apiPost(_x2) {
+  return _apiPost.apply(this, arguments);
+}
 /* Resize foto sebelum diupload ke Google Drive agar lebih cepat & ringan */
-function resizeImage(file, maxDim = 1280, quality = 0.8) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const img = new Image();
-      img.onload = () => {
-        let { width, height } = img;
+function _apiPost() {
+  _apiPost = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee0(action) {
+    var payload,
+      res,
+      _args0 = arguments;
+    return _regenerator().w(function (_context0) {
+      while (1) switch (_context0.n) {
+        case 0:
+          payload = _args0.length > 1 && _args0[1] !== undefined ? _args0[1] : {};
+          _context0.n = 1;
+          return fetch(CONFIG.API_URL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "text/plain;charset=utf-8"
+            },
+            body: JSON.stringify(_objectSpread({
+              action: action
+            }, payload))
+          });
+        case 1:
+          res = _context0.v;
+          if (res.ok) {
+            _context0.n = 2;
+            break;
+          }
+          throw new Error("HTTP ".concat(res.status));
+        case 2:
+          return _context0.a(2, res.json());
+      }
+    }, _callee0);
+  }));
+  return _apiPost.apply(this, arguments);
+}
+function resizeImage(file) {
+  var maxDim = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1280;
+  var quality = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0.8;
+  return new Promise(function (resolve, reject) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      var img = new Image();
+      img.onload = function () {
+        var width = img.width,
+          height = img.height;
         if (width > maxDim || height > maxDim) {
           if (width > height) {
-            height = Math.round((height * maxDim) / width);
+            height = Math.round(height * maxDim / width);
             width = maxDim;
           } else {
-            width = Math.round((width * maxDim) / height);
+            width = Math.round(width * maxDim / height);
             height = maxDim;
           }
         }
-        const canvas = document.createElement("canvas");
+        var canvas = document.createElement("canvas");
         canvas.width = width;
         canvas.height = height;
-        const ctx = canvas.getContext("2d");
+        var ctx = canvas.getContext("2d");
         ctx.drawImage(img, 0, 0, width, height);
         resolve(canvas.toDataURL("image/jpeg", quality));
       };
@@ -109,115 +182,182 @@ function resizeImage(file, maxDim = 1280, quality = 0.8) {
    MASTER DATA
    ========================================================================= */
 
-const MP_LIST = [
-  // Molding ACE-1 NSP
-  "Sunarno","Sumarno","Nadir","Sumardi","Rudi Andriansyah","Riyan","Agus S.P.",
-  "Teguh I.","Aang A.","M. Sonni A.","Dwi M.","Suranto","Yosef Nugraha",
-  "Ahmad Sahrul N","A. Syukur","Rohmanudin","Aji Koswara","Joni H.","Fauzi A.",
-  // Molding ACE-1 NSM
-  "Sonang F.","Sutopo","Ajis S.","Riski D.","Karim Abdulloh","Tajudin",
-  "Kusnandar","Sunoto","Yoyon","Kemal F.","Panji Satriya","Yanuardi","Totok",
-  "Farhan","Ari Sujarwo","Khaerul A.","Harun Agus S","Asep P.","Solikin",
-  // Molding ACE-2 NSP
-  "Kurniangga Y.","Adi Mulyono","Syepudin","Hafid F.","Aris PW",
-  "Rifki Ardiansyah","Ahmad Niki N","Wahyu Adik K.S","Atmam","Saripudin",
-  "Jeje M.","Ribut Mulyono","Indria Ratna G.","Satrio A","Hamidan","Resa",
-  // Molding ACE-2 NSM
-  "Agus M.","Ridwan K","Agus Surahno","Yayat H.","Mahfud","Januar A.",
-  "R. Afandi","Cucu Efendy","Sartono","Yulian Tikno","Darmanto","Khoirul A.",
-  "Kamaludin","Sopian Arip","Andi Tri Prasetyo","Alfian Budi S.",
-  // Melting ACE-1 NSP
-  "Sudimin","Suparmin","Rudi A.","Didi S.","Achmad W.","Yogaswara",
-  "Wahyudi W","Dede J.","Mandiyono","Nunung N.","Dede A.","Darta",
-  // Melting ACE-1 NSM
-  "Eko Winardi","Hermawan SP","Slamet R.","Saiful","M. Khoirul A.","Atsa",
-  "Tatang","Eko H.","Tarnado","Wahyu Eko S.","Nugroho","Hamdani",
-  // Melting ACE-2 NSP
-  "Ikhsani","Aripin","Setyo T.","Dwi H.","Ayuts H.","Siswanto","Guntur P.",
-  "Tono H.","Heri S.","M. Rizal","Sutoro","Sarnata","Imam S.",
-  // Melting ACE-2 NSM
-  "Agus Rachman","Joko W.","Husein","M. Sapi'i","M. Dwi H.","Fikri Y.",
-  "Catur","Widodo","Kayun","Warsono","Yudi Adi W.","A. Musrifin","Cucun W.",
-  // Die Making
-  "Waryono","Suryadin","Aris Nurcahyo","Endang Sumarna","Rega A","Yasir Ali",
-  "Iman R.","Ari Kustiana","Fuad","Agus Y.","Pandi","Setya Budi","Hermawan",
-  "Doni Prasetyo",
-  // HADICO
-  "Dadan","Endang S","Angkrih","Adam J.","Ade Iman","Sutrisno","Kusnadi",
-  "Rustam","Ade S.","Yahman","Oki","Nurdin",
-  // Lainnya
-  "Sudiyono","M. Syafaat","Dede M.","Suroso","Didik S.",
-  // Tambahan dari Schedule Hot Casting 2 (OT 13-14 Juni 2026)
-  "Agung Z","Endrik","Maman","Pirmansyah","Ari Risnandar","Halimun","Ade Saefudin"
-];
-
-const AREA_OPTIONS = ["Melting", "ACE-1", "ACE-2", "Die Making"];
-
-const JENIS_OPTIONS = ["Maintenance","Improvement","Safety","Trial","Others"];
-const RISK_OPTIONS = ["Low","Medium","High"];
-
-const JENIS_META = {
-  Maintenance: { icon: "Wrench", color: "text-sky-400 bg-sky-500/10 border-sky-500/30" },
-  Improvement: { icon: "TrendingUp", color: "text-emerald-400 bg-emerald-500/10 border-emerald-500/30" },
-  Safety: { icon: "ShieldAlert", color: "text-rose-400 bg-rose-500/10 border-rose-500/30" },
-  Trial: { icon: "FlaskConical", color: "text-violet-400 bg-violet-500/10 border-violet-500/30" },
-  Others: { icon: "ClipboardList", color: "text-zinc-400 bg-zinc-500/10 border-zinc-500/30" },
+var MP_LIST = [
+// Molding ACE-1 NSP
+"Sunarno", "Sumarno", "Nadir", "Sumardi", "Rudi Andriansyah", "Riyan", "Agus S.P.", "Teguh I.", "Aang A.", "M. Sonni A.", "Dwi M.", "Suranto", "Yosef Nugraha", "Ahmad Sahrul N", "A. Syukur", "Rohmanudin", "Aji Koswara", "Joni H.", "Fauzi A.",
+// Molding ACE-1 NSM
+"Sonang F.", "Sutopo", "Ajis S.", "Riski D.", "Karim Abdulloh", "Tajudin", "Kusnandar", "Sunoto", "Yoyon", "Kemal F.", "Panji Satriya", "Yanuardi", "Totok", "Farhan", "Ari Sujarwo", "Khaerul A.", "Harun Agus S", "Asep P.", "Solikin",
+// Molding ACE-2 NSP
+"Kurniangga Y.", "Adi Mulyono", "Syepudin", "Hafid F.", "Aris PW", "Rifki Ardiansyah", "Ahmad Niki N", "Wahyu Adik K.S", "Atmam", "Saripudin", "Jeje M.", "Ribut Mulyono", "Indria Ratna G.", "Satrio A", "Hamidan", "Resa",
+// Molding ACE-2 NSM
+"Agus M.", "Ridwan K", "Agus Surahno", "Yayat H.", "Mahfud", "Januar A.", "R. Afandi", "Cucu Efendy", "Sartono", "Yulian Tikno", "Darmanto", "Khoirul A.", "Kamaludin", "Sopian Arip", "Andi Tri Prasetyo", "Alfian Budi S.",
+// Melting ACE-1 NSP
+"Sudimin", "Suparmin", "Rudi A.", "Didi S.", "Achmad W.", "Yogaswara", "Wahyudi W", "Dede J.", "Mandiyono", "Nunung N.", "Dede A.", "Darta",
+// Melting ACE-1 NSM
+"Eko Winardi", "Hermawan SP", "Slamet R.", "Saiful", "M. Khoirul A.", "Atsa", "Tatang", "Eko H.", "Tarnado", "Wahyu Eko S.", "Nugroho", "Hamdani",
+// Melting ACE-2 NSP
+"Ikhsani", "Aripin", "Setyo T.", "Dwi H.", "Ayuts H.", "Siswanto", "Guntur P.", "Tono H.", "Heri S.", "M. Rizal", "Sutoro", "Sarnata", "Imam S.",
+// Melting ACE-2 NSM
+"Agus Rachman", "Joko W.", "Husein", "M. Sapi'i", "M. Dwi H.", "Fikri Y.", "Catur", "Widodo", "Kayun", "Warsono", "Yudi Adi W.", "A. Musrifin", "Cucun W.",
+// Die Making
+"Waryono", "Suryadin", "Aris Nurcahyo", "Endang Sumarna", "Rega A", "Yasir Ali", "Iman R.", "Ari Kustiana", "Fuad", "Agus Y.", "Pandi", "Setya Budi", "Hermawan", "Doni Prasetyo",
+// HADICO
+"Dadan", "Endang S", "Angkrih", "Adam J.", "Ade Iman", "Sutrisno", "Kusnadi", "Rustam", "Ade S.", "Yahman", "Oki", "Nurdin",
+// Lainnya
+"Sudiyono", "M. Syafaat", "Dede M.", "Suroso", "Didik S.",
+// Tambahan dari Schedule Hot Casting 2 (OT 13-14 Juni 2026)
+"Agung Z", "Endrik", "Maman", "Pirmansyah", "Ari Risnandar", "Halimun", "Ade Saefudin"];
+var AREA_OPTIONS = ["Melting", "ACE-1", "ACE-2", "Die Making"];
+var JENIS_OPTIONS = ["Maintenance", "Improvement", "Safety", "Trial", "Others"];
+var RISK_OPTIONS = ["Low", "Medium", "High"];
+var JENIS_META = {
+  Maintenance: {
+    icon: "Wrench",
+    color: "text-sky-400 bg-sky-500/10 border-sky-500/30"
+  },
+  Improvement: {
+    icon: "TrendingUp",
+    color: "text-emerald-400 bg-emerald-500/10 border-emerald-500/30"
+  },
+  Safety: {
+    icon: "ShieldAlert",
+    color: "text-rose-400 bg-rose-500/10 border-rose-500/30"
+  },
+  Trial: {
+    icon: "FlaskConical",
+    color: "text-violet-400 bg-violet-500/10 border-violet-500/30"
+  },
+  Others: {
+    icon: "ClipboardList",
+    color: "text-zinc-400 bg-zinc-500/10 border-zinc-500/30"
+  }
 };
-
-const STATUS_LIST = ["WAITING APPROVAL","READY","IN PROGRESS","DELAY","HOLD","DONE"];
-
-const STATUS_META = {
-  "WAITING APPROVAL": { dot: "bg-amber-400", text: "text-amber-300", bg: "bg-amber-500/10", border: "border-amber-500/30" },
-  "READY":            { dot: "bg-zinc-400",  text: "text-zinc-300",  bg: "bg-zinc-500/10",  border: "border-zinc-500/30"  },
-  "IN PROGRESS":      { dot: "bg-amber-500", text: "text-amber-300", bg: "bg-amber-500/15", border: "border-amber-500/40" },
-  "DELAY":            { dot: "bg-rose-500",  text: "text-rose-300",  bg: "bg-rose-500/10",  border: "border-rose-500/30"  },
-  "HOLD":             { dot: "bg-rose-400",  text: "text-rose-300",  bg: "bg-rose-500/10",  border: "border-rose-500/30"  },
-  "DONE":             { dot: "bg-emerald-500", text: "text-emerald-300", bg: "bg-emerald-500/10", border: "border-emerald-500/30" },
+var STATUS_LIST = ["WAITING APPROVAL", "READY", "IN PROGRESS", "DELAY", "HOLD", "DONE"];
+var STATUS_META = {
+  "WAITING APPROVAL": {
+    dot: "bg-amber-400",
+    text: "text-amber-300",
+    bg: "bg-amber-500/10",
+    border: "border-amber-500/30"
+  },
+  "READY": {
+    dot: "bg-zinc-400",
+    text: "text-zinc-300",
+    bg: "bg-zinc-500/10",
+    border: "border-zinc-500/30"
+  },
+  "IN PROGRESS": {
+    dot: "bg-amber-500",
+    text: "text-amber-300",
+    bg: "bg-amber-500/15",
+    border: "border-amber-500/40"
+  },
+  "DELAY": {
+    dot: "bg-rose-500",
+    text: "text-rose-300",
+    bg: "bg-rose-500/10",
+    border: "border-rose-500/30"
+  },
+  "HOLD": {
+    dot: "bg-rose-400",
+    text: "text-rose-300",
+    bg: "bg-rose-500/10",
+    border: "border-rose-500/30"
+  },
+  "DONE": {
+    dot: "bg-emerald-500",
+    text: "text-emerald-300",
+    bg: "bg-emerald-500/10",
+    border: "border-emerald-500/30"
+  }
 };
-
-const RISK_META = {
-  Low:    { level: 1, color: "bg-sky-500",  text: "text-sky-300" },
-  Medium: { level: 2, color: "bg-amber-500", text: "text-amber-300" },
-  High:   { level: 3, color: "bg-rose-500",  text: "text-rose-300" },
+var RISK_META = {
+  Low: {
+    level: 1,
+    color: "bg-sky-500",
+    text: "text-sky-300"
+  },
+  Medium: {
+    level: 2,
+    color: "bg-amber-500",
+    text: "text-amber-300"
+  },
+  High: {
+    level: 3,
+    color: "bg-rose-500",
+    text: "text-rose-300"
+  }
 };
 
 /* STOP 6 - kriteria safety pekerjaan */
-const STOP6_OPTIONS = ["A", "B", "C", "D", "E", "F"];
-const STOP6_META = {
-  A: { label: "Aparatus", desc: "Bahaya alat / perkakas kerja" },
-  B: { label: "Big Heavy", desc: "Bahaya benda berat / beban" },
-  C: { label: "Car", desc: "Bahaya kendaraan / alat angkut" },
-  D: { label: "Drop", desc: "Bahaya jatuh / terjatuh" },
-  E: { label: "Electricity", desc: "Bahaya listrik" },
-  F: { label: "Fire", desc: "Bahaya api / panas" },
+var STOP6_OPTIONS = ["A", "B", "C", "D", "E", "F"];
+var STOP6_META = {
+  A: {
+    label: "Aparatus",
+    desc: "Bahaya alat / perkakas kerja"
+  },
+  B: {
+    label: "Big Heavy",
+    desc: "Bahaya benda berat / beban"
+  },
+  C: {
+    label: "Car",
+    desc: "Bahaya kendaraan / alat angkut"
+  },
+  D: {
+    label: "Drop",
+    desc: "Bahaya jatuh / terjatuh"
+  },
+  E: {
+    label: "Electricity",
+    desc: "Bahaya listrik"
+  },
+  F: {
+    label: "Fire",
+    desc: "Bahaya api / panas"
+  }
 };
-
-const TODAY = new Date();
-
-const fmtDate = (d) => {
+var TODAY = new Date();
+var fmtDate = function fmtDate(d) {
   if (!d) return "-";
-  const dt = new Date(d);
-  return dt.toLocaleDateString("id-ID", { day: "2-digit", month: "short", year: "numeric" });
+  var dt = new Date(d);
+  return dt.toLocaleDateString("id-ID", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric"
+  });
 };
-const fmtDateTime = (d) => {
+var fmtDateTime = function fmtDateTime(d) {
   if (!d) return "-";
-  const dt = new Date(d);
-  return dt.toLocaleString("id-ID", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" });
+  var dt = new Date(d);
+  return dt.toLocaleString("id-ID", {
+    day: "2-digit",
+    month: "short",
+    hour: "2-digit",
+    minute: "2-digit"
+  });
 };
-const diffHours = (a, b) => Math.round(((new Date(b) - new Date(a)) / 36e5) * 10) / 10;
-const sameDay = (a, b) => new Date(a).toDateString() === new Date(b).toDateString();
+var diffHours = function diffHours(a, b) {
+  return Math.round((new Date(b) - new Date(a)) / 36e5 * 10) / 10;
+};
+var sameDay = function sameDay(a, b) {
+  return new Date(a).toDateString() === new Date(b).toDateString();
+};
 
 /* =========================================================================
    APPROVAL LOGIC
    ========================================================================= */
 
-const requiredApprovals = (risk) => {
+var requiredApprovals = function requiredApprovals(risk) {
   if (risk === "High") return ["foreman", "sectionHead", "deptHead"];
   if (risk === "Medium") return ["foreman", "sectionHead"];
   return ["foreman"];
 };
-
-const APPROVAL_LABEL = { foreman: "Foreman", sectionHead: "Section Head", deptHead: "Dept Head" };
+var APPROVAL_LABEL = {
+  foreman: "Foreman",
+  sectionHead: "Section Head",
+  deptHead: "Dept Head"
+};
 
 /* =========================================================================
    LOGIN / ACCOUNTS (Foreman, Section Head, Dept Head)
@@ -225,32 +365,36 @@ const APPROVAL_LABEL = { foreman: "Foreman", sectionHead: "Section Head", deptHe
      (sheet "Accounts"), dikelola lewat tab Settings.
    ========================================================================= */
 
-const getApprovalStatus = (job) => {
-  const req = requiredApprovals(job.risk);
-  if (req.some((r) => job.approvals[r]?.status === "Rejected")) return "Rejected";
-  if (req.every((r) => job.approvals[r]?.status === "Approved")) return "Approved";
+var getApprovalStatus = function getApprovalStatus(job) {
+  var req = requiredApprovals(job.risk);
+  if (req.some(function (r) {
+    var _job$approvals$r;
+    return ((_job$approvals$r = job.approvals[r]) === null || _job$approvals$r === void 0 ? void 0 : _job$approvals$r.status) === "Rejected";
+  })) return "Rejected";
+  if (req.every(function (r) {
+    var _job$approvals$r2;
+    return ((_job$approvals$r2 = job.approvals[r]) === null || _job$approvals$r2 === void 0 ? void 0 : _job$approvals$r2.status) === "Approved";
+  })) return "Approved";
   return "Waiting";
 };
-
-const getEffectiveStatus = (job) => {
+var getEffectiveStatus = function getEffectiveStatus(job) {
   if (job.status === "DONE") return "DONE";
   if (job.status === "HOLD") return "HOLD";
-  const appStatus = getApprovalStatus(job);
+  var appStatus = getApprovalStatus(job);
   if (appStatus === "Rejected") return "HOLD";
   if (appStatus !== "Approved") return "WAITING APPROVAL";
-  if ((job.status === "READY" || job.status === "IN PROGRESS")) {
-    const plannedEnd = new Date(job.plannedDate);
+  if (job.status === "READY" || job.status === "IN PROGRESS") {
+    var plannedEnd = new Date(job.plannedDate);
     plannedEnd.setHours(plannedEnd.getHours() + Number(job.estDuration || 0));
     if (TODAY > plannedEnd) return "DELAY";
   }
   return job.status;
 };
-
-const getDelayHours = (job) => {
-  const plannedEnd = new Date(job.plannedDate);
+var getDelayHours = function getDelayHours(job) {
+  var plannedEnd = new Date(job.plannedDate);
   plannedEnd.setHours(plannedEnd.getHours() + Number(job.estDuration || 0));
-  const ref = job.actualFinish ? new Date(job.actualFinish) : TODAY;
-  const h = diffHours(plannedEnd, ref);
+  var ref = job.actualFinish ? new Date(job.actualFinish) : TODAY;
+  var h = diffHours(plannedEnd, ref);
   return h > 0 ? h : 0;
 };
 
@@ -260,1155 +404,1852 @@ const getDelayHours = (job) => {
      melalui Google Apps Script Web App. Tidak ada data contoh/dummy di sini.
    ========================================================================= */
 
-
 /* =========================================================================
    ICON HELPER (uses global `lucide` icon data, loaded via CDN)
    ========================================================================= */
 
 function toKebab(name) {
-  return name
-    .replace(/([a-zA-Z])(\d)/g, "$1-$2")
-    .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
-    .toLowerCase();
+  return name.replace(/([a-zA-Z])(\d)/g, "$1-$2").replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
 }
-
-function Ico({ name, size = 18, className = "", ...rest }) {
-  const L = window.lucide || {};
-  const candidates = [name, toKebab(name), name.toLowerCase()];
-  let data = null;
-  for (const c of candidates) {
-    if (L.icons && L.icons[c]) { data = L.icons[c]; break; }
-    if (L[c]) { data = L[c]; break; }
+function Ico(_ref) {
+  var name = _ref.name,
+    _ref$size = _ref.size,
+    size = _ref$size === void 0 ? 18 : _ref$size,
+    _ref$className = _ref.className,
+    className = _ref$className === void 0 ? "" : _ref$className,
+    rest = _objectWithoutProperties(_ref, _excluded);
+  var L = window.lucide || {};
+  var candidates = [name, toKebab(name), name.toLowerCase()];
+  var data = null;
+  for (var _i = 0, _candidates = candidates; _i < _candidates.length; _i++) {
+    var c = _candidates[_i];
+    if (L.icons && L.icons[c]) {
+      data = L.icons[c];
+      break;
+    }
+    if (L[c]) {
+      data = L[c];
+      break;
+    }
   }
-  if (!data) return <span style={{ width: size, height: size, display: "inline-block" }} />;
-  return (
-    <svg
-      width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor"
-      strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...rest}
-    >
-      {data.map((node, i) => {
-        const [tag, attrs] = node;
-        return React.createElement(tag, { key: i, ...attrs });
-      })}
-    </svg>
-  );
+  if (!data) return /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: size,
+      height: size,
+      display: "inline-block"
+    }
+  });
+  return /*#__PURE__*/React.createElement("svg", _extends({
+    width: size,
+    height: size,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    className: className
+  }, rest), data.map(function (node, i) {
+    var _node = _slicedToArray(node, 2),
+      tag = _node[0],
+      attrs = _node[1];
+    return React.createElement(tag, _objectSpread({
+      key: i
+    }, attrs));
+  }));
 }
 
 /* =========================================================================
    SMALL UI PRIMITIVES
    ========================================================================= */
 
-function RiskGauge({ risk, size = "sm" }) {
-  const meta = RISK_META[risk] || RISK_META.Low;
-  const colors = ["bg-sky-500", "bg-amber-500", "bg-rose-500"];
-  const h = size === "lg" ? "h-2" : "h-1.5";
-  const w = size === "lg" ? "w-6" : "w-4";
-  return (
-    <div className="flex items-center gap-1.5">
-      <div className="flex items-end gap-0.5">
-        {[1, 2, 3].map((i) => (
-          <div
-            key={i}
-            className={`${w} ${h} rounded-sm transition-colors ${
-              i <= meta.level ? colors[i - 1] : "bg-zinc-700"
-            }`}
-            style={{ height: `${4 + i * 3}px` }}
-          />
-        ))}
-      </div>
-      <span className={`text-xs font-semibold ${meta.text}`}>{risk}</span>
-    </div>
-  );
+function RiskGauge(_ref2) {
+  var risk = _ref2.risk,
+    _ref2$size = _ref2.size,
+    size = _ref2$size === void 0 ? "sm" : _ref2$size;
+  var meta = RISK_META[risk] || RISK_META.Low;
+  var colors = ["bg-sky-500", "bg-amber-500", "bg-rose-500"];
+  var h = size === "lg" ? "h-2" : "h-1.5";
+  var w = size === "lg" ? "w-6" : "w-4";
+  return /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-1.5"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-end gap-0.5"
+  }, [1, 2, 3].map(function (i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      className: "".concat(w, " ").concat(h, " rounded-sm transition-colors ").concat(i <= meta.level ? colors[i - 1] : "bg-zinc-700"),
+      style: {
+        height: "".concat(4 + i * 3, "px")
+      }
+    });
+  })), /*#__PURE__*/React.createElement("span", {
+    className: "text-xs font-semibold ".concat(meta.text)
+  }, risk));
 }
-
-function StatusBadge({ status }) {
-  const meta = STATUS_META[status] || STATUS_META.READY;
-  return (
-    <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full border text-[11px] font-bold tracking-wide uppercase ${meta.bg} ${meta.border} ${meta.text}`}>
-      <span className={`w-1.5 h-1.5 rounded-full ${meta.dot}`} />
-      {status}
-    </span>
-  );
+function StatusBadge(_ref3) {
+  var status = _ref3.status;
+  var meta = STATUS_META[status] || STATUS_META.READY;
+  return /*#__PURE__*/React.createElement("span", {
+    className: "inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full border text-[11px] font-bold tracking-wide uppercase ".concat(meta.bg, " ").concat(meta.border, " ").concat(meta.text)
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "w-1.5 h-1.5 rounded-full ".concat(meta.dot)
+  }), status);
 }
-
-function JenisBadge({ jenis }) {
-  const meta = JENIS_META[jenis] || JENIS_META.Others;
-  return (
-    <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded border text-[11px] font-semibold ${meta.color}`}>
-      <Ico name={meta.icon} size={12} />
-      {jenis}
-    </span>
-  );
+function JenisBadge(_ref4) {
+  var jenis = _ref4.jenis;
+  var meta = JENIS_META[jenis] || JENIS_META.Others;
+  return /*#__PURE__*/React.createElement("span", {
+    className: "inline-flex items-center gap-1 px-2 py-0.5 rounded border text-[11px] font-semibold ".concat(meta.color)
+  }, /*#__PURE__*/React.createElement(Ico, {
+    name: meta.icon,
+    size: 12
+  }), jenis);
 }
 
 /* STOP 6 - badge & picker untuk kriteria safety pekerjaan */
-function Stop6Badges({ stop6, size = "sm" }) {
+function Stop6Badges(_ref5) {
+  var stop6 = _ref5.stop6,
+    _ref5$size = _ref5.size,
+    size = _ref5$size === void 0 ? "sm" : _ref5$size;
   if (!stop6 || stop6.length === 0) return null;
-  const dim = size === "lg" ? "w-6 h-6 text-xs" : "w-5 h-5 text-[10px]";
-  return (
-    <div className="flex items-center gap-1">
-      {stop6.map((s) => (
-        <span
-          key={s}
-          title={`STOP 6 - ${s}: ${STOP6_META[s]?.label} (${STOP6_META[s]?.desc})`}
-          className={`flex items-center justify-center ${dim} rounded-full border border-orange-500/40 bg-orange-500/10 text-orange-300 font-bold`}
-        >
-          {s}
-        </span>
-      ))}
-    </div>
-  );
+  var dim = size === "lg" ? "w-6 h-6 text-xs" : "w-5 h-5 text-[10px]";
+  return /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-1"
+  }, stop6.map(function (s) {
+    var _STOP6_META$s, _STOP6_META$s2;
+    return /*#__PURE__*/React.createElement("span", {
+      key: s,
+      title: "STOP 6 - ".concat(s, ": ").concat((_STOP6_META$s = STOP6_META[s]) === null || _STOP6_META$s === void 0 ? void 0 : _STOP6_META$s.label, " (").concat((_STOP6_META$s2 = STOP6_META[s]) === null || _STOP6_META$s2 === void 0 ? void 0 : _STOP6_META$s2.desc, ")"),
+      className: "flex items-center justify-center ".concat(dim, " rounded-full border border-orange-500/40 bg-orange-500/10 text-orange-300 font-bold")
+    }, s);
+  }));
 }
-
-function Stop6Picker({ value, onChange }) {
-  const toggle = (s) => {
-    const cur = value || [];
-    onChange(cur.includes(s) ? cur.filter((x) => x !== s) : [...cur, s]);
+function Stop6Picker(_ref6) {
+  var value = _ref6.value,
+    onChange = _ref6.onChange;
+  var toggle = function toggle(s) {
+    var cur = value || [];
+    onChange(cur.includes(s) ? cur.filter(function (x) {
+      return x !== s;
+    }) : [].concat(_toConsumableArray(cur), [s]));
   };
-  return (
-    <div>
-      <div className="flex flex-wrap gap-2">
-        {STOP6_OPTIONS.map((s) => {
-          const active = (value || []).includes(s);
-          return (
-            <button
-              key={s}
-              type="button"
-              onClick={() => toggle(s)}
-              title={STOP6_META[s].desc}
-              className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-xs font-semibold transition-colors ${
-                active ? "border-orange-500 text-orange-300 bg-orange-500/10" : "border-zinc-700 text-zinc-500 hover:border-zinc-600"
-              }`}
-            >
-              <span className={`flex items-center justify-center w-5 h-5 rounded-full text-[10px] font-bold ${active ? "bg-orange-500 text-zinc-950" : "bg-zinc-800 text-zinc-400"}`}>{s}</span>
-              {STOP6_META[s].label}
-            </button>
-          );
-        })}
-      </div>
-      <p className="text-[11px] text-zinc-500 mt-1.5">STOP 6: A-Aparatus, B-Big Heavy, C-Car, D-Drop, E-Electricity, F-Fire.</p>
-    </div>
-  );
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    className: "flex flex-wrap gap-2"
+  }, STOP6_OPTIONS.map(function (s) {
+    var active = (value || []).includes(s);
+    return /*#__PURE__*/React.createElement("button", {
+      key: s,
+      type: "button",
+      onClick: function onClick() {
+        return toggle(s);
+      },
+      title: STOP6_META[s].desc,
+      className: "flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-xs font-semibold transition-colors ".concat(active ? "border-orange-500 text-orange-300 bg-orange-500/10" : "border-zinc-700 text-zinc-500 hover:border-zinc-600")
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "flex items-center justify-center w-5 h-5 rounded-full text-[10px] font-bold ".concat(active ? "bg-orange-500 text-zinc-950" : "bg-zinc-800 text-zinc-400")
+    }, s), STOP6_META[s].label);
+  })), /*#__PURE__*/React.createElement("p", {
+    className: "text-[11px] text-zinc-500 mt-1.5"
+  }, "STOP 6: A-Aparatus, B-Big Heavy, C-Car, D-Drop, E-Electricity, F-Fire."));
 }
 
 /* Person picker - single or multiple, searchable from MP ACE list */
 /* Input nama bebas (multi) - bisa ketik nama siapa saja, tidak terbatas List MP ACE.
    Datalist hanya memberi saran/autocomplete, tetap bisa input bebas. */
-function NameTagInput({ value, onChange, placeholder = "Ketik nama lalu tekan Enter / + Tambah..." }) {
-  const [text, setText] = useState("");
-  const tags = value || [];
-
-  const add = () => {
-    const name = text.trim();
+function NameTagInput(_ref7) {
+  var value = _ref7.value,
+    onChange = _ref7.onChange,
+    _ref7$placeholder = _ref7.placeholder,
+    placeholder = _ref7$placeholder === void 0 ? "Ketik nama lalu tekan Enter / + Tambah..." : _ref7$placeholder;
+  var _useState = useState(""),
+    _useState2 = _slicedToArray(_useState, 2),
+    text = _useState2[0],
+    setText = _useState2[1];
+  var tags = value || [];
+  var add = function add() {
+    var name = text.trim();
     if (!name) return;
-    if (!tags.includes(name)) onChange([...tags, name]);
+    if (!tags.includes(name)) onChange([].concat(_toConsumableArray(tags), [name]));
     setText("");
   };
-
-  const remove = (name) => onChange(tags.filter((n) => n !== name));
-
-  return (
-    <div>
-      {tags.length > 0 && (
-        <div className="flex flex-wrap gap-1.5 mb-2">
-          {tags.map((n) => (
-            <span key={n} className="inline-flex items-center gap-1 bg-zinc-800 border border-zinc-700 text-zinc-200 text-xs rounded-full px-2 py-1">
-              {n}
-              <button type="button" onClick={() => remove(n)} className="text-zinc-500 hover:text-rose-400">
-                <Ico name="X" size={12} />
-              </button>
-            </span>
-          ))}
-        </div>
-      )}
-      <div className="flex gap-2">
-        <input
-          type="text"
-          list="mp-name-suggestions"
-          className={`${inputCls} flex-1`}
-          placeholder={placeholder}
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); add(); } }}
-        />
-        <button type="button" onClick={add} className="px-3 py-2 rounded-lg bg-zinc-800 border border-zinc-700 text-zinc-300 text-sm font-semibold hover:border-orange-500/60 hover:text-orange-300 whitespace-nowrap">
-          + Tambah
-        </button>
-      </div>
-    </div>
-  );
+  var remove = function remove(name) {
+    return onChange(tags.filter(function (n) {
+      return n !== name;
+    }));
+  };
+  return /*#__PURE__*/React.createElement("div", null, tags.length > 0 && /*#__PURE__*/React.createElement("div", {
+    className: "flex flex-wrap gap-1.5 mb-2"
+  }, tags.map(function (n) {
+    return /*#__PURE__*/React.createElement("span", {
+      key: n,
+      className: "inline-flex items-center gap-1 bg-zinc-800 border border-zinc-700 text-zinc-200 text-xs rounded-full px-2 py-1"
+    }, n, /*#__PURE__*/React.createElement("button", {
+      type: "button",
+      onClick: function onClick() {
+        return remove(n);
+      },
+      className: "text-zinc-500 hover:text-rose-400"
+    }, /*#__PURE__*/React.createElement(Ico, {
+      name: "X",
+      size: 12
+    })));
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "flex gap-2"
+  }, /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    list: "mp-name-suggestions",
+    className: "".concat(inputCls, " flex-1"),
+    placeholder: placeholder,
+    value: text,
+    onChange: function onChange(e) {
+      return setText(e.target.value);
+    },
+    onKeyDown: function onKeyDown(e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        add();
+      }
+    }
+  }), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    onClick: add,
+    className: "px-3 py-2 rounded-lg bg-zinc-800 border border-zinc-700 text-zinc-300 text-sm font-semibold hover:border-orange-500/60 hover:text-orange-300 whitespace-nowrap"
+  }, "+ Tambah")));
 }
-
-function Field({ label, required, children, hint }) {
-  return (
-    <div>
-      <label className="block text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-1.5">
-        {label} {required && <span className="text-orange-400">*</span>}
-      </label>
-      {children}
-      {hint && <p className="text-[11px] text-zinc-500 mt-1">{hint}</p>}
-    </div>
-  );
+function Field(_ref8) {
+  var label = _ref8.label,
+    required = _ref8.required,
+    children = _ref8.children,
+    hint = _ref8.hint;
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+    className: "block text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-1.5"
+  }, label, " ", required && /*#__PURE__*/React.createElement("span", {
+    className: "text-orange-400"
+  }, "*")), children, hint && /*#__PURE__*/React.createElement("p", {
+    className: "text-[11px] text-zinc-500 mt-1"
+  }, hint));
 }
-
-const inputCls = "w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-100 outline-none focus:border-orange-500/60 placeholder:text-zinc-500";
+var inputCls = "w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-100 outline-none focus:border-orange-500/60 placeholder:text-zinc-500";
 
 /* Photo uploader - resize lalu upload ke Google Drive via Apps Script.
    Bisa upload beberapa foto sekaligus (KY Sheet, foto before/after). */
-function PhotoUploader({ photos, onChange, hint, prefix = "foto" }) {
-  const list = photos || [];
-  const [uploading, setUploading] = useState(false);
-  const [error, setError] = useState("");
-
-  const handleFiles = async (e) => {
-    const files = Array.from(e.target.files || []);
-    if (files.length === 0) return;
-    setUploading(true);
-    setError("");
-    const uploaded = [];
-    for (const file of files) {
-      try {
-        const dataUrl = await resizeImage(file);
-        const base64 = dataUrl.split(",")[1];
-        const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
-        const filename = `${prefix}_${Date.now()}_${safeName}.jpg`;
-        const res = await apiPost("uploadPhoto", { filename, mimeType: "image/jpeg", base64 });
-        if (res.success && res.url) {
-          uploaded.push(res.url);
-        } else {
-          setError(res.error || "Upload foto gagal.");
+function PhotoUploader(_ref9) {
+  var photos = _ref9.photos,
+    onChange = _ref9.onChange,
+    hint = _ref9.hint,
+    _ref9$prefix = _ref9.prefix,
+    prefix = _ref9$prefix === void 0 ? "foto" : _ref9$prefix;
+  var list = photos || [];
+  var _useState3 = useState(false),
+    _useState4 = _slicedToArray(_useState3, 2),
+    uploading = _useState4[0],
+    setUploading = _useState4[1];
+  var _useState5 = useState(""),
+    _useState6 = _slicedToArray(_useState5, 2),
+    error = _useState6[0],
+    setError = _useState6[1];
+  var handleFiles = /*#__PURE__*/function () {
+    var _ref0 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee(e) {
+      var files, uploaded, _i2, _files, file, dataUrl, base64, safeName, filename, res, _t;
+      return _regenerator().w(function (_context) {
+        while (1) switch (_context.p = _context.n) {
+          case 0:
+            files = Array.from(e.target.files || []);
+            if (!(files.length === 0)) {
+              _context.n = 1;
+              break;
+            }
+            return _context.a(2);
+          case 1:
+            setUploading(true);
+            setError("");
+            uploaded = [];
+            _i2 = 0, _files = files;
+          case 2:
+            if (!(_i2 < _files.length)) {
+              _context.n = 8;
+              break;
+            }
+            file = _files[_i2];
+            _context.p = 3;
+            _context.n = 4;
+            return resizeImage(file);
+          case 4:
+            dataUrl = _context.v;
+            base64 = dataUrl.split(",")[1];
+            safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
+            filename = "".concat(prefix, "_").concat(Date.now(), "_").concat(safeName, ".jpg");
+            _context.n = 5;
+            return apiPost("uploadPhoto", {
+              filename: filename,
+              mimeType: "image/jpeg",
+              base64: base64
+            });
+          case 5:
+            res = _context.v;
+            if (res.success && res.url) {
+              uploaded.push(res.url);
+            } else {
+              setError(res.error || "Upload foto gagal.");
+            }
+            _context.n = 7;
+            break;
+          case 6:
+            _context.p = 6;
+            _t = _context.v;
+            setError("Upload foto gagal: " + (_t.message || _t));
+          case 7:
+            _i2++;
+            _context.n = 2;
+            break;
+          case 8:
+            if (uploaded.length > 0) onChange([].concat(_toConsumableArray(list), uploaded));
+            setUploading(false);
+            e.target.value = "";
+          case 9:
+            return _context.a(2);
         }
-      } catch (err) {
-        setError("Upload foto gagal: " + (err.message || err));
-      }
-    }
-    if (uploaded.length > 0) onChange([...list, ...uploaded]);
-    setUploading(false);
-    e.target.value = "";
+      }, _callee, null, [[3, 6]]);
+    }));
+    return function handleFiles(_x3) {
+      return _ref0.apply(this, arguments);
+    };
+  }();
+  var remove = function remove(idx) {
+    return onChange(list.filter(function (_, i) {
+      return i !== idx;
+    }));
   };
-
-  const remove = (idx) => onChange(list.filter((_, i) => i !== idx));
-
-  return (
-    <div>
-      <div className="flex flex-wrap gap-2">
-        {list.map((src, i) => (
-          <a key={i} href={src} target="_blank" rel="noreferrer" className="relative w-20 h-20 rounded-lg overflow-hidden border border-zinc-700 group block">
-            <img src={src} alt={`Foto ${i + 1}`} className="w-full h-full object-cover" />
-            <button
-              type="button"
-              onClick={(e) => { e.preventDefault(); e.stopPropagation(); remove(i); }}
-              className="absolute top-0.5 right-0.5 bg-black/70 text-zinc-200 rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition-opacity"
-            >
-              <Ico name="X" size={12} />
-            </button>
-          </a>
-        ))}
-        <label className="w-20 h-20 flex flex-col items-center justify-center gap-1 rounded-lg border border-dashed text-[10px] cursor-pointer transition-colors border-zinc-700 text-zinc-500 hover:border-orange-500/60 hover:text-orange-300">
-          {uploading ? <Ico name="Loader2" size={16} className="animate-spin" /> : <Ico name="Upload" size={16} />}
-          {uploading ? "Mengupload..." : "Tambah Foto"}
-          <input type="file" accept="image/*" multiple className="hidden" onChange={handleFiles} disabled={uploading} />
-        </label>
-      </div>
-      {error && <p className="text-[11px] text-rose-400 mt-1.5">{error}</p>}
-      {hint && <p className="text-[11px] text-zinc-500 mt-1.5">{hint}</p>}
-    </div>
-  );
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    className: "flex flex-wrap gap-2"
+  }, list.map(function (src, i) {
+    return /*#__PURE__*/React.createElement("a", {
+      key: i,
+      href: src,
+      target: "_blank",
+      rel: "noreferrer",
+      className: "relative w-20 h-20 rounded-lg overflow-hidden border border-zinc-700 group block"
+    }, /*#__PURE__*/React.createElement("img", {
+      src: src,
+      alt: "Foto ".concat(i + 1),
+      className: "w-full h-full object-cover"
+    }), /*#__PURE__*/React.createElement("button", {
+      type: "button",
+      onClick: function onClick(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        remove(i);
+      },
+      className: "absolute top-0.5 right-0.5 bg-black/70 text-zinc-200 rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition-opacity"
+    }, /*#__PURE__*/React.createElement(Ico, {
+      name: "X",
+      size: 12
+    })));
+  }), /*#__PURE__*/React.createElement("label", {
+    className: "w-20 h-20 flex flex-col items-center justify-center gap-1 rounded-lg border border-dashed text-[10px] cursor-pointer transition-colors border-zinc-700 text-zinc-500 hover:border-orange-500/60 hover:text-orange-300"
+  }, uploading ? /*#__PURE__*/React.createElement(Ico, {
+    name: "Loader2",
+    size: 16,
+    className: "animate-spin"
+  }) : /*#__PURE__*/React.createElement(Ico, {
+    name: "Upload",
+    size: 16
+  }), uploading ? "Mengupload..." : "Tambah Foto", /*#__PURE__*/React.createElement("input", {
+    type: "file",
+    accept: "image/*",
+    multiple: true,
+    className: "hidden",
+    onChange: handleFiles,
+    disabled: uploading
+  }))), error && /*#__PURE__*/React.createElement("p", {
+    className: "text-[11px] text-rose-400 mt-1.5"
+  }, error), hint && /*#__PURE__*/React.createElement("p", {
+    className: "text-[11px] text-zinc-500 mt-1.5"
+  }, hint));
 }
 
 /* =========================================================================
    DASHBOARD
    ========================================================================= */
 
-function KpiCard({ icon, label, value, sub, accent }) {
-  return (
-    <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-4 flex items-start gap-3">
-      <div className={`p-2 rounded-lg ${accent}`}>
-        <Ico name={icon} size={18} />
-      </div>
-      <div>
-        <p className="text-2xl font-extrabold text-zinc-50 leading-none">{value}</p>
-        <p className="text-xs text-zinc-400 mt-1 font-medium">{label}</p>
-        {sub && <p className="text-[11px] text-zinc-500 mt-0.5">{sub}</p>}
-      </div>
-    </div>
-  );
+function KpiCard(_ref1) {
+  var icon = _ref1.icon,
+    label = _ref1.label,
+    value = _ref1.value,
+    sub = _ref1.sub,
+    accent = _ref1.accent;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "bg-zinc-900 border border-zinc-800 rounded-xl p-4 flex items-start gap-3"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "p-2 rounded-lg ".concat(accent)
+  }, /*#__PURE__*/React.createElement(Ico, {
+    name: icon,
+    size: 18
+  })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", {
+    className: "text-2xl font-extrabold text-zinc-50 leading-none"
+  }, value), /*#__PURE__*/React.createElement("p", {
+    className: "text-xs text-zinc-400 mt-1 font-medium"
+  }, label), sub && /*#__PURE__*/React.createElement("p", {
+    className: "text-[11px] text-zinc-500 mt-0.5"
+  }, sub)));
 }
-
-function Dashboard({ jobs }) {
-  const data = useMemo(() => {
-    const withEff = jobs.map((j) => ({ ...j, eff: getEffectiveStatus(j) }));
-
-    const counts = {};
-    STATUS_LIST.forEach((s) => (counts[s] = 0));
-    withEff.forEach((j) => counts[j.eff]++);
-
-    const waitingTooLong = withEff.filter((j) => {
+function Dashboard(_ref10) {
+  var jobs = _ref10.jobs;
+  var data = useMemo(function () {
+    var withEff = jobs.map(function (j) {
+      return _objectSpread(_objectSpread({}, j), {}, {
+        eff: getEffectiveStatus(j)
+      });
+    });
+    var counts = {};
+    STATUS_LIST.forEach(function (s) {
+      return counts[s] = 0;
+    });
+    withEff.forEach(function (j) {
+      return counts[j.eff]++;
+    });
+    var waitingTooLong = withEff.filter(function (j) {
       if (getApprovalStatus(j) === "Approved" || getApprovalStatus(j) === "Rejected") return false;
-      const hrs = diffHours(j.requestDate, TODAY);
+      var hrs = diffHours(j.requestDate, TODAY);
       return hrs > 24;
     });
-
-    const overdue = withEff.filter((j) => j.eff === "DELAY");
-
-    const doneToday = withEff.filter((j) => j.eff === "DONE" && j.actualFinish && sameDay(j.actualFinish, TODAY));
-
-    const doneJobs = withEff.filter((j) => j.eff === "DONE" && j.actualFinish);
-    const onTime = doneJobs.filter((j) => {
-      const plannedEnd = new Date(j.plannedDate);
+    var overdue = withEff.filter(function (j) {
+      return j.eff === "DELAY";
+    });
+    var doneToday = withEff.filter(function (j) {
+      return j.eff === "DONE" && j.actualFinish && sameDay(j.actualFinish, TODAY);
+    });
+    var doneJobs = withEff.filter(function (j) {
+      return j.eff === "DONE" && j.actualFinish;
+    });
+    var onTime = doneJobs.filter(function (j) {
+      var plannedEnd = new Date(j.plannedDate);
       plannedEnd.setHours(plannedEnd.getHours() + Number(j.estDuration || 0));
       return new Date(j.actualFinish) <= plannedEnd;
     });
-    const onTimeRate = doneJobs.length ? Math.round((onTime.length / doneJobs.length) * 100) : 0;
-
-    const approvedJobs = withEff.filter((j) => getApprovalStatus(j) === "Approved");
-    const leadTimes = approvedJobs.map((j) => {
-      const req = requiredApprovals(j.risk);
-      const dates = req.map((r) => j.approvals[r]?.date).filter(Boolean);
-      const last = dates.sort().slice(-1)[0];
+    var onTimeRate = doneJobs.length ? Math.round(onTime.length / doneJobs.length * 100) : 0;
+    var approvedJobs = withEff.filter(function (j) {
+      return getApprovalStatus(j) === "Approved";
+    });
+    var leadTimes = approvedJobs.map(function (j) {
+      var req = requiredApprovals(j.risk);
+      var dates = req.map(function (r) {
+        var _j$approvals$r;
+        return (_j$approvals$r = j.approvals[r]) === null || _j$approvals$r === void 0 ? void 0 : _j$approvals$r.date;
+      }).filter(Boolean);
+      var last = dates.sort().slice(-1)[0];
       return diffHours(j.requestDate, last || j.requestDate);
     });
-    const avgLeadTime = leadTimes.length ? (leadTimes.reduce((a, b) => a + b, 0) / leadTimes.length).toFixed(1) : "-";
-
-    const completionTimes = doneJobs.filter((j) => j.actualStart).map((j) => diffHours(j.actualStart, j.actualFinish));
-    const avgCompletion = completionTimes.length ? (completionTimes.reduce((a, b) => a + b, 0) / completionTimes.length).toFixed(1) : "-";
-
-    const jobsWithoutDelay = withEff.filter((j) => j.eff !== "DELAY" && !(j.delayNote)).length;
-
-    const delayByPic = {};
-    withEff.forEach((j) => {
+    var avgLeadTime = leadTimes.length ? (leadTimes.reduce(function (a, b) {
+      return a + b;
+    }, 0) / leadTimes.length).toFixed(1) : "-";
+    var completionTimes = doneJobs.filter(function (j) {
+      return j.actualStart;
+    }).map(function (j) {
+      return diffHours(j.actualStart, j.actualFinish);
+    });
+    var avgCompletion = completionTimes.length ? (completionTimes.reduce(function (a, b) {
+      return a + b;
+    }, 0) / completionTimes.length).toFixed(1) : "-";
+    var jobsWithoutDelay = withEff.filter(function (j) {
+      return j.eff !== "DELAY" && !j.delayNote;
+    }).length;
+    var delayByPic = {};
+    withEff.forEach(function (j) {
       if (j.eff === "DELAY" || j.delayNote) {
         delayByPic[j.pic] = (delayByPic[j.pic] || 0) + 1;
       }
     });
-    const topDelayPic = Object.entries(delayByPic).sort((a, b) => b[1] - a[1])[0];
-
-    const riskOrder = { High: 0, Medium: 1, Low: 2 };
-    const riskRanking = [...withEff]
-      .filter((j) => j.eff !== "DONE")
-      .sort((a, b) => (riskOrder[a.risk] - riskOrder[b.risk]) || (a.eff === "WAITING APPROVAL" ? -1 : 1))
-      .slice(0, 5);
-
-    return { counts, waitingTooLong, overdue, doneToday, onTimeRate, avgLeadTime, avgCompletion, jobsWithoutDelay, topDelayPic, riskRanking, total: withEff.length };
+    var topDelayPic = Object.entries(delayByPic).sort(function (a, b) {
+      return b[1] - a[1];
+    })[0];
+    var riskOrder = {
+      High: 0,
+      Medium: 1,
+      Low: 2
+    };
+    var riskRanking = _toConsumableArray(withEff).filter(function (j) {
+      return j.eff !== "DONE";
+    }).sort(function (a, b) {
+      return riskOrder[a.risk] - riskOrder[b.risk] || (a.eff === "WAITING APPROVAL" ? -1 : 1);
+    }).slice(0, 5);
+    return {
+      counts: counts,
+      waitingTooLong: waitingTooLong,
+      overdue: overdue,
+      doneToday: doneToday,
+      onTimeRate: onTimeRate,
+      avgLeadTime: avgLeadTime,
+      avgCompletion: avgCompletion,
+      jobsWithoutDelay: jobsWithoutDelay,
+      topDelayPic: topDelayPic,
+      riskRanking: riskRanking,
+      total: withEff.length
+    };
   }, [jobs]);
-
-  return (
-    <div className="space-y-6">
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
-        <KpiCard icon="LayoutGrid" label="Total Job Aktif" value={data.total} accent="bg-zinc-700/40 text-zinc-300" />
-        <KpiCard icon="Clock" label="Waiting Approval" value={data.counts["WAITING APPROVAL"]} accent="bg-amber-500/15 text-amber-400" />
-        <KpiCard icon="Flame" label="In Progress" value={data.counts["IN PROGRESS"]} accent="bg-amber-500/15 text-amber-400" />
-        <KpiCard icon="AlertTriangle" label="Delay / Overdue" value={data.counts["DELAY"]} accent="bg-rose-500/15 text-rose-400" />
-        <KpiCard icon="PauseCircle" label="Hold / Rejected" value={data.counts["HOLD"]} accent="bg-rose-500/15 text-rose-400" />
-        <KpiCard icon="CheckCircle2" label="Selesai Hari Ini" value={data.doneToday.length} accent="bg-emerald-500/15 text-emerald-400" />
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        {/* Alerts */}
-        <div className="lg:col-span-1 bg-zinc-900 border border-zinc-800 rounded-xl p-4">
-          <h3 className="text-sm font-bold text-zinc-100 uppercase tracking-wide flex items-center gap-2 mb-3">
-            <Ico name="AlertTriangle" size={16} className="text-rose-400" /> Alert & Perhatian
-          </h3>
-          <div className="space-y-3">
-            <div>
-              <p className="text-xs font-semibold text-amber-300 mb-1.5">Belum di-approve &gt; 24 jam</p>
-              {data.waitingTooLong.length === 0 ? (
-                <p className="text-xs text-zinc-500">Tidak ada job.</p>
-              ) : data.waitingTooLong.map((j) => (
-                <div key={j.id} className="text-xs text-zinc-300 bg-zinc-800/60 rounded px-2 py-1.5 mb-1 flex justify-between">
-                  <span className="font-mono text-zinc-400">{j.id}</span>
-                  <span className="truncate ml-2">{j.deskripsi.slice(0, 28)}...</span>
-                </div>
-              ))}
-            </div>
-            <div>
-              <p className="text-xs font-semibold text-rose-300 mb-1.5">Melewati planned date</p>
-              {data.overdue.length === 0 ? (
-                <p className="text-xs text-zinc-500">Tidak ada job overdue.</p>
-              ) : data.overdue.map((j) => (
-                <div key={j.id} className="text-xs text-zinc-300 bg-zinc-800/60 rounded px-2 py-1.5 mb-1 flex justify-between">
-                  <span className="font-mono text-zinc-400">{j.id}</span>
-                  <span className="text-rose-300 font-semibold ml-2">+{getDelayHours(j)} jam</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* KPI lanjutan */}
-        <div className="lg:col-span-1 bg-zinc-900 border border-zinc-800 rounded-xl p-4">
-          <h3 className="text-sm font-bold text-zinc-100 uppercase tracking-wide flex items-center gap-2 mb-3">
-            <Ico name="Gauge" size={16} className="text-orange-400" /> KPI Monitoring
-          </h3>
-          <div className="space-y-3 text-sm">
-            <div className="flex justify-between items-center">
-              <span className="text-zinc-400">% Job selesai tepat waktu</span>
-              <span className="font-bold text-emerald-400">{data.onTimeRate}%</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-zinc-400">Approval lead time (avg)</span>
-              <span className="font-bold text-zinc-100">{data.avgLeadTime} jam</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-zinc-400">Avg completion time</span>
-              <span className="font-bold text-zinc-100">{data.avgCompletion} jam</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-zinc-400">Job tanpa delay</span>
-              <span className="font-bold text-zinc-100">{data.jobsWithoutDelay} / {data.total}</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-zinc-400">PIC paling sering delay</span>
-              <span className="font-bold text-rose-300">{data.topDelayPic ? `${data.topDelayPic[0]} (${data.topDelayPic[1]}x)` : "-"}</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Risk ranking */}
-        <div className="lg:col-span-1 bg-zinc-900 border border-zinc-800 rounded-xl p-4">
-          <h3 className="text-sm font-bold text-zinc-100 uppercase tracking-wide flex items-center gap-2 mb-3">
-            <Ico name="Flame" size={16} className="text-rose-400" /> Ranking Risiko Job Aktif
-          </h3>
-          <div className="space-y-2">
-            {data.riskRanking.map((j) => (
-              <div key={j.id} className="flex items-center justify-between bg-zinc-800/60 rounded-lg px-3 py-2">
-                <div className="min-w-0">
-                  <p className="font-mono text-[11px] text-zinc-500">{j.id}</p>
-                  <p className="text-xs text-zinc-200 truncate max-w-[160px]">{j.deskripsi}</p>
-                </div>
-                <RiskGauge risk={j.risk} />
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+  return /*#__PURE__*/React.createElement("div", {
+    className: "space-y-6"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3"
+  }, /*#__PURE__*/React.createElement(KpiCard, {
+    icon: "LayoutGrid",
+    label: "Total Job Aktif",
+    value: data.total,
+    accent: "bg-zinc-700/40 text-zinc-300"
+  }), /*#__PURE__*/React.createElement(KpiCard, {
+    icon: "Clock",
+    label: "Waiting Approval",
+    value: data.counts["WAITING APPROVAL"],
+    accent: "bg-amber-500/15 text-amber-400"
+  }), /*#__PURE__*/React.createElement(KpiCard, {
+    icon: "Flame",
+    label: "In Progress",
+    value: data.counts["IN PROGRESS"],
+    accent: "bg-amber-500/15 text-amber-400"
+  }), /*#__PURE__*/React.createElement(KpiCard, {
+    icon: "AlertTriangle",
+    label: "Delay / Overdue",
+    value: data.counts["DELAY"],
+    accent: "bg-rose-500/15 text-rose-400"
+  }), /*#__PURE__*/React.createElement(KpiCard, {
+    icon: "PauseCircle",
+    label: "Hold / Rejected",
+    value: data.counts["HOLD"],
+    accent: "bg-rose-500/15 text-rose-400"
+  }), /*#__PURE__*/React.createElement(KpiCard, {
+    icon: "CheckCircle2",
+    label: "Selesai Hari Ini",
+    value: data.doneToday.length,
+    accent: "bg-emerald-500/15 text-emerald-400"
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-1 lg:grid-cols-3 gap-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "lg:col-span-1 bg-zinc-900 border border-zinc-800 rounded-xl p-4"
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "text-sm font-bold text-zinc-100 uppercase tracking-wide flex items-center gap-2 mb-3"
+  }, /*#__PURE__*/React.createElement(Ico, {
+    name: "AlertTriangle",
+    size: 16,
+    className: "text-rose-400"
+  }), " Alert & Perhatian"), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-3"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", {
+    className: "text-xs font-semibold text-amber-300 mb-1.5"
+  }, "Belum di-approve > 24 jam"), data.waitingTooLong.length === 0 ? /*#__PURE__*/React.createElement("p", {
+    className: "text-xs text-zinc-500"
+  }, "Tidak ada job.") : data.waitingTooLong.map(function (j) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: j.id,
+      className: "text-xs text-zinc-300 bg-zinc-800/60 rounded px-2 py-1.5 mb-1 flex justify-between"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "font-mono text-zinc-400"
+    }, j.id), /*#__PURE__*/React.createElement("span", {
+      className: "truncate ml-2"
+    }, j.deskripsi.slice(0, 28), "..."));
+  })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", {
+    className: "text-xs font-semibold text-rose-300 mb-1.5"
+  }, "Melewati planned date"), data.overdue.length === 0 ? /*#__PURE__*/React.createElement("p", {
+    className: "text-xs text-zinc-500"
+  }, "Tidak ada job overdue.") : data.overdue.map(function (j) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: j.id,
+      className: "text-xs text-zinc-300 bg-zinc-800/60 rounded px-2 py-1.5 mb-1 flex justify-between"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "font-mono text-zinc-400"
+    }, j.id), /*#__PURE__*/React.createElement("span", {
+      className: "text-rose-300 font-semibold ml-2"
+    }, "+", getDelayHours(j), " jam"));
+  })))), /*#__PURE__*/React.createElement("div", {
+    className: "lg:col-span-1 bg-zinc-900 border border-zinc-800 rounded-xl p-4"
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "text-sm font-bold text-zinc-100 uppercase tracking-wide flex items-center gap-2 mb-3"
+  }, /*#__PURE__*/React.createElement(Ico, {
+    name: "Gauge",
+    size: 16,
+    className: "text-orange-400"
+  }), " KPI Monitoring"), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-3 text-sm"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex justify-between items-center"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-zinc-400"
+  }, "% Job selesai tepat waktu"), /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-emerald-400"
+  }, data.onTimeRate, "%")), /*#__PURE__*/React.createElement("div", {
+    className: "flex justify-between items-center"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-zinc-400"
+  }, "Approval lead time (avg)"), /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-zinc-100"
+  }, data.avgLeadTime, " jam")), /*#__PURE__*/React.createElement("div", {
+    className: "flex justify-between items-center"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-zinc-400"
+  }, "Avg completion time"), /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-zinc-100"
+  }, data.avgCompletion, " jam")), /*#__PURE__*/React.createElement("div", {
+    className: "flex justify-between items-center"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-zinc-400"
+  }, "Job tanpa delay"), /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-zinc-100"
+  }, data.jobsWithoutDelay, " / ", data.total)), /*#__PURE__*/React.createElement("div", {
+    className: "flex justify-between items-center"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-zinc-400"
+  }, "PIC paling sering delay"), /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-rose-300"
+  }, data.topDelayPic ? "".concat(data.topDelayPic[0], " (").concat(data.topDelayPic[1], "x)") : "-")))), /*#__PURE__*/React.createElement("div", {
+    className: "lg:col-span-1 bg-zinc-900 border border-zinc-800 rounded-xl p-4"
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "text-sm font-bold text-zinc-100 uppercase tracking-wide flex items-center gap-2 mb-3"
+  }, /*#__PURE__*/React.createElement(Ico, {
+    name: "Flame",
+    size: 16,
+    className: "text-rose-400"
+  }), " Ranking Risiko Job Aktif"), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-2"
+  }, data.riskRanking.map(function (j) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: j.id,
+      className: "flex items-center justify-between bg-zinc-800/60 rounded-lg px-3 py-2"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "min-w-0"
+    }, /*#__PURE__*/React.createElement("p", {
+      className: "font-mono text-[11px] text-zinc-500"
+    }, j.id), /*#__PURE__*/React.createElement("p", {
+      className: "text-xs text-zinc-200 truncate max-w-[160px]"
+    }, j.deskripsi)), /*#__PURE__*/React.createElement(RiskGauge, {
+      risk: j.risk
+    }));
+  })))));
 }
 
 /* =========================================================================
    KANBAN BOARD
    ========================================================================= */
 
-function KanbanCard({ job, onOpen }) {
-  const eff = getEffectiveStatus(job);
-  const meta = STATUS_META[eff];
-  const appStatus = getApprovalStatus(job);
-  const req = requiredApprovals(job.risk);
-
-  return (
-    <div
-      draggable
-      onDragStart={(e) => e.dataTransfer.setData("jobId", job.id)}
-      onClick={() => onOpen(job.id)}
-      className={`bg-zinc-900 border ${meta.border} rounded-xl p-3 cursor-pointer hover:border-orange-500/50 transition-colors`}
-    >
-      <div className="flex items-center justify-between mb-2">
-        <span className="font-mono text-[11px] text-zinc-500">{job.id}</span>
-        <RiskGauge risk={job.risk} />
-      </div>
-      <div className="mb-2 flex items-center justify-between gap-2">
-        <JenisBadge jenis={job.jenis} />
-        <Stop6Badges stop6={job.stop6} />
-      </div>
-      <p className="text-sm text-zinc-100 font-medium leading-snug mb-2 line-clamp-2">{job.deskripsi}</p>
-      <p className="text-[11px] text-zinc-500 mb-2">{job.lokasi}</p>
-      <div className="flex items-center justify-between text-[11px] text-zinc-400">
-        <span className="flex items-center gap-1"><Ico name="CalendarClock" size={12} /> {fmtDate(job.plannedDate)}</span>
-        <span className="flex items-center gap-1"><Ico name="Users" size={12} /> {job.pic || "-"}</span>
-      </div>
-      <div className="flex items-center gap-1 mt-2">
-        {req.map((r) => {
-          const st = job.approvals[r]?.status;
-          const color = st === "Approved" ? "bg-emerald-500" : st === "Rejected" ? "bg-rose-500" : "bg-zinc-600";
-          return <span key={r} title={`${APPROVAL_LABEL[r]}: ${st || "Pending"}`} className={`w-2 h-2 rounded-full ${color}`} />;
-        })}
-        <span className="text-[10px] text-zinc-500 ml-1">
-          {appStatus === "Approved" ? "Approved" : appStatus === "Rejected" ? "Rejected" : "Approval pending"}
-        </span>
-      </div>
-      {(eff === "DELAY") && (
-        <p className="text-[11px] text-rose-300 font-semibold mt-2 flex items-center gap-1"><Ico name="AlertTriangle" size={12}/> Delay {getDelayHours(job)} jam</p>
-      )}
-    </div>
-  );
+function KanbanCard(_ref11) {
+  var job = _ref11.job,
+    onOpen = _ref11.onOpen;
+  var eff = getEffectiveStatus(job);
+  var meta = STATUS_META[eff];
+  var appStatus = getApprovalStatus(job);
+  var req = requiredApprovals(job.risk);
+  return /*#__PURE__*/React.createElement("div", {
+    draggable: true,
+    onDragStart: function onDragStart(e) {
+      return e.dataTransfer.setData("jobId", job.id);
+    },
+    onClick: function onClick() {
+      return onOpen(job.id);
+    },
+    className: "bg-zinc-900 border ".concat(meta.border, " rounded-xl p-3 cursor-pointer hover:border-orange-500/50 transition-colors")
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center justify-between mb-2"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "font-mono text-[11px] text-zinc-500"
+  }, job.id), /*#__PURE__*/React.createElement(RiskGauge, {
+    risk: job.risk
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "mb-2 flex items-center justify-between gap-2"
+  }, /*#__PURE__*/React.createElement(JenisBadge, {
+    jenis: job.jenis
+  }), /*#__PURE__*/React.createElement(Stop6Badges, {
+    stop6: job.stop6
+  })), /*#__PURE__*/React.createElement("p", {
+    className: "text-sm text-zinc-100 font-medium leading-snug mb-2 line-clamp-2"
+  }, job.deskripsi), /*#__PURE__*/React.createElement("p", {
+    className: "text-[11px] text-zinc-500 mb-2"
+  }, job.lokasi), /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center justify-between text-[11px] text-zinc-400"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "flex items-center gap-1"
+  }, /*#__PURE__*/React.createElement(Ico, {
+    name: "CalendarClock",
+    size: 12
+  }), " ", fmtDate(job.plannedDate)), /*#__PURE__*/React.createElement("span", {
+    className: "flex items-center gap-1"
+  }, /*#__PURE__*/React.createElement(Ico, {
+    name: "Users",
+    size: 12
+  }), " ", job.pic || "-")), /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-1 mt-2"
+  }, req.map(function (r) {
+    var _job$approvals$r3;
+    var st = (_job$approvals$r3 = job.approvals[r]) === null || _job$approvals$r3 === void 0 ? void 0 : _job$approvals$r3.status;
+    var color = st === "Approved" ? "bg-emerald-500" : st === "Rejected" ? "bg-rose-500" : "bg-zinc-600";
+    return /*#__PURE__*/React.createElement("span", {
+      key: r,
+      title: "".concat(APPROVAL_LABEL[r], ": ").concat(st || "Pending"),
+      className: "w-2 h-2 rounded-full ".concat(color)
+    });
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] text-zinc-500 ml-1"
+  }, appStatus === "Approved" ? "Approved" : appStatus === "Rejected" ? "Rejected" : "Approval pending")), eff === "DELAY" && /*#__PURE__*/React.createElement("p", {
+    className: "text-[11px] text-rose-300 font-semibold mt-2 flex items-center gap-1"
+  }, /*#__PURE__*/React.createElement(Ico, {
+    name: "AlertTriangle",
+    size: 12
+  }), " Delay ", getDelayHours(job), " jam"));
 }
-
-function KanbanBoard({ jobs, onMove, onOpen }) {
-  const [dragOver, setDragOver] = useState(null);
-
-  const handleDrop = (e, status) => {
+function KanbanBoard(_ref12) {
+  var jobs = _ref12.jobs,
+    onMove = _ref12.onMove,
+    onOpen = _ref12.onOpen;
+  var _useState7 = useState(null),
+    _useState8 = _slicedToArray(_useState7, 2),
+    dragOver = _useState8[0],
+    setDragOver = _useState8[1];
+  var handleDrop = function handleDrop(e, status) {
     e.preventDefault();
     setDragOver(null);
-    const jobId = e.dataTransfer.getData("jobId");
+    var jobId = e.dataTransfer.getData("jobId");
     onMove(jobId, status);
   };
-
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-3">
-      {STATUS_LIST.map((status) => {
-        const list = jobs.filter((j) => getEffectiveStatus(j) === status);
-        const meta = STATUS_META[status];
-        return (
-          <div
-            key={status}
-            onDragOver={(e) => { e.preventDefault(); setDragOver(status); }}
-            onDragLeave={() => setDragOver(null)}
-            onDrop={(e) => handleDrop(e, status)}
-            className={`rounded-xl border ${dragOver === status ? "border-orange-500 bg-orange-500/5" : "border-zinc-800 bg-zinc-950/40"} p-2 min-h-[200px]`}
-          >
-            <div className={`flex items-center justify-between px-2 py-1.5 mb-2 rounded-lg ${meta.bg}`}>
-              <span className={`text-xs font-bold uppercase tracking-wide flex items-center gap-1.5 ${meta.text}`}>
-                <span className={`w-2 h-2 rounded-full ${meta.dot}`} /> {status}
-              </span>
-              <span className="text-xs font-mono text-zinc-400">{list.length}</span>
-            </div>
-            <div className="space-y-2">
-              {list.map((j) => <KanbanCard key={j.id} job={j} onOpen={onOpen} />)}
-              {list.length === 0 && <p className="text-center text-[11px] text-zinc-600 py-6">Tidak ada job</p>}
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  );
+  return /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-3"
+  }, STATUS_LIST.map(function (status) {
+    var list = jobs.filter(function (j) {
+      return getEffectiveStatus(j) === status;
+    });
+    var meta = STATUS_META[status];
+    return /*#__PURE__*/React.createElement("div", {
+      key: status,
+      onDragOver: function onDragOver(e) {
+        e.preventDefault();
+        setDragOver(status);
+      },
+      onDragLeave: function onDragLeave() {
+        return setDragOver(null);
+      },
+      onDrop: function onDrop(e) {
+        return handleDrop(e, status);
+      },
+      className: "rounded-xl border ".concat(dragOver === status ? "border-orange-500 bg-orange-500/5" : "border-zinc-800 bg-zinc-950/40", " p-2 min-h-[200px]")
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "flex items-center justify-between px-2 py-1.5 mb-2 rounded-lg ".concat(meta.bg)
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "text-xs font-bold uppercase tracking-wide flex items-center gap-1.5 ".concat(meta.text)
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "w-2 h-2 rounded-full ".concat(meta.dot)
+    }), " ", status), /*#__PURE__*/React.createElement("span", {
+      className: "text-xs font-mono text-zinc-400"
+    }, list.length)), /*#__PURE__*/React.createElement("div", {
+      className: "space-y-2"
+    }, list.map(function (j) {
+      return /*#__PURE__*/React.createElement(KanbanCard, {
+        key: j.id,
+        job: j,
+        onOpen: onOpen
+      });
+    }), list.length === 0 && /*#__PURE__*/React.createElement("p", {
+      className: "text-center text-[11px] text-zinc-600 py-6"
+    }, "Tidak ada job")));
+  }));
 }
 
 /* =========================================================================
    JOB DETAIL / APPROVAL PANEL
    ========================================================================= */
 
-function ApprovalStep({ role, approval, required, job, onAct, currentUser }) {
+function ApprovalStep(_ref13) {
+  var role = _ref13.role,
+    approval = _ref13.approval,
+    required = _ref13.required,
+    job = _ref13.job,
+    onAct = _ref13.onAct,
+    currentUser = _ref13.currentUser;
   if (!required) {
-    return (
-      <div className="flex-1 bg-zinc-800/40 border border-zinc-800 rounded-lg p-3 opacity-50">
-        <p className="text-xs font-bold uppercase text-zinc-500">{APPROVAL_LABEL[role]}</p>
-        <p className="text-xs text-zinc-600 mt-1">Tidak diperlukan untuk risiko {job.risk}</p>
-      </div>
-    );
+    return /*#__PURE__*/React.createElement("div", {
+      className: "flex-1 bg-zinc-800/40 border border-zinc-800 rounded-lg p-3 opacity-50"
+    }, /*#__PURE__*/React.createElement("p", {
+      className: "text-xs font-bold uppercase text-zinc-500"
+    }, APPROVAL_LABEL[role]), /*#__PURE__*/React.createElement("p", {
+      className: "text-xs text-zinc-600 mt-1"
+    }, "Tidak diperlukan untuk risiko ", job.risk));
   }
-  const status = approval?.status || "Pending";
-  const color = status === "Approved" ? "border-emerald-500/40 bg-emerald-500/5" : status === "Rejected" ? "border-rose-500/40 bg-rose-500/5" : "border-amber-500/30 bg-amber-500/5";
-  const canAct = currentUser && currentUser.role === role;
-
-  return (
-    <div className={`flex-1 border rounded-lg p-3 ${color}`}>
-      <div className="flex items-center justify-between mb-1">
-        <p className="text-xs font-bold uppercase text-zinc-200">{APPROVAL_LABEL[role]}</p>
-        <StatusBadge status={status === "Pending" ? "WAITING APPROVAL" : status === "Approved" ? "DONE" : "HOLD"} />
-      </div>
-      {status !== "Pending" ? (
-        <div className="text-xs text-zinc-400 mt-1">
-          <p>{approval.name}</p>
-          <p className="text-zinc-500">{fmtDate(approval.date)}</p>
-        </div>
-      ) : canAct ? (
-        <div className="mt-2 flex gap-2">
-          <button
-            onClick={() => onAct(role, "Approved")}
-            className="flex-1 text-xs font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 rounded-md py-1.5 hover:bg-emerald-500/25"
-          >
-            Approve
-          </button>
-          <button
-            onClick={() => onAct(role, "Rejected")}
-            className="flex-1 text-xs font-semibold bg-rose-500/15 text-rose-300 border border-rose-500/30 rounded-md py-1.5 hover:bg-rose-500/25"
-          >
-            Reject
-          </button>
-        </div>
-      ) : (
-        <p className="text-[11px] text-zinc-500 mt-2">Login sebagai {APPROVAL_LABEL[role]} untuk approve/reject.</p>
-      )}
-      <p className="text-[10px] text-zinc-500 mt-1.5">
-        {canAct ? `Sebagai: ${currentUser.name}` : "Belum login sesuai role ini."}
-      </p>
-    </div>
-  );
+  var status = (approval === null || approval === void 0 ? void 0 : approval.status) || "Pending";
+  var color = status === "Approved" ? "border-emerald-500/40 bg-emerald-500/5" : status === "Rejected" ? "border-rose-500/40 bg-rose-500/5" : "border-amber-500/30 bg-amber-500/5";
+  var canAct = currentUser && currentUser.role === role;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "flex-1 border rounded-lg p-3 ".concat(color)
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center justify-between mb-1"
+  }, /*#__PURE__*/React.createElement("p", {
+    className: "text-xs font-bold uppercase text-zinc-200"
+  }, APPROVAL_LABEL[role]), /*#__PURE__*/React.createElement(StatusBadge, {
+    status: status === "Pending" ? "WAITING APPROVAL" : status === "Approved" ? "DONE" : "HOLD"
+  })), status !== "Pending" ? /*#__PURE__*/React.createElement("div", {
+    className: "text-xs text-zinc-400 mt-1"
+  }, /*#__PURE__*/React.createElement("p", null, approval.name), /*#__PURE__*/React.createElement("p", {
+    className: "text-zinc-500"
+  }, fmtDate(approval.date))) : canAct ? /*#__PURE__*/React.createElement("div", {
+    className: "mt-2 flex gap-2"
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: function onClick() {
+      return onAct(role, "Approved");
+    },
+    className: "flex-1 text-xs font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 rounded-md py-1.5 hover:bg-emerald-500/25"
+  }, "Approve"), /*#__PURE__*/React.createElement("button", {
+    onClick: function onClick() {
+      return onAct(role, "Rejected");
+    },
+    className: "flex-1 text-xs font-semibold bg-rose-500/15 text-rose-300 border border-rose-500/30 rounded-md py-1.5 hover:bg-rose-500/25"
+  }, "Reject")) : /*#__PURE__*/React.createElement("p", {
+    className: "text-[11px] text-zinc-500 mt-2"
+  }, "Login sebagai ", APPROVAL_LABEL[role], " untuk approve/reject."), /*#__PURE__*/React.createElement("p", {
+    className: "text-[10px] text-zinc-500 mt-1.5"
+  }, canAct ? "Sebagai: ".concat(currentUser.name) : "Belum login sesuai role ini."));
 }
-
-function JobDetail({ job, onUpdate, onClose, currentUser }) {
-  const [local, setLocal] = useState(job);
-  const [saving, setSaving] = useState(false);
-  const [saveMsg, setSaveMsg] = useState("");
-  const eff = getEffectiveStatus(local);
-  const req = requiredApprovals(local.risk);
-
-  const save = (patch) => setLocal((l) => ({ ...l, ...patch }));
-
-  const persist = async (jobToSave) => {
-    setSaving(true);
-    setSaveMsg("");
-    try {
-      const res = await apiPost("updateJob", { job: jobToSave });
-      if (res.success) {
-        onUpdate(jobToSave);
-        setSaveMsg("Tersimpan ke server.");
-      } else {
-        setSaveMsg("Gagal menyimpan: " + (res.error || "unknown error"));
-      }
-    } catch (err) {
-      setSaveMsg("Gagal menyimpan: " + (err.message || err));
-    }
-    setSaving(false);
+function JobDetail(_ref14) {
+  var job = _ref14.job,
+    onUpdate = _ref14.onUpdate,
+    onClose = _ref14.onClose,
+    currentUser = _ref14.currentUser;
+  var _useState9 = useState(job),
+    _useState0 = _slicedToArray(_useState9, 2),
+    local = _useState0[0],
+    setLocal = _useState0[1];
+  var _useState1 = useState(false),
+    _useState10 = _slicedToArray(_useState1, 2),
+    saving = _useState10[0],
+    setSaving = _useState10[1];
+  var _useState11 = useState(""),
+    _useState12 = _slicedToArray(_useState11, 2),
+    saveMsg = _useState12[0],
+    setSaveMsg = _useState12[1];
+  var eff = getEffectiveStatus(local);
+  var req = requiredApprovals(local.risk);
+  var save = function save(patch) {
+    return setLocal(function (l) {
+      return _objectSpread(_objectSpread({}, l), patch);
+    });
   };
-
-  const handleManualSave = () => persist(local);
-
-  const act = (role, decision) => {
-    if (!currentUser || currentUser.role !== role) return;
-    const next = {
-      ...local,
-      approvals: {
-        ...local.approvals,
-        [role]: { status: decision, name: currentUser.name, date: new Date().toISOString().slice(0, 10) },
-      },
-      status: decision === "Rejected" ? "HOLD" : local.status === "WAITING APPROVAL" ? "READY" : local.status,
+  var persist = /*#__PURE__*/function () {
+    var _ref15 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2(jobToSave) {
+      var res, _t2;
+      return _regenerator().w(function (_context2) {
+        while (1) switch (_context2.p = _context2.n) {
+          case 0:
+            setSaving(true);
+            setSaveMsg("");
+            _context2.p = 1;
+            _context2.n = 2;
+            return apiPost("updateJob", {
+              job: jobToSave
+            });
+          case 2:
+            res = _context2.v;
+            if (res.success) {
+              onUpdate(jobToSave);
+              setSaveMsg("Tersimpan ke server.");
+            } else {
+              setSaveMsg("Gagal menyimpan: " + (res.error || "unknown error"));
+            }
+            _context2.n = 4;
+            break;
+          case 3:
+            _context2.p = 3;
+            _t2 = _context2.v;
+            setSaveMsg("Gagal menyimpan: " + (_t2.message || _t2));
+          case 4:
+            setSaving(false);
+          case 5:
+            return _context2.a(2);
+        }
+      }, _callee2, null, [[1, 3]]);
+    }));
+    return function persist(_x4) {
+      return _ref15.apply(this, arguments);
     };
+  }();
+  var handleManualSave = function handleManualSave() {
+    return persist(local);
+  };
+  var act = function act(role, decision) {
+    if (!currentUser || currentUser.role !== role) return;
+    var next = _objectSpread(_objectSpread({}, local), {}, {
+      approvals: _objectSpread(_objectSpread({}, local.approvals), {}, _defineProperty({}, role, {
+        status: decision,
+        name: currentUser.name,
+        date: new Date().toISOString().slice(0, 10)
+      })),
+      status: decision === "Rejected" ? "HOLD" : local.status === "WAITING APPROVAL" ? "READY" : local.status
+    });
     setLocal(next);
     persist(next);
   };
-
-  const handlePhotos = (field, photos) => {
-    const next = { ...local, [field]: photos };
+  var handlePhotos = function handlePhotos(field, photos) {
+    var next = _objectSpread(_objectSpread({}, local), {}, _defineProperty({}, field, photos));
     setLocal(next);
     persist(next);
   };
-
-  return (
-    <div className="fixed inset-0 bg-black/60 z-30 flex items-center justify-center p-4" onClick={onClose}>
-      <div className="bg-zinc-950 border border-zinc-800 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
-        <div className="p-5 border-b border-zinc-800 flex items-start justify-between sticky top-0 bg-zinc-950">
-          <div>
-            <p className="font-mono text-xs text-zinc-500">{local.id}</p>
-            <h2 className="text-lg font-bold text-zinc-50 mt-0.5">{local.deskripsi}</h2>
-            <div className="flex items-center gap-2 mt-2 flex-wrap">
-              <JenisBadge jenis={local.jenis} />
-              <StatusBadge status={eff} />
-              <RiskGauge risk={local.risk} size="lg" />
-              <Stop6Badges stop6={local.stop6} size="lg" />
-            </div>
-          </div>
-          <button onClick={onClose} className="text-zinc-500 hover:text-zinc-200"><Ico name="X" size={20} /></button>
-        </div>
-
-        <div className="p-5 space-y-5">
-          {/* Info */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
-            <div><p className="text-[11px] text-zinc-500 uppercase">Area</p><p className="text-zinc-100 font-medium">{local.area}</p></div>
-            <div><p className="text-[11px] text-zinc-500 uppercase">Lokasi</p><p className="text-zinc-100 font-medium">{local.lokasi}</p></div>
-            <div><p className="text-[11px] text-zinc-500 uppercase">Requester</p><p className="text-zinc-100 font-medium">{local.requester}</p></div>
-            <div><p className="text-[11px] text-zinc-500 uppercase">Tgl Request</p><p className="text-zinc-100 font-medium">{fmtDate(local.requestDate)}</p></div>
-            <div><p className="text-[11px] text-zinc-500 uppercase">Planned Date</p><p className="text-zinc-100 font-medium">{fmtDateTime(local.plannedDate)}</p></div>
-            <div><p className="text-[11px] text-zinc-500 uppercase">Estimasi Durasi</p><p className="text-zinc-100 font-medium">{local.estDuration} jam</p></div>
-            <div><p className="text-[11px] text-zinc-500 uppercase">Dampak Produksi</p><p className="text-zinc-100 font-medium">{local.dampakProduksi}</p></div>
-            <div><p className="text-[11px] text-zinc-500 uppercase">Need Shutdown</p><p className="text-zinc-100 font-medium">{local.needShutdown}</p></div>
-          </div>
-
-          {local.stop6 && local.stop6.length > 0 && (
-            <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-3">
-              <p className="text-[11px] text-zinc-500 uppercase mb-1.5">Kriteria Safety (STOP 6)</p>
-              <div className="flex flex-wrap gap-2">
-                {local.stop6.map((s) => (
-                  <span key={s} className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full border border-orange-500/40 bg-orange-500/10 text-orange-300 text-xs font-semibold">
-                    <span className="flex items-center justify-center w-5 h-5 rounded-full bg-orange-500 text-zinc-950 text-[10px] font-bold">{s}</span>
-                    {STOP6_META[s].label}
-                  </span>
-                ))}
-              </div>
-            </div>
-          )}
-
-          <div>
-            <p className="text-[11px] text-zinc-500 uppercase mb-1">Pelaksana Pekerjaan</p>
-            <div className="flex flex-wrap gap-1.5">
-              {local.pelaksana.map((p) => (
-                <span key={p} className="text-xs bg-zinc-800 border border-zinc-700 rounded-full px-2 py-1 text-zinc-200">{p}</span>
-              ))}
-            </div>
-          </div>
-
-          <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-3">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <p className="text-sm font-semibold text-zinc-100 flex items-center gap-2 mb-1">
-                  <Ico name="Image" size={16} className="text-orange-400" /> Foto KY Sheet - Sebelum Bekerja
-                </p>
-                <p className="text-xs text-zinc-500 mb-2">
-                  {local.risk !== "Low" || local.needShutdown === "Yes"
-                    ? "Wajib dilampirkan sebelum approval Section Head / Dept Head. Foto bisa lebih dari 1 (misal: halaman KY & sketsa area)."
-                    : "Lampirkan foto KY Sheet jika tersedia (opsional untuk risiko Low)."}
-                </p>
-                <PhotoUploader photos={local.kySheetBefore} onChange={(photos) => handlePhotos("kySheetBefore", photos)} prefix={`${local.id}_KY_BEFORE`} />
-              </div>
-              <div className="md:border-l md:border-zinc-800 md:pl-4 pt-3 md:pt-0 border-t md:border-t-0 border-zinc-800">
-                <p className="text-sm font-semibold text-zinc-100 flex items-center gap-2 mb-1">
-                  <Ico name="Image" size={16} className="text-orange-400" /> Foto KY Sheet - Setelah Selesai Bekerja
-                </p>
-                <p className="text-xs text-zinc-500 mb-2">
-                  Lampirkan foto KY Sheet bagian "Konfirmasi Setelah Selesai Bekerja" (cek fence/cover, sisa alat, sampah, dll) setelah pekerjaan selesai.
-                </p>
-                <PhotoUploader photos={local.kySheetAfter} onChange={(photos) => handlePhotos("kySheetAfter", photos)} prefix={`${local.id}_KY_AFTER`} />
-              </div>
-            </div>
-          </div>
-
-          {/* Approval workflow */}
-          <div>
-            <p className="text-xs font-bold uppercase text-zinc-300 mb-2 flex items-center gap-2"><Ico name="CheckCircle2" size={14} className="text-orange-400"/> Approval Workflow</p>
-            <div className="flex flex-col sm:flex-row gap-2">
-              {["foreman", "sectionHead", "deptHead"].map((role) => (
-                <ApprovalStep
-                  key={role}
-                  role={role}
-                  approval={local.approvals[role]}
-                  required={req.includes(role)}
-                  job={local}
-                  onAct={act}
-                  currentUser={currentUser}
-                />
-              ))}
-            </div>
-            <p className="text-[11px] text-zinc-500 mt-2">Approval boleh dilakukan tidak berurutan (loncat). Job dapat dieksekusi ("READY") setelah seluruh approval wajib berstatus Approved.</p>
-          </div>
-
-          {/* Execution */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-3">
-              <p className="text-xs font-bold uppercase text-zinc-300 flex items-center gap-2"><Ico name="Wrench" size={14} className="text-orange-400"/> Execution</p>
-              <Field label="PIC">
-                <input type="text" list="mp-name-suggestions" className={inputCls} placeholder="Ketik nama PIC..." value={local.pic} onChange={(e) => save({ pic: e.target.value })} />
-              </Field>
-              <div className="grid grid-cols-2 gap-2">
-                <Field label="Actual Start">
-                  <input type="datetime-local" className={inputCls} value={local.actualStart} onChange={(e) => save({ actualStart: e.target.value, status: local.status === "READY" ? "IN PROGRESS" : local.status })} />
-                </Field>
-                <Field label="Actual Finish">
-                  <input type="datetime-local" className={inputCls} value={local.actualFinish} onChange={(e) => save({ actualFinish: e.target.value, status: e.target.value ? "DONE" : local.status })} />
-                </Field>
-              </div>
-              <Field label="Status Pekerjaan">
-                <select className={inputCls} value={local.status} onChange={(e) => save({ status: e.target.value })}>
-                  {STATUS_LIST.filter((s) => s !== "DELAY").map((s) => <option key={s}>{s}</option>)}
-                </select>
-              </Field>
-              <Field label="Keterangan Delay / Hold">
-                <textarea className={inputCls} rows={2} value={local.delayNote} onChange={(e) => save({ delayNote: e.target.value })} placeholder="Isi jika ada delay / hold..." />
-              </Field>
-              {eff === "DELAY" && (
-                <p className="text-xs text-rose-300 font-semibold">⚠ Delay otomatis terdeteksi: +{getDelayHours(local)} jam dari rencana.</p>
-              )}
-              <Field label="Foto Pekerjaan - Before" hint="Bisa upload lebih dari 1 foto.">
-                <PhotoUploader photos={local.fotoBefore} onChange={(photos) => handlePhotos("fotoBefore", photos)} prefix={`${local.id}_BEFORE`} />
-              </Field>
-              <Field label="Foto Pekerjaan - After" hint="Bisa upload lebih dari 1 foto.">
-                <PhotoUploader photos={local.fotoAfter} onChange={(photos) => handlePhotos("fotoAfter", photos)} prefix={`${local.id}_AFTER`} />
-              </Field>
-            </div>
-
-            <div className="space-y-3">
-              <p className="text-xs font-bold uppercase text-zinc-300 flex items-center gap-2"><Ico name="ClipboardList" size={14} className="text-orange-400"/> Result & Evaluation</p>
-              <Field label="Hasil Pekerjaan">
-                <select className={inputCls} value={local.hasil} onChange={(e) => save({ hasil: e.target.value })}>
-                  <option value="">- Pilih -</option>
-                  <option value="OK">OK</option>
-                  <option value="NG">NG</option>
-                </select>
-              </Field>
-              <Field label="Catatan Hasil">
-                <textarea className={inputCls} rows={2} value={local.catatanHasil} onChange={(e) => save({ catatanHasil: e.target.value })} />
-              </Field>
-              <Field label="Problem Ditemukan">
-                <textarea className={inputCls} rows={2} value={local.problem} onChange={(e) => save({ problem: e.target.value })} />
-              </Field>
-              <Field label="Action / Follow Up">
-                <textarea className={inputCls} rows={2} value={local.followUp} onChange={(e) => save({ followUp: e.target.value })} />
-              </Field>
-            </div>
-          </div>
-        </div>
-
-        {/* Save bar */}
-        <div className="p-4 border-t border-zinc-800 sticky bottom-0 bg-zinc-950 flex items-center justify-between gap-3">
-          <p className="text-xs text-zinc-500">
-            {saveMsg
-              ? saveMsg
-              : "Foto & approval tersimpan otomatis. Klik \"Simpan Perubahan\" untuk menyimpan field lainnya ke server."}
-          </p>
-          <button
-            onClick={handleManualSave}
-            disabled={saving}
-            className="px-5 py-2 rounded-lg bg-orange-500 text-zinc-950 text-sm font-bold hover:bg-orange-400 disabled:opacity-50 flex items-center gap-2 whitespace-nowrap"
-          >
-            {saving ? <Ico name="Loader2" size={14} className="animate-spin" /> : <Ico name="Save" size={14} />}
-            {saving ? "Menyimpan..." : "Simpan Perubahan"}
-          </button>
-        </div>
-      </div>
-    </div>
-  );
+  return /*#__PURE__*/React.createElement("div", {
+    className: "fixed inset-0 bg-black/60 z-30 flex items-center justify-center p-4",
+    onClick: onClose
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "bg-zinc-950 border border-zinc-800 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto",
+    onClick: function onClick(e) {
+      return e.stopPropagation();
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "p-5 border-b border-zinc-800 flex items-start justify-between sticky top-0 bg-zinc-950"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", {
+    className: "font-mono text-xs text-zinc-500"
+  }, local.id), /*#__PURE__*/React.createElement("h2", {
+    className: "text-lg font-bold text-zinc-50 mt-0.5"
+  }, local.deskripsi), /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-2 mt-2 flex-wrap"
+  }, /*#__PURE__*/React.createElement(JenisBadge, {
+    jenis: local.jenis
+  }), /*#__PURE__*/React.createElement(StatusBadge, {
+    status: eff
+  }), /*#__PURE__*/React.createElement(RiskGauge, {
+    risk: local.risk,
+    size: "lg"
+  }), /*#__PURE__*/React.createElement(Stop6Badges, {
+    stop6: local.stop6,
+    size: "lg"
+  }))), /*#__PURE__*/React.createElement("button", {
+    onClick: onClose,
+    className: "text-zinc-500 hover:text-zinc-200"
+  }, /*#__PURE__*/React.createElement(Ico, {
+    name: "X",
+    size: 20
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "p-5 space-y-5"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-2 md:grid-cols-4 gap-3 text-sm"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", {
+    className: "text-[11px] text-zinc-500 uppercase"
+  }, "Area"), /*#__PURE__*/React.createElement("p", {
+    className: "text-zinc-100 font-medium"
+  }, local.area)), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", {
+    className: "text-[11px] text-zinc-500 uppercase"
+  }, "Lokasi"), /*#__PURE__*/React.createElement("p", {
+    className: "text-zinc-100 font-medium"
+  }, local.lokasi)), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", {
+    className: "text-[11px] text-zinc-500 uppercase"
+  }, "Requester"), /*#__PURE__*/React.createElement("p", {
+    className: "text-zinc-100 font-medium"
+  }, local.requester)), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", {
+    className: "text-[11px] text-zinc-500 uppercase"
+  }, "Tgl Request"), /*#__PURE__*/React.createElement("p", {
+    className: "text-zinc-100 font-medium"
+  }, fmtDate(local.requestDate))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", {
+    className: "text-[11px] text-zinc-500 uppercase"
+  }, "Planned Date"), /*#__PURE__*/React.createElement("p", {
+    className: "text-zinc-100 font-medium"
+  }, fmtDateTime(local.plannedDate))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", {
+    className: "text-[11px] text-zinc-500 uppercase"
+  }, "Estimasi Durasi"), /*#__PURE__*/React.createElement("p", {
+    className: "text-zinc-100 font-medium"
+  }, local.estDuration, " jam")), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", {
+    className: "text-[11px] text-zinc-500 uppercase"
+  }, "Dampak Produksi"), /*#__PURE__*/React.createElement("p", {
+    className: "text-zinc-100 font-medium"
+  }, local.dampakProduksi)), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", {
+    className: "text-[11px] text-zinc-500 uppercase"
+  }, "Need Shutdown"), /*#__PURE__*/React.createElement("p", {
+    className: "text-zinc-100 font-medium"
+  }, local.needShutdown))), local.stop6 && local.stop6.length > 0 && /*#__PURE__*/React.createElement("div", {
+    className: "bg-zinc-900 border border-zinc-800 rounded-lg p-3"
+  }, /*#__PURE__*/React.createElement("p", {
+    className: "text-[11px] text-zinc-500 uppercase mb-1.5"
+  }, "Kriteria Safety (STOP 6)"), /*#__PURE__*/React.createElement("div", {
+    className: "flex flex-wrap gap-2"
+  }, local.stop6.map(function (s) {
+    return /*#__PURE__*/React.createElement("span", {
+      key: s,
+      className: "inline-flex items-center gap-1.5 px-2 py-1 rounded-full border border-orange-500/40 bg-orange-500/10 text-orange-300 text-xs font-semibold"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "flex items-center justify-center w-5 h-5 rounded-full bg-orange-500 text-zinc-950 text-[10px] font-bold"
+    }, s), STOP6_META[s].label);
+  }))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", {
+    className: "text-[11px] text-zinc-500 uppercase mb-1"
+  }, "Pelaksana Pekerjaan"), /*#__PURE__*/React.createElement("div", {
+    className: "flex flex-wrap gap-1.5"
+  }, local.pelaksana.map(function (p) {
+    return /*#__PURE__*/React.createElement("span", {
+      key: p,
+      className: "text-xs bg-zinc-800 border border-zinc-700 rounded-full px-2 py-1 text-zinc-200"
+    }, p);
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "bg-zinc-900 border border-zinc-800 rounded-lg p-3"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-1 md:grid-cols-2 gap-4"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", {
+    className: "text-sm font-semibold text-zinc-100 flex items-center gap-2 mb-1"
+  }, /*#__PURE__*/React.createElement(Ico, {
+    name: "Image",
+    size: 16,
+    className: "text-orange-400"
+  }), " Foto KY Sheet - Sebelum Bekerja"), /*#__PURE__*/React.createElement("p", {
+    className: "text-xs text-zinc-500 mb-2"
+  }, local.risk !== "Low" || local.needShutdown === "Yes" ? "Wajib dilampirkan sebelum approval Section Head / Dept Head. Foto bisa lebih dari 1 (misal: halaman KY & sketsa area)." : "Lampirkan foto KY Sheet jika tersedia (opsional untuk risiko Low)."), /*#__PURE__*/React.createElement(PhotoUploader, {
+    photos: local.kySheetBefore,
+    onChange: function onChange(photos) {
+      return handlePhotos("kySheetBefore", photos);
+    },
+    prefix: "".concat(local.id, "_KY_BEFORE")
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "md:border-l md:border-zinc-800 md:pl-4 pt-3 md:pt-0 border-t md:border-t-0 border-zinc-800"
+  }, /*#__PURE__*/React.createElement("p", {
+    className: "text-sm font-semibold text-zinc-100 flex items-center gap-2 mb-1"
+  }, /*#__PURE__*/React.createElement(Ico, {
+    name: "Image",
+    size: 16,
+    className: "text-orange-400"
+  }), " Foto KY Sheet - Setelah Selesai Bekerja"), /*#__PURE__*/React.createElement("p", {
+    className: "text-xs text-zinc-500 mb-2"
+  }, "Lampirkan foto KY Sheet bagian \"Konfirmasi Setelah Selesai Bekerja\" (cek fence/cover, sisa alat, sampah, dll) setelah pekerjaan selesai."), /*#__PURE__*/React.createElement(PhotoUploader, {
+    photos: local.kySheetAfter,
+    onChange: function onChange(photos) {
+      return handlePhotos("kySheetAfter", photos);
+    },
+    prefix: "".concat(local.id, "_KY_AFTER")
+  })))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", {
+    className: "text-xs font-bold uppercase text-zinc-300 mb-2 flex items-center gap-2"
+  }, /*#__PURE__*/React.createElement(Ico, {
+    name: "CheckCircle2",
+    size: 14,
+    className: "text-orange-400"
+  }), " Approval Workflow"), /*#__PURE__*/React.createElement("div", {
+    className: "flex flex-col sm:flex-row gap-2"
+  }, ["foreman", "sectionHead", "deptHead"].map(function (role) {
+    return /*#__PURE__*/React.createElement(ApprovalStep, {
+      key: role,
+      role: role,
+      approval: local.approvals[role],
+      required: req.includes(role),
+      job: local,
+      onAct: act,
+      currentUser: currentUser
+    });
+  })), /*#__PURE__*/React.createElement("p", {
+    className: "text-[11px] text-zinc-500 mt-2"
+  }, "Approval boleh dilakukan tidak berurutan (loncat). Job dapat dieksekusi (\"READY\") setelah seluruh approval wajib berstatus Approved.")), /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-1 md:grid-cols-2 gap-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "space-y-3"
+  }, /*#__PURE__*/React.createElement("p", {
+    className: "text-xs font-bold uppercase text-zinc-300 flex items-center gap-2"
+  }, /*#__PURE__*/React.createElement(Ico, {
+    name: "Wrench",
+    size: 14,
+    className: "text-orange-400"
+  }), " Execution"), /*#__PURE__*/React.createElement(Field, {
+    label: "PIC"
+  }, /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    list: "mp-name-suggestions",
+    className: inputCls,
+    placeholder: "Ketik nama PIC...",
+    value: local.pic,
+    onChange: function onChange(e) {
+      return save({
+        pic: e.target.value
+      });
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-2 gap-2"
+  }, /*#__PURE__*/React.createElement(Field, {
+    label: "Actual Start"
+  }, /*#__PURE__*/React.createElement("input", {
+    type: "datetime-local",
+    className: inputCls,
+    value: local.actualStart,
+    onChange: function onChange(e) {
+      return save({
+        actualStart: e.target.value,
+        status: local.status === "READY" ? "IN PROGRESS" : local.status
+      });
+    }
+  })), /*#__PURE__*/React.createElement(Field, {
+    label: "Actual Finish"
+  }, /*#__PURE__*/React.createElement("input", {
+    type: "datetime-local",
+    className: inputCls,
+    value: local.actualFinish,
+    onChange: function onChange(e) {
+      return save({
+        actualFinish: e.target.value,
+        status: e.target.value ? "DONE" : local.status
+      });
+    }
+  }))), /*#__PURE__*/React.createElement(Field, {
+    label: "Status Pekerjaan"
+  }, /*#__PURE__*/React.createElement("select", {
+    className: inputCls,
+    value: local.status,
+    onChange: function onChange(e) {
+      return save({
+        status: e.target.value
+      });
+    }
+  }, STATUS_LIST.filter(function (s) {
+    return s !== "DELAY";
+  }).map(function (s) {
+    return /*#__PURE__*/React.createElement("option", {
+      key: s
+    }, s);
+  }))), /*#__PURE__*/React.createElement(Field, {
+    label: "Keterangan Delay / Hold"
+  }, /*#__PURE__*/React.createElement("textarea", {
+    className: inputCls,
+    rows: 2,
+    value: local.delayNote,
+    onChange: function onChange(e) {
+      return save({
+        delayNote: e.target.value
+      });
+    },
+    placeholder: "Isi jika ada delay / hold..."
+  })), eff === "DELAY" && /*#__PURE__*/React.createElement("p", {
+    className: "text-xs text-rose-300 font-semibold"
+  }, "\u26A0 Delay otomatis terdeteksi: +", getDelayHours(local), " jam dari rencana."), /*#__PURE__*/React.createElement(Field, {
+    label: "Foto Pekerjaan - Before",
+    hint: "Bisa upload lebih dari 1 foto."
+  }, /*#__PURE__*/React.createElement(PhotoUploader, {
+    photos: local.fotoBefore,
+    onChange: function onChange(photos) {
+      return handlePhotos("fotoBefore", photos);
+    },
+    prefix: "".concat(local.id, "_BEFORE")
+  })), /*#__PURE__*/React.createElement(Field, {
+    label: "Foto Pekerjaan - After",
+    hint: "Bisa upload lebih dari 1 foto."
+  }, /*#__PURE__*/React.createElement(PhotoUploader, {
+    photos: local.fotoAfter,
+    onChange: function onChange(photos) {
+      return handlePhotos("fotoAfter", photos);
+    },
+    prefix: "".concat(local.id, "_AFTER")
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-3"
+  }, /*#__PURE__*/React.createElement("p", {
+    className: "text-xs font-bold uppercase text-zinc-300 flex items-center gap-2"
+  }, /*#__PURE__*/React.createElement(Ico, {
+    name: "ClipboardList",
+    size: 14,
+    className: "text-orange-400"
+  }), " Result & Evaluation"), /*#__PURE__*/React.createElement(Field, {
+    label: "Hasil Pekerjaan"
+  }, /*#__PURE__*/React.createElement("select", {
+    className: inputCls,
+    value: local.hasil,
+    onChange: function onChange(e) {
+      return save({
+        hasil: e.target.value
+      });
+    }
+  }, /*#__PURE__*/React.createElement("option", {
+    value: ""
+  }, "- Pilih -"), /*#__PURE__*/React.createElement("option", {
+    value: "OK"
+  }, "OK"), /*#__PURE__*/React.createElement("option", {
+    value: "NG"
+  }, "NG"))), /*#__PURE__*/React.createElement(Field, {
+    label: "Catatan Hasil"
+  }, /*#__PURE__*/React.createElement("textarea", {
+    className: inputCls,
+    rows: 2,
+    value: local.catatanHasil,
+    onChange: function onChange(e) {
+      return save({
+        catatanHasil: e.target.value
+      });
+    }
+  })), /*#__PURE__*/React.createElement(Field, {
+    label: "Problem Ditemukan"
+  }, /*#__PURE__*/React.createElement("textarea", {
+    className: inputCls,
+    rows: 2,
+    value: local.problem,
+    onChange: function onChange(e) {
+      return save({
+        problem: e.target.value
+      });
+    }
+  })), /*#__PURE__*/React.createElement(Field, {
+    label: "Action / Follow Up"
+  }, /*#__PURE__*/React.createElement("textarea", {
+    className: inputCls,
+    rows: 2,
+    value: local.followUp,
+    onChange: function onChange(e) {
+      return save({
+        followUp: e.target.value
+      });
+    }
+  }))))), /*#__PURE__*/React.createElement("div", {
+    className: "p-4 border-t border-zinc-800 sticky bottom-0 bg-zinc-950 flex items-center justify-between gap-3"
+  }, /*#__PURE__*/React.createElement("p", {
+    className: "text-xs text-zinc-500"
+  }, saveMsg ? saveMsg : "Foto & approval tersimpan otomatis. Klik \"Simpan Perubahan\" untuk menyimpan field lainnya ke server."), /*#__PURE__*/React.createElement("button", {
+    onClick: handleManualSave,
+    disabled: saving,
+    className: "px-5 py-2 rounded-lg bg-orange-500 text-zinc-950 text-sm font-bold hover:bg-orange-400 disabled:opacity-50 flex items-center gap-2 whitespace-nowrap"
+  }, saving ? /*#__PURE__*/React.createElement(Ico, {
+    name: "Loader2",
+    size: 14,
+    className: "animate-spin"
+  }) : /*#__PURE__*/React.createElement(Ico, {
+    name: "Save",
+    size: 14
+  }), saving ? "Menyimpan..." : "Simpan Perubahan"))));
 }
 
 /* =========================================================================
    LOGIN MODAL
    ========================================================================= */
 
-function LoginModal({ accounts, onLogin, onClose }) {
-  const [role, setRole] = useState("foreman");
-  const [name, setName] = useState((accounts.foreman || [])[0]?.name || "");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [checking, setChecking] = useState(false);
-
-  const people = accounts[role] || [];
-
-  const changeRole = (r) => {
+function LoginModal(_ref16) {
+  var _2;
+  var accounts = _ref16.accounts,
+    onLogin = _ref16.onLogin,
+    onClose = _ref16.onClose;
+  var _useState13 = useState("foreman"),
+    _useState14 = _slicedToArray(_useState13, 2),
+    role = _useState14[0],
+    setRole = _useState14[1];
+  var _useState15 = useState(((_2 = (accounts.foreman || [])[0]) === null || _2 === void 0 ? void 0 : _2.name) || ""),
+    _useState16 = _slicedToArray(_useState15, 2),
+    name = _useState16[0],
+    setName = _useState16[1];
+  var _useState17 = useState(""),
+    _useState18 = _slicedToArray(_useState17, 2),
+    password = _useState18[0],
+    setPassword = _useState18[1];
+  var _useState19 = useState(""),
+    _useState20 = _slicedToArray(_useState19, 2),
+    error = _useState20[0],
+    setError = _useState20[1];
+  var _useState21 = useState(false),
+    _useState22 = _slicedToArray(_useState21, 2),
+    checking = _useState22[0],
+    setChecking = _useState22[1];
+  var people = accounts[role] || [];
+  var changeRole = function changeRole(r) {
+    var _3;
     setRole(r);
-    setName((accounts[r] || [])[0]?.name || "");
+    setName(((_3 = (accounts[r] || [])[0]) === null || _3 === void 0 ? void 0 : _3.name) || "");
     setPassword("");
     setError("");
   };
-
-  const submit = async () => {
-    if (!name || !password) {
-      setError("Pilih nama & isi password.");
-      return;
+  var submit = /*#__PURE__*/function () {
+    var _ref17 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3() {
+      var res, _t3;
+      return _regenerator().w(function (_context3) {
+        while (1) switch (_context3.p = _context3.n) {
+          case 0:
+            if (!(!name || !password)) {
+              _context3.n = 1;
+              break;
+            }
+            setError("Pilih nama & isi password.");
+            return _context3.a(2);
+          case 1:
+            setChecking(true);
+            setError("");
+            _context3.p = 2;
+            _context3.n = 3;
+            return apiPost("login", {
+              role: role,
+              name: name,
+              password: password
+            });
+          case 3:
+            res = _context3.v;
+            if (res.success) {
+              onLogin({
+                role: role,
+                name: name
+              });
+            } else {
+              setError(res.error || "Nama atau password salah.");
+            }
+            _context3.n = 5;
+            break;
+          case 4:
+            _context3.p = 4;
+            _t3 = _context3.v;
+            setError("Gagal terhubung ke server: " + (_t3.message || _t3));
+          case 5:
+            setChecking(false);
+          case 6:
+            return _context3.a(2);
+        }
+      }, _callee3, null, [[2, 4]]);
+    }));
+    return function submit() {
+      return _ref17.apply(this, arguments);
+    };
+  }();
+  return /*#__PURE__*/React.createElement("div", {
+    className: "fixed inset-0 bg-black/60 z-40 flex items-center justify-center p-4",
+    onClick: onClose
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "bg-zinc-950 border border-zinc-800 rounded-2xl max-w-sm w-full p-5",
+    onClick: function onClick(e) {
+      return e.stopPropagation();
     }
-    setChecking(true);
-    setError("");
-    try {
-      const res = await apiPost("login", { role, name, password });
-      if (res.success) {
-        onLogin({ role, name });
-      } else {
-        setError(res.error || "Nama atau password salah.");
-      }
-    } catch (err) {
-      setError("Gagal terhubung ke server: " + (err.message || err));
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center justify-between mb-4"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "text-lg font-bold text-zinc-50 flex items-center gap-2"
+  }, /*#__PURE__*/React.createElement(Ico, {
+    name: "LogIn",
+    size: 18,
+    className: "text-orange-400"
+  }), " Login"), /*#__PURE__*/React.createElement("button", {
+    onClick: onClose,
+    className: "text-zinc-500 hover:text-zinc-200"
+  }, /*#__PURE__*/React.createElement(Ico, {
+    name: "X",
+    size: 18
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-3"
+  }, /*#__PURE__*/React.createElement(Field, {
+    label: "Login sebagai"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-3 gap-2"
+  }, ["foreman", "sectionHead", "deptHead"].map(function (r) {
+    return /*#__PURE__*/React.createElement("button", {
+      key: r,
+      onClick: function onClick() {
+        return changeRole(r);
+      },
+      className: "px-2 py-2 rounded-lg border text-xs font-semibold ".concat(role === r ? "border-orange-500 text-orange-300 bg-orange-500/10" : "border-zinc-700 text-zinc-400 hover:border-zinc-600")
+    }, APPROVAL_LABEL[r]);
+  }))), /*#__PURE__*/React.createElement(Field, {
+    label: "Nama"
+  }, people.length > 0 ? /*#__PURE__*/React.createElement("select", {
+    className: inputCls,
+    value: name,
+    onChange: function onChange(e) {
+      setName(e.target.value);
+      setError("");
     }
-    setChecking(false);
-  };
-
-  return (
-    <div className="fixed inset-0 bg-black/60 z-40 flex items-center justify-center p-4" onClick={onClose}>
-      <div className="bg-zinc-950 border border-zinc-800 rounded-2xl max-w-sm w-full p-5" onClick={(e) => e.stopPropagation()}>
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-bold text-zinc-50 flex items-center gap-2">
-            <Ico name="LogIn" size={18} className="text-orange-400" /> Login
-          </h2>
-          <button onClick={onClose} className="text-zinc-500 hover:text-zinc-200"><Ico name="X" size={18} /></button>
-        </div>
-        <div className="space-y-3">
-          <Field label="Login sebagai">
-            <div className="grid grid-cols-3 gap-2">
-              {["foreman", "sectionHead", "deptHead"].map((r) => (
-                <button
-                  key={r}
-                  onClick={() => changeRole(r)}
-                  className={`px-2 py-2 rounded-lg border text-xs font-semibold ${role === r ? "border-orange-500 text-orange-300 bg-orange-500/10" : "border-zinc-700 text-zinc-400 hover:border-zinc-600"}`}
-                >
-                  {APPROVAL_LABEL[r]}
-                </button>
-              ))}
-            </div>
-          </Field>
-          <Field label="Nama">
-            {people.length > 0 ? (
-              <select className={inputCls} value={name} onChange={(e) => { setName(e.target.value); setError(""); }}>
-                {people.map((p) => <option key={p.name} value={p.name}>{p.name}</option>)}
-              </select>
-            ) : (
-              <p className="text-xs text-zinc-500 bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2">
-                Belum ada akun {APPROVAL_LABEL[role]}. Minta admin menambahkan di tab Settings.
-              </p>
-            )}
-          </Field>
-          <Field label="Password">
-            <input
-              type="password"
-              className={inputCls}
-              value={password}
-              onChange={(e) => { setPassword(e.target.value); setError(""); }}
-              onKeyDown={(e) => e.key === "Enter" && submit()}
-              placeholder="Masukkan password..."
-            />
-          </Field>
-          {error && (
-            <div className="flex items-center gap-2 text-xs text-rose-300 bg-rose-500/10 border border-rose-500/30 rounded-lg px-3 py-2">
-              <Ico name="AlertTriangle" size={14} /> {error}
-            </div>
-          )}
-          <button onClick={submit} disabled={checking || people.length === 0} className="w-full px-4 py-2 rounded-lg bg-orange-500 text-zinc-950 text-sm font-bold hover:bg-orange-400 disabled:opacity-50 flex items-center justify-center gap-2">
-            {checking && <Ico name="Loader2" size={14} className="animate-spin" />}
-            {checking ? "Memeriksa..." : "Masuk"}
-          </button>
-          <p className="text-[11px] text-zinc-500 text-center">Approval pekerjaan akan tercatat atas nama akun yang login.</p>
-        </div>
-      </div>
-    </div>
-  );
-
+  }, people.map(function (p) {
+    return /*#__PURE__*/React.createElement("option", {
+      key: p.name,
+      value: p.name
+    }, p.name);
+  })) : /*#__PURE__*/React.createElement("p", {
+    className: "text-xs text-zinc-500 bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2"
+  }, "Belum ada akun ", APPROVAL_LABEL[role], ". Minta admin menambahkan di tab Settings.")), /*#__PURE__*/React.createElement(Field, {
+    label: "Password"
+  }, /*#__PURE__*/React.createElement("input", {
+    type: "password",
+    className: inputCls,
+    value: password,
+    onChange: function onChange(e) {
+      setPassword(e.target.value);
+      setError("");
+    },
+    onKeyDown: function onKeyDown(e) {
+      return e.key === "Enter" && submit();
+    },
+    placeholder: "Masukkan password..."
+  })), error && /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-2 text-xs text-rose-300 bg-rose-500/10 border border-rose-500/30 rounded-lg px-3 py-2"
+  }, /*#__PURE__*/React.createElement(Ico, {
+    name: "AlertTriangle",
+    size: 14
+  }), " ", error), /*#__PURE__*/React.createElement("button", {
+    onClick: submit,
+    disabled: checking || people.length === 0,
+    className: "w-full px-4 py-2 rounded-lg bg-orange-500 text-zinc-950 text-sm font-bold hover:bg-orange-400 disabled:opacity-50 flex items-center justify-center gap-2"
+  }, checking && /*#__PURE__*/React.createElement(Ico, {
+    name: "Loader2",
+    size: 14,
+    className: "animate-spin"
+  }), checking ? "Memeriksa..." : "Masuk"), /*#__PURE__*/React.createElement("p", {
+    className: "text-[11px] text-zinc-500 text-center"
+  }, "Approval pekerjaan akan tercatat atas nama akun yang login."))));
 }
 
 /* =========================================================================
    ADMIN SETTINGS - kelola akun Foreman / Section Head / Dept Head
    ========================================================================= */
 
-function AdminSettings({ accounts, setAccounts }) {
-  const [unlocked, setUnlocked] = useState(false);
-  const [adminPassword, setAdminPassword] = useState("");
-  const [pwdInput, setPwdInput] = useState("");
-  const [error, setError] = useState("");
-  const [checking, setChecking] = useState(false);
-  const [saveMsg, setSaveMsg] = useState("");
-
-  const tryUnlock = async () => {
-    if (!pwdInput) return;
-    setChecking(true);
-    setError("");
-    try {
-      // "No-op save" trik: kirim accounts saat ini untuk validasi password admin di server
-      const res = await apiPost("updateAccounts", { adminPassword: pwdInput, accounts });
-      if (res.success) {
-        setAdminPassword(pwdInput);
-        setUnlocked(true);
-      } else {
-        setError(res.error || "Password admin salah.");
-      }
-    } catch (err) {
-      setError("Gagal terhubung ke server: " + (err.message || err));
-    }
-    setChecking(false);
-  };
-
+function AdminSettings(_ref18) {
+  var accounts = _ref18.accounts,
+    setAccounts = _ref18.setAccounts;
+  var _useState23 = useState(false),
+    _useState24 = _slicedToArray(_useState23, 2),
+    unlocked = _useState24[0],
+    setUnlocked = _useState24[1];
+  var _useState25 = useState(""),
+    _useState26 = _slicedToArray(_useState25, 2),
+    adminPassword = _useState26[0],
+    setAdminPassword = _useState26[1];
+  var _useState27 = useState(""),
+    _useState28 = _slicedToArray(_useState27, 2),
+    pwdInput = _useState28[0],
+    setPwdInput = _useState28[1];
+  var _useState29 = useState(""),
+    _useState30 = _slicedToArray(_useState29, 2),
+    error = _useState30[0],
+    setError = _useState30[1];
+  var _useState31 = useState(false),
+    _useState32 = _slicedToArray(_useState31, 2),
+    checking = _useState32[0],
+    setChecking = _useState32[1];
+  var _useState33 = useState(""),
+    _useState34 = _slicedToArray(_useState33, 2),
+    saveMsg = _useState34[0],
+    setSaveMsg = _useState34[1];
+  var tryUnlock = /*#__PURE__*/function () {
+    var _ref19 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4() {
+      var res, _t4;
+      return _regenerator().w(function (_context4) {
+        while (1) switch (_context4.p = _context4.n) {
+          case 0:
+            if (pwdInput) {
+              _context4.n = 1;
+              break;
+            }
+            return _context4.a(2);
+          case 1:
+            setChecking(true);
+            setError("");
+            _context4.p = 2;
+            _context4.n = 3;
+            return apiPost("updateAccounts", {
+              adminPassword: pwdInput,
+              accounts: accounts
+            });
+          case 3:
+            res = _context4.v;
+            if (res.success) {
+              setAdminPassword(pwdInput);
+              setUnlocked(true);
+            } else {
+              setError(res.error || "Password admin salah.");
+            }
+            _context4.n = 5;
+            break;
+          case 4:
+            _context4.p = 4;
+            _t4 = _context4.v;
+            setError("Gagal terhubung ke server: " + (_t4.message || _t4));
+          case 5:
+            setChecking(false);
+          case 6:
+            return _context4.a(2);
+        }
+      }, _callee4, null, [[2, 4]]);
+    }));
+    return function tryUnlock() {
+      return _ref19.apply(this, arguments);
+    };
+  }();
   if (!unlocked) {
-    return (
-      <div className="max-w-sm mx-auto bg-zinc-900 border border-zinc-800 rounded-xl p-5 space-y-3">
-        <h2 className="text-lg font-bold text-zinc-50 flex items-center gap-2">
-          <Ico name="ShieldAlert" size={18} className="text-orange-400" /> Settings (Admin Only)
-        </h2>
-        <p className="text-xs text-zinc-500">Masukkan password admin untuk mengatur akun Foreman, Section Head, dan Dept Head.</p>
-        <input
-          type="password"
-          className={inputCls}
-          value={pwdInput}
-          onChange={(e) => { setPwdInput(e.target.value); setError(""); }}
-          onKeyDown={(e) => e.key === "Enter" && tryUnlock()}
-          placeholder="Password admin..."
-        />
-        {error && (
-          <div className="flex items-center gap-2 text-xs text-rose-300 bg-rose-500/10 border border-rose-500/30 rounded-lg px-3 py-2">
-            <Ico name="AlertTriangle" size={14} /> {error}
-          </div>
-        )}
-        <button
-          onClick={tryUnlock}
-          disabled={checking}
-          className="w-full px-4 py-2 rounded-lg bg-orange-500 text-zinc-950 text-sm font-bold hover:bg-orange-400 disabled:opacity-50 flex items-center justify-center gap-2"
-        >
-          {checking && <Ico name="Loader2" size={14} className="animate-spin" />}
-          {checking ? "Memeriksa..." : "Unlock"}
-        </button>
-      </div>
-    );
+    return /*#__PURE__*/React.createElement("div", {
+      className: "max-w-sm mx-auto bg-zinc-900 border border-zinc-800 rounded-xl p-5 space-y-3"
+    }, /*#__PURE__*/React.createElement("h2", {
+      className: "text-lg font-bold text-zinc-50 flex items-center gap-2"
+    }, /*#__PURE__*/React.createElement(Ico, {
+      name: "ShieldAlert",
+      size: 18,
+      className: "text-orange-400"
+    }), " Settings (Admin Only)"), /*#__PURE__*/React.createElement("p", {
+      className: "text-xs text-zinc-500"
+    }, "Masukkan password admin untuk mengatur akun Foreman, Section Head, dan Dept Head."), /*#__PURE__*/React.createElement("input", {
+      type: "password",
+      className: inputCls,
+      value: pwdInput,
+      onChange: function onChange(e) {
+        setPwdInput(e.target.value);
+        setError("");
+      },
+      onKeyDown: function onKeyDown(e) {
+        return e.key === "Enter" && tryUnlock();
+      },
+      placeholder: "Password admin..."
+    }), error && /*#__PURE__*/React.createElement("div", {
+      className: "flex items-center gap-2 text-xs text-rose-300 bg-rose-500/10 border border-rose-500/30 rounded-lg px-3 py-2"
+    }, /*#__PURE__*/React.createElement(Ico, {
+      name: "AlertTriangle",
+      size: 14
+    }), " ", error), /*#__PURE__*/React.createElement("button", {
+      onClick: tryUnlock,
+      disabled: checking,
+      className: "w-full px-4 py-2 rounded-lg bg-orange-500 text-zinc-950 text-sm font-bold hover:bg-orange-400 disabled:opacity-50 flex items-center justify-center gap-2"
+    }, checking && /*#__PURE__*/React.createElement(Ico, {
+      name: "Loader2",
+      size: 14,
+      className: "animate-spin"
+    }), checking ? "Memeriksa..." : "Unlock"));
   }
-
-  const saveAccounts = async (next) => {
-    setAccounts(next);
-    setSaveMsg("Menyimpan...");
-    try {
-      const res = await apiPost("updateAccounts", { adminPassword, accounts: next });
-      setSaveMsg(res.success ? "Tersimpan ke server." : "Gagal: " + (res.error || "unknown"));
-    } catch (err) {
-      setSaveMsg("Gagal menyimpan: " + (err.message || err));
-    }
+  var saveAccounts = /*#__PURE__*/function () {
+    var _ref20 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee5(next) {
+      var res, _t5;
+      return _regenerator().w(function (_context5) {
+        while (1) switch (_context5.p = _context5.n) {
+          case 0:
+            setAccounts(next);
+            setSaveMsg("Menyimpan...");
+            _context5.p = 1;
+            _context5.n = 2;
+            return apiPost("updateAccounts", {
+              adminPassword: adminPassword,
+              accounts: next
+            });
+          case 2:
+            res = _context5.v;
+            setSaveMsg(res.success ? "Tersimpan ke server." : "Gagal: " + (res.error || "unknown"));
+            _context5.n = 4;
+            break;
+          case 3:
+            _context5.p = 3;
+            _t5 = _context5.v;
+            setSaveMsg("Gagal menyimpan: " + (_t5.message || _t5));
+          case 4:
+            return _context5.a(2);
+        }
+      }, _callee5, null, [[1, 3]]);
+    }));
+    return function saveAccounts(_x5) {
+      return _ref20.apply(this, arguments);
+    };
+  }();
+  var updateRole = function updateRole(role, list) {
+    return saveAccounts(_objectSpread(_objectSpread({}, accounts), {}, _defineProperty({}, role, list)));
   };
-
-  const updateRole = (role, list) => saveAccounts({ ...accounts, [role]: list });
-
-  return (
-    <div className="max-w-3xl mx-auto space-y-4">
-      <div className="flex items-center gap-2">
-        <Ico name="ShieldAlert" size={18} className="text-orange-400" />
-        <h2 className="text-lg font-bold text-zinc-50">Settings - Kelola Akun Approval</h2>
-      </div>
-      <p className="text-xs text-zinc-500">
-        Tiap role (Foreman, Section Head, Dept Head) bisa diisi lebih dari satu orang. Akun ini dipakai untuk login & menjadi penanda siapa yang melakukan approval. Perubahan otomatis tersimpan ke server.
-      </p>
-      {saveMsg && <p className="text-xs text-zinc-400">{saveMsg}</p>}
-      {["foreman", "sectionHead", "deptHead"].map((role) => (
-        <AccountRoleEditor key={role} role={role} list={accounts[role] || []} onChange={(list) => updateRole(role, list)} />
-      ))}
-    </div>
-  );
+  return /*#__PURE__*/React.createElement("div", {
+    className: "max-w-3xl mx-auto space-y-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-2"
+  }, /*#__PURE__*/React.createElement(Ico, {
+    name: "ShieldAlert",
+    size: 18,
+    className: "text-orange-400"
+  }), /*#__PURE__*/React.createElement("h2", {
+    className: "text-lg font-bold text-zinc-50"
+  }, "Settings - Kelola Akun Approval")), /*#__PURE__*/React.createElement("p", {
+    className: "text-xs text-zinc-500"
+  }, "Tiap role (Foreman, Section Head, Dept Head) bisa diisi lebih dari satu orang. Akun ini dipakai untuk login & menjadi penanda siapa yang melakukan approval. Perubahan otomatis tersimpan ke server."), saveMsg && /*#__PURE__*/React.createElement("p", {
+    className: "text-xs text-zinc-400"
+  }, saveMsg), ["foreman", "sectionHead", "deptHead"].map(function (role) {
+    return /*#__PURE__*/React.createElement(AccountRoleEditor, {
+      key: role,
+      role: role,
+      list: accounts[role] || [],
+      onChange: function onChange(list) {
+        return updateRole(role, list);
+      }
+    });
+  }));
 }
-
-function AccountRoleEditor({ role, list, onChange }) {
-  const [newName, setNewName] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [showPwd, setShowPwd] = useState({});
-  const [error, setError] = useState("");
-
-  const add = () => {
-    const name = newName.trim();
+function AccountRoleEditor(_ref21) {
+  var role = _ref21.role,
+    list = _ref21.list,
+    onChange = _ref21.onChange;
+  var _useState35 = useState(""),
+    _useState36 = _slicedToArray(_useState35, 2),
+    newName = _useState36[0],
+    setNewName = _useState36[1];
+  var _useState37 = useState(""),
+    _useState38 = _slicedToArray(_useState37, 2),
+    newPassword = _useState38[0],
+    setNewPassword = _useState38[1];
+  var _useState39 = useState({}),
+    _useState40 = _slicedToArray(_useState39, 2),
+    showPwd = _useState40[0],
+    setShowPwd = _useState40[1];
+  var _useState41 = useState(""),
+    _useState42 = _slicedToArray(_useState41, 2),
+    error = _useState42[0],
+    setError = _useState42[1];
+  var add = function add() {
+    var name = newName.trim();
     if (!name || !newPassword) {
       setError("Isi nama dan password terlebih dahulu.");
       return;
     }
-    if (list.some((p) => p.name.toLowerCase() === name.toLowerCase())) {
-      setError(`Akun "${name}" sudah ada.`);
+    if (list.some(function (p) {
+      return p.name.toLowerCase() === name.toLowerCase();
+    })) {
+      setError("Akun \"".concat(name, "\" sudah ada."));
       return;
     }
     setError("");
-    onChange([...list, { name, password: newPassword }]);
+    onChange([].concat(_toConsumableArray(list), [{
+      name: name,
+      password: newPassword
+    }]));
     setNewName("");
     setNewPassword("");
   };
-
-  const remove = (idx) => onChange(list.filter((_, i) => i !== idx));
-  const updatePassword = (idx, value) => onChange(list.map((p, i) => (i === idx ? { ...p, password: value } : p)));
-
-  return (
-    <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-4">
-      <h3 className="text-sm font-bold text-zinc-100 uppercase tracking-wide mb-3">{APPROVAL_LABEL[role]}</h3>
-      <div className="space-y-2 mb-3">
-        {list.map((p, i) => (
-          <div key={i} className="flex items-center gap-2 bg-zinc-800/60 rounded-lg px-3 py-2">
-            <span className="text-sm text-zinc-100 flex-1">{p.name}</span>
-            <input
-              type={showPwd[i] ? "text" : "password"}
-              className="bg-zinc-800 border border-zinc-700 rounded-lg px-2 py-1 text-xs text-zinc-100 outline-none w-32"
-              value={p.password}
-              onChange={(e) => updatePassword(i, e.target.value)}
-            />
-            <button onClick={() => setShowPwd((s) => ({ ...s, [i]: !s[i] }))} className="text-zinc-500 hover:text-orange-400">
-              <Ico name={showPwd[i] ? "EyeOff" : "Eye"} size={14} />
-            </button>
-            <button onClick={() => remove(i)} className="text-zinc-500 hover:text-rose-400">
-              <Ico name="Trash2" size={14} />
-            </button>
-          </div>
-        ))}
-        {list.length === 0 && <p className="text-xs text-zinc-500">Belum ada akun {APPROVAL_LABEL[role]}.</p>}
-      </div>
-      <div className="flex flex-col sm:flex-row gap-2">
-        <input
-          type="text"
-          list="mp-name-suggestions"
-          className={`${inputCls} flex-1`}
-          placeholder={`Tambah nama ${APPROVAL_LABEL[role]}...`}
-          value={newName}
-          onChange={(e) => { setNewName(e.target.value); setError(""); }}
-          onKeyDown={(e) => e.key === "Enter" && add()}
-        />
-        <input
-          type="text"
-          className={`${inputCls} sm:max-w-[160px]`}
-          placeholder="Password"
-          value={newPassword}
-          onChange={(e) => { setNewPassword(e.target.value); setError(""); }}
-          onKeyDown={(e) => e.key === "Enter" && add()}
-        />
-        <button onClick={add} className="px-4 py-2 rounded-lg bg-orange-500 text-zinc-950 text-sm font-bold hover:bg-orange-400 whitespace-nowrap">
-          + Tambah
-        </button>
-      </div>
-      {error && <p className="text-[11px] text-rose-400 mt-1.5">{error}</p>}
-    </div>
-  );
+  var remove = function remove(idx) {
+    return onChange(list.filter(function (_, i) {
+      return i !== idx;
+    }));
+  };
+  var updatePassword = function updatePassword(idx, value) {
+    return onChange(list.map(function (p, i) {
+      return i === idx ? _objectSpread(_objectSpread({}, p), {}, {
+        password: value
+      }) : p;
+    }));
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    className: "bg-zinc-900 border border-zinc-800 rounded-xl p-4"
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "text-sm font-bold text-zinc-100 uppercase tracking-wide mb-3"
+  }, APPROVAL_LABEL[role]), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-2 mb-3"
+  }, list.map(function (p, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      className: "flex items-center gap-2 bg-zinc-800/60 rounded-lg px-3 py-2"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "text-sm text-zinc-100 flex-1"
+    }, p.name), /*#__PURE__*/React.createElement("input", {
+      type: showPwd[i] ? "text" : "password",
+      className: "bg-zinc-800 border border-zinc-700 rounded-lg px-2 py-1 text-xs text-zinc-100 outline-none w-32",
+      value: p.password,
+      onChange: function onChange(e) {
+        return updatePassword(i, e.target.value);
+      }
+    }), /*#__PURE__*/React.createElement("button", {
+      onClick: function onClick() {
+        return setShowPwd(function (s) {
+          return _objectSpread(_objectSpread({}, s), {}, _defineProperty({}, i, !s[i]));
+        });
+      },
+      className: "text-zinc-500 hover:text-orange-400"
+    }, /*#__PURE__*/React.createElement(Ico, {
+      name: showPwd[i] ? "EyeOff" : "Eye",
+      size: 14
+    })), /*#__PURE__*/React.createElement("button", {
+      onClick: function onClick() {
+        return remove(i);
+      },
+      className: "text-zinc-500 hover:text-rose-400"
+    }, /*#__PURE__*/React.createElement(Ico, {
+      name: "Trash2",
+      size: 14
+    })));
+  }), list.length === 0 && /*#__PURE__*/React.createElement("p", {
+    className: "text-xs text-zinc-500"
+  }, "Belum ada akun ", APPROVAL_LABEL[role], ".")), /*#__PURE__*/React.createElement("div", {
+    className: "flex flex-col sm:flex-row gap-2"
+  }, /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    list: "mp-name-suggestions",
+    className: "".concat(inputCls, " flex-1"),
+    placeholder: "Tambah nama ".concat(APPROVAL_LABEL[role], "..."),
+    value: newName,
+    onChange: function onChange(e) {
+      setNewName(e.target.value);
+      setError("");
+    },
+    onKeyDown: function onKeyDown(e) {
+      return e.key === "Enter" && add();
+    }
+  }), /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    className: "".concat(inputCls, " sm:max-w-[160px]"),
+    placeholder: "Password",
+    value: newPassword,
+    onChange: function onChange(e) {
+      setNewPassword(e.target.value);
+      setError("");
+    },
+    onKeyDown: function onKeyDown(e) {
+      return e.key === "Enter" && add();
+    }
+  }), /*#__PURE__*/React.createElement("button", {
+    onClick: add,
+    className: "px-4 py-2 rounded-lg bg-orange-500 text-zinc-950 text-sm font-bold hover:bg-orange-400 whitespace-nowrap"
+  }, "+ Tambah")), error && /*#__PURE__*/React.createElement("p", {
+    className: "text-[11px] text-rose-400 mt-1.5"
+  }, error));
 }
-
 
 /* =========================================================================
    JOB LIST + FILTERS
    ========================================================================= */
 
-function JobList({ jobs, onOpen }) {
-  const [filters, setFilters] = useState({ area: "", status: "", pic: "", q: "" });
-
-  const filtered = useMemo(() => {
-    return jobs.filter((j) => {
-      const eff = getEffectiveStatus(j);
+function JobList(_ref22) {
+  var jobs = _ref22.jobs,
+    onOpen = _ref22.onOpen;
+  var _useState43 = useState({
+      area: "",
+      status: "",
+      pic: "",
+      q: ""
+    }),
+    _useState44 = _slicedToArray(_useState43, 2),
+    filters = _useState44[0],
+    setFilters = _useState44[1];
+  var filtered = useMemo(function () {
+    return jobs.filter(function (j) {
+      var eff = getEffectiveStatus(j);
       if (filters.area && j.area !== filters.area) return false;
       if (filters.status && eff !== filters.status) return false;
       if (filters.pic && j.pic !== filters.pic) return false;
-      if (filters.q && !(`${j.id} ${j.deskripsi}`.toLowerCase().includes(filters.q.toLowerCase()))) return false;
+      if (filters.q && !"".concat(j.id, " ").concat(j.deskripsi).toLowerCase().includes(filters.q.toLowerCase())) return false;
       return true;
     });
   }, [jobs, filters]);
-
-  const pics = useMemo(() => Array.from(new Set(jobs.map((j) => j.pic).filter(Boolean))), [jobs]);
-
-  return (
-    <div className="space-y-3">
-      <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-3 flex flex-wrap gap-2 items-center">
-        <Ico name="Filter" size={14} className="text-orange-400" />
-        <input placeholder="Cari ID / deskripsi..." value={filters.q} onChange={(e) => setFilters((f) => ({ ...f, q: e.target.value }))} className={`${inputCls} max-w-[220px]`} />
-        <select className={`${inputCls} max-w-[180px]`} value={filters.area} onChange={(e) => setFilters((f) => ({ ...f, area: e.target.value }))}>
-          <option value="">Semua Area</option>
-          {AREA_OPTIONS.map((d) => <option key={d}>{d}</option>)}
-        </select>
-        <select className={`${inputCls} max-w-[180px]`} value={filters.status} onChange={(e) => setFilters((f) => ({ ...f, status: e.target.value }))}>
-          <option value="">Semua Status</option>
-          {STATUS_LIST.map((s) => <option key={s}>{s}</option>)}
-        </select>
-        <select className={`${inputCls} max-w-[160px]`} value={filters.pic} onChange={(e) => setFilters((f) => ({ ...f, pic: e.target.value }))}>
-          <option value="">Semua PIC</option>
-          {pics.map((p) => <option key={p}>{p}</option>)}
-        </select>
-        {(filters.area || filters.status || filters.pic || filters.q) && (
-          <button onClick={() => setFilters({ area: "", status: "", pic: "", q: "" })} className="text-xs text-zinc-400 hover:text-orange-400 flex items-center gap-1">
-            <Ico name="RotateCcw" size={12} /> Reset
-          </button>
-        )}
-        <span className="ml-auto text-xs text-zinc-500">{filtered.length} job</span>
-      </div>
-
-      <div className="bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden">
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="bg-zinc-800/60 text-left text-[11px] uppercase tracking-wider text-zinc-400">
-              <th className="px-3 py-2.5">Job ID</th>
-              <th className="px-3 py-2.5">Jenis</th>
-              <th className="px-3 py-2.5 hidden md:table-cell">Deskripsi</th>
-              <th className="px-3 py-2.5 hidden lg:table-cell">Area</th>
-              <th className="px-3 py-2.5">Risk</th>
-              <th className="px-3 py-2.5">PIC</th>
-              <th className="px-3 py-2.5 hidden sm:table-cell">Planned</th>
-              <th className="px-3 py-2.5">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filtered.map((j) => {
-              const eff = getEffectiveStatus(j);
-              return (
-                <tr key={j.id} onClick={() => onOpen(j.id)} className="border-t border-zinc-800 hover:bg-zinc-800/40 cursor-pointer">
-                  <td className="px-3 py-2.5 font-mono text-xs text-zinc-400">{j.id}</td>
-                  <td className="px-3 py-2.5"><JenisBadge jenis={j.jenis} /></td>
-                  <td className="px-3 py-2.5 hidden md:table-cell text-zinc-200 max-w-[260px] truncate">{j.deskripsi}</td>
-                  <td className="px-3 py-2.5 hidden lg:table-cell text-zinc-400 text-xs">{j.area}</td>
-                  <td className="px-3 py-2.5"><RiskGauge risk={j.risk} /></td>
-                  <td className="px-3 py-2.5 text-zinc-300 text-xs">{j.pic || "-"}</td>
-                  <td className="px-3 py-2.5 hidden sm:table-cell text-zinc-400 text-xs">{fmtDate(j.plannedDate)}</td>
-                  <td className="px-3 py-2.5"><StatusBadge status={eff} /></td>
-                </tr>
-              );
-            })}
-            {filtered.length === 0 && (
-              <tr><td colSpan={8} className="text-center text-zinc-500 text-sm py-8">Tidak ada job yang sesuai filter.</td></tr>
-            )}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
+  var pics = useMemo(function () {
+    return Array.from(new Set(jobs.map(function (j) {
+      return j.pic;
+    }).filter(Boolean)));
+  }, [jobs]);
+  return /*#__PURE__*/React.createElement("div", {
+    className: "space-y-3"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "bg-zinc-900 border border-zinc-800 rounded-xl p-3 flex flex-wrap gap-2 items-center"
+  }, /*#__PURE__*/React.createElement(Ico, {
+    name: "Filter",
+    size: 14,
+    className: "text-orange-400"
+  }), /*#__PURE__*/React.createElement("input", {
+    placeholder: "Cari ID / deskripsi...",
+    value: filters.q,
+    onChange: function onChange(e) {
+      return setFilters(function (f) {
+        return _objectSpread(_objectSpread({}, f), {}, {
+          q: e.target.value
+        });
+      });
+    },
+    className: "".concat(inputCls, " max-w-[220px]")
+  }), /*#__PURE__*/React.createElement("select", {
+    className: "".concat(inputCls, " max-w-[180px]"),
+    value: filters.area,
+    onChange: function onChange(e) {
+      return setFilters(function (f) {
+        return _objectSpread(_objectSpread({}, f), {}, {
+          area: e.target.value
+        });
+      });
+    }
+  }, /*#__PURE__*/React.createElement("option", {
+    value: ""
+  }, "Semua Area"), AREA_OPTIONS.map(function (d) {
+    return /*#__PURE__*/React.createElement("option", {
+      key: d
+    }, d);
+  })), /*#__PURE__*/React.createElement("select", {
+    className: "".concat(inputCls, " max-w-[180px]"),
+    value: filters.status,
+    onChange: function onChange(e) {
+      return setFilters(function (f) {
+        return _objectSpread(_objectSpread({}, f), {}, {
+          status: e.target.value
+        });
+      });
+    }
+  }, /*#__PURE__*/React.createElement("option", {
+    value: ""
+  }, "Semua Status"), STATUS_LIST.map(function (s) {
+    return /*#__PURE__*/React.createElement("option", {
+      key: s
+    }, s);
+  })), /*#__PURE__*/React.createElement("select", {
+    className: "".concat(inputCls, " max-w-[160px]"),
+    value: filters.pic,
+    onChange: function onChange(e) {
+      return setFilters(function (f) {
+        return _objectSpread(_objectSpread({}, f), {}, {
+          pic: e.target.value
+        });
+      });
+    }
+  }, /*#__PURE__*/React.createElement("option", {
+    value: ""
+  }, "Semua PIC"), pics.map(function (p) {
+    return /*#__PURE__*/React.createElement("option", {
+      key: p
+    }, p);
+  })), (filters.area || filters.status || filters.pic || filters.q) && /*#__PURE__*/React.createElement("button", {
+    onClick: function onClick() {
+      return setFilters({
+        area: "",
+        status: "",
+        pic: "",
+        q: ""
+      });
+    },
+    className: "text-xs text-zinc-400 hover:text-orange-400 flex items-center gap-1"
+  }, /*#__PURE__*/React.createElement(Ico, {
+    name: "RotateCcw",
+    size: 12
+  }), " Reset"), /*#__PURE__*/React.createElement("span", {
+    className: "ml-auto text-xs text-zinc-500"
+  }, filtered.length, " job")), /*#__PURE__*/React.createElement("div", {
+    className: "bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden"
+  }, /*#__PURE__*/React.createElement("table", {
+    className: "w-full text-sm"
+  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", {
+    className: "bg-zinc-800/60 text-left text-[11px] uppercase tracking-wider text-zinc-400"
+  }, /*#__PURE__*/React.createElement("th", {
+    className: "px-3 py-2.5"
+  }, "Job ID"), /*#__PURE__*/React.createElement("th", {
+    className: "px-3 py-2.5"
+  }, "Jenis"), /*#__PURE__*/React.createElement("th", {
+    className: "px-3 py-2.5 hidden md:table-cell"
+  }, "Deskripsi"), /*#__PURE__*/React.createElement("th", {
+    className: "px-3 py-2.5 hidden lg:table-cell"
+  }, "Area"), /*#__PURE__*/React.createElement("th", {
+    className: "px-3 py-2.5"
+  }, "Risk"), /*#__PURE__*/React.createElement("th", {
+    className: "px-3 py-2.5"
+  }, "PIC"), /*#__PURE__*/React.createElement("th", {
+    className: "px-3 py-2.5 hidden sm:table-cell"
+  }, "Planned"), /*#__PURE__*/React.createElement("th", {
+    className: "px-3 py-2.5"
+  }, "Status"))), /*#__PURE__*/React.createElement("tbody", null, filtered.map(function (j) {
+    var eff = getEffectiveStatus(j);
+    return /*#__PURE__*/React.createElement("tr", {
+      key: j.id,
+      onClick: function onClick() {
+        return onOpen(j.id);
+      },
+      className: "border-t border-zinc-800 hover:bg-zinc-800/40 cursor-pointer"
+    }, /*#__PURE__*/React.createElement("td", {
+      className: "px-3 py-2.5 font-mono text-xs text-zinc-400"
+    }, j.id), /*#__PURE__*/React.createElement("td", {
+      className: "px-3 py-2.5"
+    }, /*#__PURE__*/React.createElement(JenisBadge, {
+      jenis: j.jenis
+    })), /*#__PURE__*/React.createElement("td", {
+      className: "px-3 py-2.5 hidden md:table-cell text-zinc-200 max-w-[260px] truncate"
+    }, j.deskripsi), /*#__PURE__*/React.createElement("td", {
+      className: "px-3 py-2.5 hidden lg:table-cell text-zinc-400 text-xs"
+    }, j.area), /*#__PURE__*/React.createElement("td", {
+      className: "px-3 py-2.5"
+    }, /*#__PURE__*/React.createElement(RiskGauge, {
+      risk: j.risk
+    })), /*#__PURE__*/React.createElement("td", {
+      className: "px-3 py-2.5 text-zinc-300 text-xs"
+    }, j.pic || "-"), /*#__PURE__*/React.createElement("td", {
+      className: "px-3 py-2.5 hidden sm:table-cell text-zinc-400 text-xs"
+    }, fmtDate(j.plannedDate)), /*#__PURE__*/React.createElement("td", {
+      className: "px-3 py-2.5"
+    }, /*#__PURE__*/React.createElement(StatusBadge, {
+      status: eff
+    })));
+  }), filtered.length === 0 && /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", {
+    colSpan: 8,
+    className: "text-center text-zinc-500 text-sm py-8"
+  }, "Tidak ada job yang sesuai filter."))))));
 }
 
 /* =========================================================================
    NEW JOB FORM
    ========================================================================= */
 
-const emptyForm = {
+var emptyForm = {
   requester: "",
   area: AREA_OPTIONS[0],
   jenis: "Maintenance",
@@ -1421,169 +2262,318 @@ const emptyForm = {
   dampakProduksi: "No",
   needShutdown: "No",
   stop6: [],
-  kySheetBefore: [],
+  kySheetBefore: []
 };
-
-function NewJobForm({ onSubmit }) {
-  const [form, setForm] = useState(emptyForm);
-  const [error, setError] = useState("");
-  const [submitting, setSubmitting] = useState(false);
-
-  const set = (patch) => setForm((f) => ({ ...f, ...patch }));
-
-  const submit = async () => {
-    if (!form.requester || !form.deskripsi || !form.lokasi || !form.plannedDate || !form.estDuration) {
-      setError("Lengkapi seluruh field wajib (*) sebelum submit.");
-      return;
-    }
-    if ((form.risk !== "Low" || form.needShutdown === "Yes") && form.kySheetBefore.length === 0) {
-      setError("Pekerjaan dengan risiko Medium/High atau yang memerlukan shutdown wajib upload foto KY Sheet (Sebelum Bekerja) terlebih dahulu.");
-      return;
-    }
-    setError("");
-    setSubmitting(true);
-    const res = await onSubmit({
-      ...form,
-      requestDate: new Date().toISOString().slice(0, 10),
-      approvals: { foreman: { status: "Pending", name: "", date: "" } },
-      pic: form.pelaksana[0] || "",
-      actualStart: "",
-      actualFinish: "",
-      status: "WAITING APPROVAL",
-      delayNote: "",
-      hasil: "",
-      catatanHasil: "",
-      problem: "",
-      followUp: "",
-      fotoBefore: [],
-      fotoAfter: [],
-      kySheetAfter: [],
+function NewJobForm(_ref23) {
+  var onSubmit = _ref23.onSubmit;
+  var _useState45 = useState(emptyForm),
+    _useState46 = _slicedToArray(_useState45, 2),
+    form = _useState46[0],
+    setForm = _useState46[1];
+  var _useState47 = useState(""),
+    _useState48 = _slicedToArray(_useState47, 2),
+    error = _useState48[0],
+    setError = _useState48[1];
+  var _useState49 = useState(false),
+    _useState50 = _slicedToArray(_useState49, 2),
+    submitting = _useState50[0],
+    setSubmitting = _useState50[1];
+  var set = function set(patch) {
+    return setForm(function (f) {
+      return _objectSpread(_objectSpread({}, f), patch);
     });
-    setSubmitting(false);
-    if (res && res.success) {
-      setForm(emptyForm);
-    } else {
-      setError("Gagal menyimpan job: " + ((res && res.error) || "unknown error"));
-    }
   };
-
-  return (
-    <div className="max-w-3xl mx-auto bg-zinc-900 border border-zinc-800 rounded-xl p-5 space-y-5">
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-lg font-bold text-zinc-50">Input Job Non-Routine Baru</h2>
-          <p className="text-xs text-zinc-500">Job ID akan dibuat otomatis oleh sistem setelah disimpan.</p>
-        </div>
-        <Ico name="Plus" className="text-orange-400" />
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Field label="Requester (Operator/Staff)" required>
-          <input type="text" list="mp-name-suggestions" className={inputCls} placeholder="Ketik nama requester..." value={form.requester} onChange={(e) => set({ requester: e.target.value })} />
-        </Field>
-        <Field label="AREA" required>
-          <select className={inputCls} value={form.area} onChange={(e) => set({ area: e.target.value })}>
-            {AREA_OPTIONS.map((d) => <option key={d}>{d}</option>)}
-          </select>
-        </Field>
-      </div>
-
-      <Field label="Jenis Pekerjaan" required>
-        <div className="flex flex-wrap gap-2">
-          {JENIS_OPTIONS.map((j) => {
-            const meta = JENIS_META[j];
-                      const active = form.jenis === j;
-            return (
-              <button key={j} onClick={() => set({ jenis: j })} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-semibold transition-colors ${active ? meta.color + " ring-1 ring-inset ring-current" : "border-zinc-700 text-zinc-400 hover:border-zinc-600"}`}>
-                <Ico name={meta.icon} size={14} /> {j}
-              </button>
-            );
-          })}
-        </div>
-      </Field>
-
-      <Field label="Kriteria Safety (STOP 6)" hint="Pilih semua potensi bahaya yang relevan dengan pekerjaan ini.">
-        <Stop6Picker value={form.stop6} onChange={(v) => set({ stop6: v })} />
-      </Field>
-
-
-      <Field label="Deskripsi Pekerjaan" required>
-        <textarea className={inputCls} rows={3} placeholder="Jelaskan pekerjaan secara spesifik (apa, mengapa, kondisi saat ini)..." value={form.deskripsi} onChange={(e) => set({ deskripsi: e.target.value })} />
-      </Field>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Field label="Lokasi Pekerjaan" required>
-          <input className={inputCls} placeholder="Contoh: Melting ACE-1 - Area Pouring" value={form.lokasi} onChange={(e) => set({ lokasi: e.target.value })} />
-        </Field>
-        <Field label="Pelaksana Pekerjaan" hint="Ketik nama lalu Enter / klik + Tambah, bisa lebih dari satu.">
-          <NameTagInput value={form.pelaksana} onChange={(v) => set({ pelaksana: v })} placeholder="Ketik nama pelaksana..." />
-        </Field>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <Field label="Planned Date" required>
-          <input type="datetime-local" className={inputCls} value={form.plannedDate} onChange={(e) => set({ plannedDate: e.target.value })} />
-        </Field>
-        <Field label="Estimasi Durasi (jam)" required>
-          <input type="number" min="0" step="0.5" className={inputCls} value={form.estDuration} onChange={(e) => set({ estDuration: e.target.value })} />
-        </Field>
-        <Field label="Risiko Pekerjaan" required>
-          <div className="flex gap-2">
-            {RISK_OPTIONS.map((r) => (
-              <button key={r} onClick={() => set({ risk: r })} className={`flex-1 px-2 py-2 rounded-lg border text-xs font-bold ${form.risk === r ? RISK_META[r].text + " border-current bg-current/10" : "border-zinc-700 text-zinc-500"}`}>
-                {r}
-              </button>
-            ))}
-          </div>
-        </Field>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Field label="Dampak ke Produksi?" required>
-          <div className="flex gap-2">
-            {["Yes", "No"].map((v) => (
-              <button key={v} onClick={() => set({ dampakProduksi: v })} className={`flex-1 px-3 py-2 rounded-lg border text-sm font-semibold ${form.dampakProduksi === v ? "border-orange-500 text-orange-400 bg-orange-500/10" : "border-zinc-700 text-zinc-400"}`}>{v}</button>
-            ))}
-          </div>
-        </Field>
-        <Field label="Perlu Shutdown?" required hint={form.needShutdown === "Yes" ? "Wajib upload foto KY Sheet (lihat di bawah)" : undefined}>
-          <div className="flex gap-2">
-            {["Yes", "No"].map((v) => (
-              <button key={v} onClick={() => set({ needShutdown: v })} className={`flex-1 px-3 py-2 rounded-lg border text-sm font-semibold ${form.needShutdown === v ? "border-orange-500 text-orange-400 bg-orange-500/10" : "border-zinc-700 text-zinc-400"}`}>{v}</button>
-            ))}
-          </div>
-        </Field>
-      </div>
-
-      <Field
-        label="Upload Foto KY Sheet - Sebelum Bekerja (Low Frequency &amp; Non Routine)"
-        required={form.risk !== "Low" || form.needShutdown === "Yes"}
-        hint={
-          form.risk !== "Low" || form.needShutdown === "Yes"
-            ? "Wajib: isi & foto KY Sheet bagian 'Konfirmasi Sebelum Bekerja' (sesuai form 'KY Sheet Pekerjaan Low Frequency & Non Routine') sebelum job bisa di-approve."
-            : "Disarankan tetap melampirkan foto KY Sheet meskipun risiko Low."
+  var submit = /*#__PURE__*/function () {
+    var _ref24 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee6() {
+      var res;
+      return _regenerator().w(function (_context6) {
+        while (1) switch (_context6.n) {
+          case 0:
+            if (!(!form.requester || !form.deskripsi || !form.lokasi || !form.plannedDate || !form.estDuration)) {
+              _context6.n = 1;
+              break;
+            }
+            setError("Lengkapi seluruh field wajib (*) sebelum submit.");
+            return _context6.a(2);
+          case 1:
+            if (!((form.risk !== "Low" || form.needShutdown === "Yes") && form.kySheetBefore.length === 0)) {
+              _context6.n = 2;
+              break;
+            }
+            setError("Pekerjaan dengan risiko Medium/High atau yang memerlukan shutdown wajib upload foto KY Sheet (Sebelum Bekerja) terlebih dahulu.");
+            return _context6.a(2);
+          case 2:
+            setError("");
+            setSubmitting(true);
+            _context6.n = 3;
+            return onSubmit(_objectSpread(_objectSpread({}, form), {}, {
+              requestDate: new Date().toISOString().slice(0, 10),
+              approvals: {
+                foreman: {
+                  status: "Pending",
+                  name: "",
+                  date: ""
+                }
+              },
+              pic: form.pelaksana[0] || "",
+              actualStart: "",
+              actualFinish: "",
+              status: "WAITING APPROVAL",
+              delayNote: "",
+              hasil: "",
+              catatanHasil: "",
+              problem: "",
+              followUp: "",
+              fotoBefore: [],
+              fotoAfter: [],
+              kySheetAfter: []
+            }));
+          case 3:
+            res = _context6.v;
+            setSubmitting(false);
+            if (res && res.success) {
+              setForm(emptyForm);
+            } else {
+              setError("Gagal menyimpan job: " + (res && res.error || "unknown error"));
+            }
+          case 4:
+            return _context6.a(2);
         }
-      >
-        <PhotoUploader photos={form.kySheetBefore} onChange={(photos) => set({ kySheetBefore: photos })} prefix="NEWJOB_KY_BEFORE" />
-      </Field>
-      <p className="text-[11px] text-zinc-500">Foto KY Sheet bagian "Konfirmasi Setelah Selesai Bekerja" dapat diupload nanti lewat detail job setelah pekerjaan selesai.</p>
-
-      {error && (
-        <div className="flex items-center gap-2 text-xs text-rose-300 bg-rose-500/10 border border-rose-500/30 rounded-lg px-3 py-2">
-          <Ico name="AlertTriangle" size={14} /> {error}
-        </div>
-      )}
-
-      <div className="flex justify-end gap-2">
-        <button onClick={() => { setForm(emptyForm); setError(""); }} className="px-4 py-2 rounded-lg border border-zinc-700 text-zinc-300 text-sm font-semibold hover:border-zinc-600">Reset</button>
-        <button onClick={submit} disabled={submitting} className="px-5 py-2 rounded-lg bg-orange-500 text-zinc-950 text-sm font-bold hover:bg-orange-400 disabled:opacity-50 flex items-center gap-2">
-          {submitting ? <Ico name="Loader2" size={14} className="animate-spin" /> : <Ico name="ArrowRight" size={14} />}
-          {submitting ? "Menyimpan..." : "Submit Job"}
-        </button>
-      </div>
-      <p className="text-[11px] text-zinc-500">Job akan masuk dengan status <span className="font-semibold text-amber-300">WAITING APPROVAL</span> dan menunggu approval Foreman{form.risk !== "Low" && " → Section Head"}{form.risk === "High" && " → Dept Head"}. Approval boleh diberikan tidak berurutan.</p>
-    </div>
-  );
+      }, _callee6);
+    }));
+    return function submit() {
+      return _ref24.apply(this, arguments);
+    };
+  }();
+  return /*#__PURE__*/React.createElement("div", {
+    className: "max-w-3xl mx-auto bg-zinc-900 border border-zinc-800 rounded-xl p-5 space-y-5"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center justify-between"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
+    className: "text-lg font-bold text-zinc-50"
+  }, "Input Job Non-Routine Baru"), /*#__PURE__*/React.createElement("p", {
+    className: "text-xs text-zinc-500"
+  }, "Job ID akan dibuat otomatis oleh sistem setelah disimpan.")), /*#__PURE__*/React.createElement(Ico, {
+    name: "Plus",
+    className: "text-orange-400"
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-1 md:grid-cols-2 gap-4"
+  }, /*#__PURE__*/React.createElement(Field, {
+    label: "Requester (Operator/Staff)",
+    required: true
+  }, /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    list: "mp-name-suggestions",
+    className: inputCls,
+    placeholder: "Ketik nama requester...",
+    value: form.requester,
+    onChange: function onChange(e) {
+      return set({
+        requester: e.target.value
+      });
+    }
+  })), /*#__PURE__*/React.createElement(Field, {
+    label: "AREA",
+    required: true
+  }, /*#__PURE__*/React.createElement("select", {
+    className: inputCls,
+    value: form.area,
+    onChange: function onChange(e) {
+      return set({
+        area: e.target.value
+      });
+    }
+  }, AREA_OPTIONS.map(function (d) {
+    return /*#__PURE__*/React.createElement("option", {
+      key: d
+    }, d);
+  })))), /*#__PURE__*/React.createElement(Field, {
+    label: "Jenis Pekerjaan",
+    required: true
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex flex-wrap gap-2"
+  }, JENIS_OPTIONS.map(function (j) {
+    var meta = JENIS_META[j];
+    var active = form.jenis === j;
+    return /*#__PURE__*/React.createElement("button", {
+      key: j,
+      onClick: function onClick() {
+        return set({
+          jenis: j
+        });
+      },
+      className: "flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-semibold transition-colors ".concat(active ? meta.color + " ring-1 ring-inset ring-current" : "border-zinc-700 text-zinc-400 hover:border-zinc-600")
+    }, /*#__PURE__*/React.createElement(Ico, {
+      name: meta.icon,
+      size: 14
+    }), " ", j);
+  }))), /*#__PURE__*/React.createElement(Field, {
+    label: "Kriteria Safety (STOP 6)",
+    hint: "Pilih semua potensi bahaya yang relevan dengan pekerjaan ini."
+  }, /*#__PURE__*/React.createElement(Stop6Picker, {
+    value: form.stop6,
+    onChange: function onChange(v) {
+      return set({
+        stop6: v
+      });
+    }
+  })), /*#__PURE__*/React.createElement(Field, {
+    label: "Deskripsi Pekerjaan",
+    required: true
+  }, /*#__PURE__*/React.createElement("textarea", {
+    className: inputCls,
+    rows: 3,
+    placeholder: "Jelaskan pekerjaan secara spesifik (apa, mengapa, kondisi saat ini)...",
+    value: form.deskripsi,
+    onChange: function onChange(e) {
+      return set({
+        deskripsi: e.target.value
+      });
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-1 md:grid-cols-2 gap-4"
+  }, /*#__PURE__*/React.createElement(Field, {
+    label: "Lokasi Pekerjaan",
+    required: true
+  }, /*#__PURE__*/React.createElement("input", {
+    className: inputCls,
+    placeholder: "Contoh: Melting ACE-1 - Area Pouring",
+    value: form.lokasi,
+    onChange: function onChange(e) {
+      return set({
+        lokasi: e.target.value
+      });
+    }
+  })), /*#__PURE__*/React.createElement(Field, {
+    label: "Pelaksana Pekerjaan",
+    hint: "Ketik nama lalu Enter / klik + Tambah, bisa lebih dari satu."
+  }, /*#__PURE__*/React.createElement(NameTagInput, {
+    value: form.pelaksana,
+    onChange: function onChange(v) {
+      return set({
+        pelaksana: v
+      });
+    },
+    placeholder: "Ketik nama pelaksana..."
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-1 md:grid-cols-3 gap-4"
+  }, /*#__PURE__*/React.createElement(Field, {
+    label: "Planned Date",
+    required: true
+  }, /*#__PURE__*/React.createElement("input", {
+    type: "datetime-local",
+    className: inputCls,
+    value: form.plannedDate,
+    onChange: function onChange(e) {
+      return set({
+        plannedDate: e.target.value
+      });
+    }
+  })), /*#__PURE__*/React.createElement(Field, {
+    label: "Estimasi Durasi (jam)",
+    required: true
+  }, /*#__PURE__*/React.createElement("input", {
+    type: "number",
+    min: "0",
+    step: "0.5",
+    className: inputCls,
+    value: form.estDuration,
+    onChange: function onChange(e) {
+      return set({
+        estDuration: e.target.value
+      });
+    }
+  })), /*#__PURE__*/React.createElement(Field, {
+    label: "Risiko Pekerjaan",
+    required: true
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex gap-2"
+  }, RISK_OPTIONS.map(function (r) {
+    return /*#__PURE__*/React.createElement("button", {
+      key: r,
+      onClick: function onClick() {
+        return set({
+          risk: r
+        });
+      },
+      className: "flex-1 px-2 py-2 rounded-lg border text-xs font-bold ".concat(form.risk === r ? RISK_META[r].text + " border-current bg-current/10" : "border-zinc-700 text-zinc-500")
+    }, r);
+  })))), /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-1 md:grid-cols-2 gap-4"
+  }, /*#__PURE__*/React.createElement(Field, {
+    label: "Dampak ke Produksi?",
+    required: true
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex gap-2"
+  }, ["Yes", "No"].map(function (v) {
+    return /*#__PURE__*/React.createElement("button", {
+      key: v,
+      onClick: function onClick() {
+        return set({
+          dampakProduksi: v
+        });
+      },
+      className: "flex-1 px-3 py-2 rounded-lg border text-sm font-semibold ".concat(form.dampakProduksi === v ? "border-orange-500 text-orange-400 bg-orange-500/10" : "border-zinc-700 text-zinc-400")
+    }, v);
+  }))), /*#__PURE__*/React.createElement(Field, {
+    label: "Perlu Shutdown?",
+    required: true,
+    hint: form.needShutdown === "Yes" ? "Wajib upload foto KY Sheet (lihat di bawah)" : undefined
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex gap-2"
+  }, ["Yes", "No"].map(function (v) {
+    return /*#__PURE__*/React.createElement("button", {
+      key: v,
+      onClick: function onClick() {
+        return set({
+          needShutdown: v
+        });
+      },
+      className: "flex-1 px-3 py-2 rounded-lg border text-sm font-semibold ".concat(form.needShutdown === v ? "border-orange-500 text-orange-400 bg-orange-500/10" : "border-zinc-700 text-zinc-400")
+    }, v);
+  })))), /*#__PURE__*/React.createElement(Field, {
+    label: "Upload Foto KY Sheet - Sebelum Bekerja (Low Frequency & Non Routine)",
+    required: form.risk !== "Low" || form.needShutdown === "Yes",
+    hint: form.risk !== "Low" || form.needShutdown === "Yes" ? "Wajib: isi & foto KY Sheet bagian 'Konfirmasi Sebelum Bekerja' (sesuai form 'KY Sheet Pekerjaan Low Frequency & Non Routine') sebelum job bisa di-approve." : "Disarankan tetap melampirkan foto KY Sheet meskipun risiko Low."
+  }, /*#__PURE__*/React.createElement(PhotoUploader, {
+    photos: form.kySheetBefore,
+    onChange: function onChange(photos) {
+      return set({
+        kySheetBefore: photos
+      });
+    },
+    prefix: "NEWJOB_KY_BEFORE"
+  })), /*#__PURE__*/React.createElement("p", {
+    className: "text-[11px] text-zinc-500"
+  }, "Foto KY Sheet bagian \"Konfirmasi Setelah Selesai Bekerja\" dapat diupload nanti lewat detail job setelah pekerjaan selesai."), error && /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-2 text-xs text-rose-300 bg-rose-500/10 border border-rose-500/30 rounded-lg px-3 py-2"
+  }, /*#__PURE__*/React.createElement(Ico, {
+    name: "AlertTriangle",
+    size: 14
+  }), " ", error), /*#__PURE__*/React.createElement("div", {
+    className: "flex justify-end gap-2"
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: function onClick() {
+      setForm(emptyForm);
+      setError("");
+    },
+    className: "px-4 py-2 rounded-lg border border-zinc-700 text-zinc-300 text-sm font-semibold hover:border-zinc-600"
+  }, "Reset"), /*#__PURE__*/React.createElement("button", {
+    onClick: submit,
+    disabled: submitting,
+    className: "px-5 py-2 rounded-lg bg-orange-500 text-zinc-950 text-sm font-bold hover:bg-orange-400 disabled:opacity-50 flex items-center gap-2"
+  }, submitting ? /*#__PURE__*/React.createElement(Ico, {
+    name: "Loader2",
+    size: 14,
+    className: "animate-spin"
+  }) : /*#__PURE__*/React.createElement(Ico, {
+    name: "ArrowRight",
+    size: 14
+  }), submitting ? "Menyimpan..." : "Submit Job")), /*#__PURE__*/React.createElement("p", {
+    className: "text-[11px] text-zinc-500"
+  }, "Job akan masuk dengan status ", /*#__PURE__*/React.createElement("span", {
+    className: "font-semibold text-amber-300"
+  }, "WAITING APPROVAL"), " dan menunggu approval Foreman", form.risk !== "Low" && " → Section Head", form.risk === "High" && " → Dept Head", ". Approval boleh diberikan tidak berurutan."));
 }
 
 /* =========================================================================
@@ -1591,209 +2581,331 @@ function NewJobForm({ onSubmit }) {
    ========================================================================= */
 
 function App() {
-  const [jobs, setJobs] = useState([]);
-  const [accounts, setAccounts] = useState({ foreman: [], sectionHead: [], deptHead: [] });
-  const [loading, setLoading] = useState(true);
-  const [loadError, setLoadError] = useState("");
-  const [tab, setTab] = useState("dashboard");
-  const [openJobId, setOpenJobId] = useState(null);
-  const [currentUser, setCurrentUser] = useState(null);
-  const [showLogin, setShowLogin] = useState(false);
-
-  const loadData = async () => {
-    setLoading(true);
-    setLoadError("");
-    try {
-      const data = await apiGet("getData");
-      if (data.error) throw new Error(data.error);
-      setJobs(data.jobs || []);
-      setAccounts(data.accounts || { foreman: [], sectionHead: [], deptHead: [] });
-    } catch (err) {
-      setLoadError(err.message || String(err));
-    }
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    if (isConfigured()) loadData();
-    else setLoading(false);
+  var _useState51 = useState([]),
+    _useState52 = _slicedToArray(_useState51, 2),
+    jobs = _useState52[0],
+    setJobs = _useState52[1];
+  var _useState53 = useState({
+      foreman: [],
+      sectionHead: [],
+      deptHead: []
+    }),
+    _useState54 = _slicedToArray(_useState53, 2),
+    accounts = _useState54[0],
+    setAccounts = _useState54[1];
+  var _useState55 = useState(true),
+    _useState56 = _slicedToArray(_useState55, 2),
+    loading = _useState56[0],
+    setLoading = _useState56[1];
+  var _useState57 = useState(""),
+    _useState58 = _slicedToArray(_useState57, 2),
+    loadError = _useState58[0],
+    setLoadError = _useState58[1];
+  var _useState59 = useState("dashboard"),
+    _useState60 = _slicedToArray(_useState59, 2),
+    tab = _useState60[0],
+    setTab = _useState60[1];
+  var _useState61 = useState(null),
+    _useState62 = _slicedToArray(_useState61, 2),
+    openJobId = _useState62[0],
+    setOpenJobId = _useState62[1];
+  var _useState63 = useState(null),
+    _useState64 = _slicedToArray(_useState63, 2),
+    currentUser = _useState64[0],
+    setCurrentUser = _useState64[1];
+  var _useState65 = useState(false),
+    _useState66 = _slicedToArray(_useState65, 2),
+    showLogin = _useState66[0],
+    setShowLogin = _useState66[1];
+  var loadData = /*#__PURE__*/function () {
+    var _ref25 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee7() {
+      var data, _t6;
+      return _regenerator().w(function (_context7) {
+        while (1) switch (_context7.p = _context7.n) {
+          case 0:
+            setLoading(true);
+            setLoadError("");
+            _context7.p = 1;
+            _context7.n = 2;
+            return apiGet("getData");
+          case 2:
+            data = _context7.v;
+            if (!data.error) {
+              _context7.n = 3;
+              break;
+            }
+            throw new Error(data.error);
+          case 3:
+            setJobs(data.jobs || []);
+            setAccounts(data.accounts || {
+              foreman: [],
+              sectionHead: [],
+              deptHead: []
+            });
+            _context7.n = 5;
+            break;
+          case 4:
+            _context7.p = 4;
+            _t6 = _context7.v;
+            setLoadError(_t6.message || String(_t6));
+          case 5:
+            setLoading(false);
+          case 6:
+            return _context7.a(2);
+        }
+      }, _callee7, null, [[1, 4]]);
+    }));
+    return function loadData() {
+      return _ref25.apply(this, arguments);
+    };
+  }();
+  useEffect(function () {
+    if (isConfigured()) loadData();else setLoading(false);
   }, []);
-
-  const updateJob = (next) => setJobs((js) => js.map((j) => (j.id === next.id ? next : j)));
-
-  const moveJob = (jobId, status) => {
-    const job = jobs.find((j) => j.id === jobId);
+  var updateJob = function updateJob(next) {
+    return setJobs(function (js) {
+      return js.map(function (j) {
+        return j.id === next.id ? next : j;
+      });
+    });
+  };
+  var moveJob = function moveJob(jobId, status) {
+    var job = jobs.find(function (j) {
+      return j.id === jobId;
+    });
     if (!job) return;
     if (["READY", "IN PROGRESS", "DONE"].includes(status) && getApprovalStatus(job) !== "Approved") {
       return; // block: belum approve
     }
-    const patch = { status };
+    var patch = {
+      status: status
+    };
     if (status === "IN PROGRESS" && !job.actualStart) patch.actualStart = new Date().toISOString().slice(0, 16);
     if (status === "DONE" && !job.actualFinish) patch.actualFinish = new Date().toISOString().slice(0, 16);
-    const next = { ...job, ...patch };
+    var next = _objectSpread(_objectSpread({}, job), patch);
     updateJob(next);
-    apiPost("updateJob", { job: next }).catch(() => {});
+    apiPost("updateJob", {
+      job: next
+    })["catch"](function () {});
   };
-
-  const addJob = async (job) => {
-    try {
-      const res = await apiPost("addJob", { job });
-      if (res.success && res.job) setJobs((js) => [res.job, ...js]);
-      return res;
-    } catch (err) {
-      return { success: false, error: err.message || String(err) };
-    }
-  };
-
-  const openJob = jobs.find((j) => j.id === openJobId);
-
-  const TABS = [
-    { id: "dashboard", label: "Dashboard", icon: "Gauge" },
-    { id: "kanban", label: "Kanban Board", icon: "LayoutGrid" },
-    { id: "list", label: "Daftar Job & Approval", icon: "ClipboardList" },
-    { id: "form", label: "Input Job Baru", icon: "Plus" },
-    { id: "settings", label: "Settings", icon: "Settings" },
-  ];
+  var addJob = /*#__PURE__*/function () {
+    var _ref26 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee8(job) {
+      var res, _t7;
+      return _regenerator().w(function (_context8) {
+        while (1) switch (_context8.p = _context8.n) {
+          case 0:
+            _context8.p = 0;
+            _context8.n = 1;
+            return apiPost("addJob", {
+              job: job
+            });
+          case 1:
+            res = _context8.v;
+            if (res.success && res.job) setJobs(function (js) {
+              return [res.job].concat(_toConsumableArray(js));
+            });
+            return _context8.a(2, res);
+          case 2:
+            _context8.p = 2;
+            _t7 = _context8.v;
+            return _context8.a(2, {
+              success: false,
+              error: _t7.message || String(_t7)
+            });
+        }
+      }, _callee8, null, [[0, 2]]);
+    }));
+    return function addJob(_x6) {
+      return _ref26.apply(this, arguments);
+    };
+  }();
+  var openJob = jobs.find(function (j) {
+    return j.id === openJobId;
+  });
+  var TABS = [{
+    id: "dashboard",
+    label: "Dashboard",
+    icon: "Gauge"
+  }, {
+    id: "kanban",
+    label: "Kanban Board",
+    icon: "LayoutGrid"
+  }, {
+    id: "list",
+    label: "Daftar Job & Approval",
+    icon: "ClipboardList"
+  }, {
+    id: "form",
+    label: "Input Job Baru",
+    icon: "Plus"
+  }, {
+    id: "settings",
+    label: "Settings",
+    icon: "Settings"
+  }];
 
   /* Belum dikonfigurasi -> tampilkan instruksi setup */
   if (!isConfigured()) {
-    return (
-      <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans flex items-center justify-center p-4">
-        <div className="max-w-lg bg-zinc-900 border border-zinc-800 rounded-2xl p-6 space-y-3">
-          <h1 className="text-lg font-bold text-zinc-50 flex items-center gap-2">
-            <Ico name="AlertTriangle" size={18} className="text-orange-400" /> Belum Terhubung ke Backend
-          </h1>
-          <p className="text-sm text-zinc-400">
-            Sistem ini membutuhkan koneksi ke server agar data job, akun, dan foto bisa tersimpan permanen.
-          </p>
-          <p className="text-sm text-zinc-400">
-            Ikuti <span className="font-semibold text-zinc-200">SETUP_GUIDE.md</span>, lalu isi <code className="bg-zinc-800 px-1.5 py-0.5 rounded text-orange-300">CONFIG.API_URL</code> di bagian atas file HTML ini dengan URL Web App hasil deploy Apps Script.
-          </p>
-        </div>
-      </div>
-    );
+    return /*#__PURE__*/React.createElement("div", {
+      className: "min-h-screen bg-zinc-950 text-zinc-100 font-sans flex items-center justify-center p-4"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "max-w-lg bg-zinc-900 border border-zinc-800 rounded-2xl p-6 space-y-3"
+    }, /*#__PURE__*/React.createElement("h1", {
+      className: "text-lg font-bold text-zinc-50 flex items-center gap-2"
+    }, /*#__PURE__*/React.createElement(Ico, {
+      name: "AlertTriangle",
+      size: 18,
+      className: "text-orange-400"
+    }), " Belum Terhubung ke Backend"), /*#__PURE__*/React.createElement("p", {
+      className: "text-sm text-zinc-400"
+    }, "Sistem ini membutuhkan koneksi ke server agar data job, akun, dan foto bisa tersimpan permanen."), /*#__PURE__*/React.createElement("p", {
+      className: "text-sm text-zinc-400"
+    }, "Ikuti ", /*#__PURE__*/React.createElement("span", {
+      className: "font-semibold text-zinc-200"
+    }, "SETUP_GUIDE.md"), ", lalu isi ", /*#__PURE__*/React.createElement("code", {
+      className: "bg-zinc-800 px-1.5 py-0.5 rounded text-orange-300"
+    }, "CONFIG.API_URL"), " di bagian atas file HTML ini dengan URL Web App hasil deploy Apps Script.")));
   }
-
   if (loading) {
-    return (
-      <div className="min-h-screen bg-zinc-950 text-zinc-400 font-sans flex items-center justify-center text-sm gap-2">
-        <Ico name="Loader2" size={18} className="animate-spin text-orange-400" /> Memuat data dari server...
-      </div>
-    );
+    return /*#__PURE__*/React.createElement("div", {
+      className: "min-h-screen bg-zinc-950 text-zinc-400 font-sans flex items-center justify-center text-sm gap-2"
+    }, /*#__PURE__*/React.createElement(Ico, {
+      name: "Loader2",
+      size: 18,
+      className: "animate-spin text-orange-400"
+    }), " Memuat data dari server...");
   }
-
-  return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans">
-      {/* Saran nama (datalist) - dipakai input nama bebas di seluruh halaman.
-          Tetap bisa input nama apa saja, ini hanya autocomplete opsional. */}
-      <datalist id="mp-name-suggestions">
-        {MP_LIST.map((n) => <option key={n} value={n} />)}
-      </datalist>
-
-      {/* Hazard stripe */}
-      <div className="h-1.5 w-full" style={{ backgroundImage: "repeating-linear-gradient(45deg, #f97316 0 14px, #18181b 14px 28px)" }} />
-
-      {/* Header */}
-      <header className="border-b border-zinc-800 bg-zinc-900/60">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-          <div className="flex items-center gap-3">
-            <div className="bg-orange-500 text-zinc-950 font-black text-lg w-11 h-11 rounded-xl flex items-center justify-center">
-              <Ico name="Factory" size={22} />
-            </div>
-            <div>
-              <h1 className="text-base md:text-lg font-extrabold tracking-tight uppercase">Job Monitoring — Non Routine Activity</h1>
-              <p className="text-xs text-zinc-400">PT AT Indonesia · Casting-2 (ACE)</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-2 text-xs">
-            <button onClick={loadData} title="Muat ulang data" className="text-zinc-500 hover:text-orange-400 p-1.5">
-              <Ico name="RotateCcw" size={14} />
-            </button>
-            {currentUser ? (
-              <div className="flex items-center gap-2 bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-1.5">
-                <Ico name="UserCheck" size={14} className="text-orange-400" />
-                <span className="text-zinc-100 font-semibold">{currentUser.name}</span>
-                <span className="text-zinc-500">· {APPROVAL_LABEL[currentUser.role]}</span>
-                <button onClick={() => setCurrentUser(null)} className="text-zinc-500 hover:text-rose-400 ml-1" title="Logout">
-                  <Ico name="LogOut" size={14} />
-                </button>
-              </div>
-            ) : (
-              <button
-                onClick={() => setShowLogin(true)}
-                className="flex items-center gap-2 bg-orange-500 text-zinc-950 font-bold rounded-lg px-3 py-1.5 hover:bg-orange-400"
-              >
-                <Ico name="LogIn" size={14} /> Login
-              </button>
-            )}
-          </div>
-        </div>
-      </header>
-
-      {loadError && (
-        <div className="max-w-7xl mx-auto px-4 pt-3">
-          <div className="flex items-center gap-2 text-xs text-rose-300 bg-rose-500/10 border border-rose-500/30 rounded-lg px-3 py-2">
-            <Ico name="AlertTriangle" size={14} /> Gagal memuat data: {loadError}
-            <button onClick={loadData} className="ml-auto underline hover:text-rose-200">Coba lagi</button>
-          </div>
-        </div>
-      )}
-
-      {/* Tabs */}
-      <nav className="border-b border-zinc-800 bg-zinc-950 sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-4 flex gap-1 overflow-x-auto">
-          {TABS.map((t) => {
-            const active = tab === t.id;
-            return (
-              <button
-                key={t.id}
-                onClick={() => setTab(t.id)}
-                className={`flex items-center gap-2 px-4 py-3 text-sm font-semibold border-b-2 whitespace-nowrap transition-colors ${
-                  active ? "border-orange-500 text-orange-400" : "border-transparent text-zinc-500 hover:text-zinc-300"
-                }`}
-              >
-                <Ico name={t.icon} size={15} /> {t.label}
-              </button>
-            );
-          })}
-        </div>
-      </nav>
-
-      <main className="max-w-7xl mx-auto px-4 py-6">
-        {tab === "dashboard" && <Dashboard jobs={jobs} />}
-        {tab === "kanban" && <KanbanBoard jobs={jobs} onMove={moveJob} onOpen={setOpenJobId} />}
-        {tab === "list" && <JobList jobs={jobs} onOpen={setOpenJobId} />}
-        {tab === "form" && <NewJobForm onSubmit={addJob} />}
-        {tab === "settings" && <AdminSettings accounts={accounts} setAccounts={setAccounts} />}
-      </main>
-
-      {openJob && (
-        <JobDetail
-          job={openJob}
-          onUpdate={updateJob}
-          onClose={() => setOpenJobId(null)}
-          currentUser={currentUser}
-        />
-      )}
-
-      {showLogin && (
-        <LoginModal
-          accounts={accounts}
-          onLogin={(u) => { setCurrentUser(u); setShowLogin(false); }}
-          onClose={() => setShowLogin(false)}
-        />
-      )}
-
-      <footer className="border-t border-zinc-800 py-4 text-center text-[11px] text-zinc-600">
-        Sistem Job Monitoring Non-Routine / Irregular Job — Melting &amp; Molding ACE, PT AT Indonesia. Data &amp; foto tersimpan otomatis di server.
-      </footer>
-    </div>
-  );
+  return /*#__PURE__*/React.createElement("div", {
+    className: "min-h-screen bg-zinc-950 text-zinc-100 font-sans"
+  }, /*#__PURE__*/React.createElement("datalist", {
+    id: "mp-name-suggestions"
+  }, MP_LIST.map(function (n) {
+    return /*#__PURE__*/React.createElement("option", {
+      key: n,
+      value: n
+    });
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "h-1.5 w-full",
+    style: {
+      backgroundImage: "repeating-linear-gradient(45deg, #f97316 0 14px, #18181b 14px 28px)"
+    }
+  }), /*#__PURE__*/React.createElement("header", {
+    className: "border-b border-zinc-800 bg-zinc-900/60"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-3"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "bg-orange-500 text-zinc-950 font-black text-lg w-11 h-11 rounded-xl flex items-center justify-center"
+  }, /*#__PURE__*/React.createElement(Ico, {
+    name: "Factory",
+    size: 22
+  })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", {
+    className: "text-base md:text-lg font-extrabold tracking-tight uppercase"
+  }, "Job Monitoring \u2014 Non Routine Activity"), /*#__PURE__*/React.createElement("p", {
+    className: "text-xs text-zinc-400"
+  }, "PT AT Indonesia \xB7 Casting-2 (ACE)"))), /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-2 text-xs"
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: loadData,
+    title: "Muat ulang data",
+    className: "text-zinc-500 hover:text-orange-400 p-1.5"
+  }, /*#__PURE__*/React.createElement(Ico, {
+    name: "RotateCcw",
+    size: 14
+  })), currentUser ? /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-2 bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-1.5"
+  }, /*#__PURE__*/React.createElement(Ico, {
+    name: "UserCheck",
+    size: 14,
+    className: "text-orange-400"
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "text-zinc-100 font-semibold"
+  }, currentUser.name), /*#__PURE__*/React.createElement("span", {
+    className: "text-zinc-500"
+  }, "\xB7 ", APPROVAL_LABEL[currentUser.role]), /*#__PURE__*/React.createElement("button", {
+    onClick: function onClick() {
+      return setCurrentUser(null);
+    },
+    className: "text-zinc-500 hover:text-rose-400 ml-1",
+    title: "Logout"
+  }, /*#__PURE__*/React.createElement(Ico, {
+    name: "LogOut",
+    size: 14
+  }))) : /*#__PURE__*/React.createElement("button", {
+    onClick: function onClick() {
+      return setShowLogin(true);
+    },
+    className: "flex items-center gap-2 bg-orange-500 text-zinc-950 font-bold rounded-lg px-3 py-1.5 hover:bg-orange-400"
+  }, /*#__PURE__*/React.createElement(Ico, {
+    name: "LogIn",
+    size: 14
+  }), " Login")))), loadError && /*#__PURE__*/React.createElement("div", {
+    className: "max-w-7xl mx-auto px-4 pt-3"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-2 text-xs text-rose-300 bg-rose-500/10 border border-rose-500/30 rounded-lg px-3 py-2"
+  }, /*#__PURE__*/React.createElement(Ico, {
+    name: "AlertTriangle",
+    size: 14
+  }), " Gagal memuat data: ", loadError, /*#__PURE__*/React.createElement("button", {
+    onClick: loadData,
+    className: "ml-auto underline hover:text-rose-200"
+  }, "Coba lagi"))), /*#__PURE__*/React.createElement("nav", {
+    className: "border-b border-zinc-800 bg-zinc-950 sticky top-0 z-10"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "max-w-7xl mx-auto px-4 flex gap-1 overflow-x-auto"
+  }, TABS.map(function (t) {
+    var active = tab === t.id;
+    return /*#__PURE__*/React.createElement("button", {
+      key: t.id,
+      onClick: function onClick() {
+        return setTab(t.id);
+      },
+      className: "flex items-center gap-2 px-4 py-3 text-sm font-semibold border-b-2 whitespace-nowrap transition-colors ".concat(active ? "border-orange-500 text-orange-400" : "border-transparent text-zinc-500 hover:text-zinc-300")
+    }, /*#__PURE__*/React.createElement(Ico, {
+      name: t.icon,
+      size: 15
+    }), " ", t.label);
+  }))), /*#__PURE__*/React.createElement("main", {
+    className: "max-w-7xl mx-auto px-4 py-6"
+  }, tab === "dashboard" && /*#__PURE__*/React.createElement(Dashboard, {
+    jobs: jobs
+  }), tab === "kanban" && /*#__PURE__*/React.createElement(KanbanBoard, {
+    jobs: jobs,
+    onMove: moveJob,
+    onOpen: setOpenJobId
+  }), tab === "list" && /*#__PURE__*/React.createElement(JobList, {
+    jobs: jobs,
+    onOpen: setOpenJobId
+  }), tab === "form" && /*#__PURE__*/React.createElement(NewJobForm, {
+    onSubmit: addJob
+  }), tab === "settings" && /*#__PURE__*/React.createElement(AdminSettings, {
+    accounts: accounts,
+    setAccounts: setAccounts
+  })), openJob && /*#__PURE__*/React.createElement(JobDetail, {
+    job: openJob,
+    onUpdate: updateJob,
+    onClose: function onClose() {
+      return setOpenJobId(null);
+    },
+    currentUser: currentUser
+  }), showLogin && /*#__PURE__*/React.createElement(LoginModal, {
+    accounts: accounts,
+    onLogin: function onLogin(u) {
+      setCurrentUser(u);
+      setShowLogin(false);
+    },
+    onClose: function onClose() {
+      return setShowLogin(false);
+    }
+  }), /*#__PURE__*/React.createElement("footer", {
+    className: "border-t border-zinc-800 py-4 text-center text-[11px] text-zinc-600"
+  }, "Sistem Job Monitoring Non-Routine / Irregular Job \u2014 Melting & Molding ACE, PT AT Indonesia. Data & foto tersimpan otomatis di server."));
 }
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
+root.render(React.createElement(App, null));
 </script>
 </body>
 </html>
