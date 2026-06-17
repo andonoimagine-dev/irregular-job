@@ -4,23 +4,16 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Job Monitoring - Non Routine Activity | PT AT Indonesia</title>
-
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-
 <style>
   body { margin: 0; background:#09090b; }
   ::-webkit-scrollbar { width: 8px; height: 8px; }
   ::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 4px; }
   ::-webkit-scrollbar-track { background: #18181b; }
-  .line-clamp-2 {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
+  .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 </style>
 </head>
 <body>
@@ -29,7 +22,6 @@
     Memuat Job Monitoring System...
   </div>
 </div>
-
 <script>
 "use strict";
 
@@ -654,6 +646,10 @@ function PhotoUploader(_ref9) {
     _useState8 = _slicedToArray(_useState7, 2),
     showModal = _useState8[0],
     setShowModal = _useState8[1];
+  var _useState9 = useState(null),
+    _useState0 = _slicedToArray(_useState9, 2),
+    lightbox = _useState0[0],
+    setLightbox = _useState0[1];
   var galleryRef = React.useRef(null);
   var cameraRef = React.useRef(null);
   var processFiles = /*#__PURE__*/function () {
@@ -763,10 +759,11 @@ function PhotoUploader(_ref9) {
     return /*#__PURE__*/React.createElement("div", {
       key: i,
       className: "relative w-20 h-20 rounded-lg overflow-hidden border border-zinc-700"
-    }, /*#__PURE__*/React.createElement("a", {
-      href: src,
-      target: "_blank",
-      rel: "noreferrer",
+    }, /*#__PURE__*/React.createElement("button", {
+      type: "button",
+      onClick: function onClick() {
+        return setLightbox(i);
+      },
       className: "block w-full h-full"
     }, /*#__PURE__*/React.createElement("img", {
       src: src,
@@ -775,7 +772,6 @@ function PhotoUploader(_ref9) {
     })), /*#__PURE__*/React.createElement("button", {
       type: "button",
       onClick: function onClick(e) {
-        e.preventDefault();
         e.stopPropagation();
         remove(i);
       },
@@ -858,19 +854,150 @@ function PhotoUploader(_ref9) {
       return setShowModal(false);
     },
     className: "w-full py-2 text-xs text-zinc-500 hover:text-zinc-300"
-  }, "Batal"))));
+  }, "Batal"))), lightbox !== null && /*#__PURE__*/React.createElement(Lightbox, {
+    photos: list,
+    startIndex: lightbox,
+    onClose: function onClose() {
+      return setLightbox(null);
+    }
+  }));
 }
 
 /* =========================================================================
-   DASHBOARD
+   LIGHTBOX - preview foto tanpa pindah tab
    ========================================================================= */
 
-function KpiCard(_ref10) {
-  var icon = _ref10.icon,
-    label = _ref10.label,
-    value = _ref10.value,
-    sub = _ref10.sub,
-    accent = _ref10.accent;
+function Lightbox(_ref10) {
+  var photos = _ref10.photos,
+    startIndex = _ref10.startIndex,
+    onClose = _ref10.onClose;
+  var _useState1 = useState(startIndex || 0),
+    _useState10 = _slicedToArray(_useState1, 2),
+    idx = _useState10[0],
+    setIdx = _useState10[1];
+  var total = photos.length;
+
+  // tutup dengan tombol Escape
+  useEffect(function () {
+    var handler = function handler(e) {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", handler);
+    return function () {
+      return window.removeEventListener("keydown", handler);
+    };
+  }, [onClose]);
+  var prev = function prev(e) {
+    e.stopPropagation();
+    setIdx(function (i) {
+      return (i - 1 + total) % total;
+    });
+  };
+  var next = function next(e) {
+    e.stopPropagation();
+    setIdx(function (i) {
+      return (i + 1) % total;
+    });
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    className: "fixed inset-0 z-[100] bg-black/90 flex flex-col items-center justify-center",
+    onClick: onClose
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "absolute top-0 left-0 right-0 flex items-center justify-between px-4 py-3 z-10"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-xs text-zinc-400"
+  }, idx + 1, " / ", total), /*#__PURE__*/React.createElement("button", {
+    onClick: onClose,
+    className: "bg-zinc-800 text-zinc-200 rounded-full p-2 hover:bg-zinc-700"
+  }, /*#__PURE__*/React.createElement(Ico, {
+    name: "X",
+    size: 18
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "relative flex items-center justify-center w-full h-full px-12",
+    onClick: function onClick(e) {
+      return e.stopPropagation();
+    }
+  }, /*#__PURE__*/React.createElement("img", {
+    src: photos[idx],
+    alt: "Foto ".concat(idx + 1),
+    className: "max-w-full max-h-[80vh] rounded-lg object-contain shadow-2xl",
+    onClick: function onClick(e) {
+      return e.stopPropagation();
+    }
+  })), total > 1 && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
+    onClick: prev,
+    className: "absolute left-2 top-1/2 -translate-y-1/2 bg-zinc-800/80 text-zinc-200 rounded-full p-2.5 hover:bg-zinc-700"
+  }, /*#__PURE__*/React.createElement(Ico, {
+    name: "ChevronLeft",
+    size: 22
+  })), /*#__PURE__*/React.createElement("button", {
+    onClick: next,
+    className: "absolute right-2 top-1/2 -translate-y-1/2 bg-zinc-800/80 text-zinc-200 rounded-full p-2.5 hover:bg-zinc-700"
+  }, /*#__PURE__*/React.createElement(Ico, {
+    name: "ChevronRight",
+    size: 22
+  }))), total > 1 && /*#__PURE__*/React.createElement("div", {
+    className: "absolute bottom-4 flex gap-2 overflow-x-auto px-4 pb-1",
+    onClick: function onClick(e) {
+      return e.stopPropagation();
+    }
+  }, photos.map(function (src, i) {
+    return /*#__PURE__*/React.createElement("button", {
+      key: i,
+      onClick: function onClick(e) {
+        e.stopPropagation();
+        setIdx(i);
+      },
+      className: "w-12 h-12 rounded-md overflow-hidden border-2 flex-shrink-0 transition-all ".concat(i === idx ? "border-orange-500" : "border-zinc-700 opacity-60")
+    }, /*#__PURE__*/React.createElement("img", {
+      src: src,
+      alt: "",
+      className: "w-full h-full object-cover"
+    }));
+  })));
+}
+
+/* Komponen kecil: grid thumbnail yang klik-nya membuka Lightbox (tanpa tombol hapus) */
+function PhotoViewer(_ref11) {
+  var photos = _ref11.photos,
+    label = _ref11.label;
+  var _useState11 = useState(null),
+    _useState12 = _slicedToArray(_useState11, 2),
+    lightbox = _useState12[0],
+    setLightbox = _useState12[1]; // index foto yang dibuka
+  var list = photos || [];
+  if (list.length === 0) return /*#__PURE__*/React.createElement("p", {
+    className: "text-xs text-zinc-600 italic"
+  }, "Belum ada foto.");
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    className: "flex flex-wrap gap-2"
+  }, list.map(function (src, i) {
+    return /*#__PURE__*/React.createElement("button", {
+      key: i,
+      type: "button",
+      onClick: function onClick() {
+        return setLightbox(i);
+      },
+      className: "w-16 h-16 rounded-lg overflow-hidden border border-zinc-700 hover:border-orange-500/60 transition-colors"
+    }, /*#__PURE__*/React.createElement("img", {
+      src: src,
+      alt: "".concat(label || "Foto", " ").concat(i + 1),
+      className: "w-full h-full object-cover"
+    }));
+  })), lightbox !== null && /*#__PURE__*/React.createElement(Lightbox, {
+    photos: list,
+    startIndex: lightbox,
+    onClose: function onClose() {
+      return setLightbox(null);
+    }
+  }));
+}
+function KpiCard(_ref12) {
+  var icon = _ref12.icon,
+    label = _ref12.label,
+    value = _ref12.value,
+    sub = _ref12.sub,
+    accent = _ref12.accent;
   return /*#__PURE__*/React.createElement("div", {
     className: "bg-zinc-900 border border-zinc-800 rounded-xl p-4 flex items-start gap-3"
   }, /*#__PURE__*/React.createElement("div", {
@@ -886,8 +1013,8 @@ function KpiCard(_ref10) {
     className: "text-[11px] text-zinc-500 mt-0.5"
   }, sub)));
 }
-function Dashboard(_ref11) {
-  var jobs = _ref11.jobs;
+function Dashboard(_ref13) {
+  var jobs = _ref13.jobs;
   var data = useMemo(function () {
     var withEff = jobs.map(function (j) {
       return _objectSpread(_objectSpread({}, j), {}, {
@@ -1122,9 +1249,9 @@ function Dashboard(_ref11) {
    KANBAN BOARD
    ========================================================================= */
 
-function KanbanCard(_ref12) {
-  var job = _ref12.job,
-    onOpen = _ref12.onOpen;
+function KanbanCard(_ref14) {
+  var job = _ref14.job,
+    onOpen = _ref14.onOpen;
   var eff = getEffectiveStatus(job);
   var meta = STATUS_META[eff];
   var appStatus = getApprovalStatus(job);
@@ -1186,14 +1313,14 @@ function KanbanCard(_ref12) {
     size: 12
   }), " Delay ", getDelayHours(job), " jam"));
 }
-function KanbanBoard(_ref13) {
-  var jobs = _ref13.jobs,
-    onMove = _ref13.onMove,
-    onOpen = _ref13.onOpen;
-  var _useState9 = useState(null),
-    _useState0 = _slicedToArray(_useState9, 2),
-    dragOver = _useState0[0],
-    setDragOver = _useState0[1];
+function KanbanBoard(_ref15) {
+  var jobs = _ref15.jobs,
+    onMove = _ref15.onMove,
+    onOpen = _ref15.onOpen;
+  var _useState13 = useState(null),
+    _useState14 = _slicedToArray(_useState13, 2),
+    dragOver = _useState14[0],
+    setDragOver = _useState14[1];
   var handleDrop = function handleDrop(e, status) {
     e.preventDefault();
     setDragOver(null);
@@ -1246,13 +1373,13 @@ function KanbanBoard(_ref13) {
    JOB DETAIL / APPROVAL PANEL
    ========================================================================= */
 
-function ApprovalStep(_ref14) {
-  var role = _ref14.role,
-    approval = _ref14.approval,
-    required = _ref14.required,
-    job = _ref14.job,
-    onAct = _ref14.onAct,
-    currentUser = _ref14.currentUser;
+function ApprovalStep(_ref16) {
+  var role = _ref16.role,
+    approval = _ref16.approval,
+    required = _ref16.required,
+    job = _ref16.job,
+    onAct = _ref16.onAct,
+    currentUser = _ref16.currentUser;
   if (!required) {
     return /*#__PURE__*/React.createElement("div", {
       className: "flex-1 bg-zinc-800/40 border border-zinc-800 rounded-lg p-3 opacity-50"
@@ -1295,23 +1422,23 @@ function ApprovalStep(_ref14) {
     className: "text-[10px] text-zinc-500 mt-1.5"
   }, canAct ? "Sebagai: ".concat(currentUser.name) : "Belum login sesuai role ini."));
 }
-function JobDetail(_ref15) {
-  var job = _ref15.job,
-    onUpdate = _ref15.onUpdate,
-    onClose = _ref15.onClose,
-    currentUser = _ref15.currentUser;
-  var _useState1 = useState(job),
-    _useState10 = _slicedToArray(_useState1, 2),
-    local = _useState10[0],
-    setLocal = _useState10[1];
-  var _useState11 = useState(false),
-    _useState12 = _slicedToArray(_useState11, 2),
-    saving = _useState12[0],
-    setSaving = _useState12[1];
-  var _useState13 = useState(""),
-    _useState14 = _slicedToArray(_useState13, 2),
-    saveMsg = _useState14[0],
-    setSaveMsg = _useState14[1];
+function JobDetail(_ref17) {
+  var job = _ref17.job,
+    onUpdate = _ref17.onUpdate,
+    onClose = _ref17.onClose,
+    currentUser = _ref17.currentUser;
+  var _useState15 = useState(job),
+    _useState16 = _slicedToArray(_useState15, 2),
+    local = _useState16[0],
+    setLocal = _useState16[1];
+  var _useState17 = useState(false),
+    _useState18 = _slicedToArray(_useState17, 2),
+    saving = _useState18[0],
+    setSaving = _useState18[1];
+  var _useState19 = useState(""),
+    _useState20 = _slicedToArray(_useState19, 2),
+    saveMsg = _useState20[0],
+    setSaveMsg = _useState20[1];
   var eff = getEffectiveStatus(local);
   var req = requiredApprovals(local.risk);
   var save = function save(patch) {
@@ -1320,7 +1447,7 @@ function JobDetail(_ref15) {
     });
   };
   var persist = /*#__PURE__*/function () {
-    var _ref16 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3(jobToSave) {
+    var _ref18 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3(jobToSave) {
       var res, _t3;
       return _regenerator().w(function (_context3) {
         while (1) switch (_context3.p = _context3.n) {
@@ -1354,11 +1481,31 @@ function JobDetail(_ref15) {
       }, _callee3, null, [[1, 3]]);
     }));
     return function persist(_x5) {
-      return _ref16.apply(this, arguments);
+      return _ref18.apply(this, arguments);
     };
   }();
   var handleManualSave = function handleManualSave() {
     return persist(local);
+  };
+  var shareWA = function shareWA() {
+    var eff = getEffectiveStatus(local);
+    var appLink = window.location.href;
+    var approvalLine = function approvalLine(role) {
+      var a = local.approvals[role];
+      if (!a || a.status === "Pending") return "".concat(APPROVAL_LABEL[role], ": \u23F3 Pending");
+      return "".concat(APPROVAL_LABEL[role], ": ").concat(a.status === "Approved" ? "✅" : "❌", " ").concat(a.status, " - ").concat(a.name, " (").concat(a.date || "-", ")");
+    };
+    var fotoLines = function fotoLines(label, arr) {
+      if (!arr || arr.length === 0) return "".concat(label, ": (belum ada foto)");
+      return arr.map(function (url, i) {
+        return "".concat(label, " ").concat(i + 1, ": ").concat(url);
+      }).join("\n");
+    };
+    var lines = ["\uD83D\uDCCB *LAPORAN JOB NON-ROUTINE*", "\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501", "*Job ID:* ".concat(local.id), "*Jenis:* ".concat(local.jenis), "*Area:* ".concat(local.area || "-"), "*Lokasi:* ".concat(local.lokasi || "-"), "*Deskripsi:* ".concat(local.deskripsi), "*Pelaksana:* ".concat((local.pelaksana || []).join(", ") || "-"), "*PIC:* ".concat(local.pic || "-"), "*Risk:* ".concat(local.risk), "*STOP6:* ".concat((local.stop6 || []).join(", ") || "-"), "", "\uD83D\uDCC5 *WAKTU*", "*Planned:* ".concat(local.plannedDate || "-", " (~").concat(local.estDuration || "-", " jam)"), "*Actual Start:* ".concat(local.actualStart || "-"), "*Actual Finish:* ".concat(local.actualFinish || "-"), "", "\uD83D\uDD10 *APPROVAL*", approvalLine("foreman")].concat(_toConsumableArray(requiredApprovals(local.risk).includes("sectionHead") ? [approvalLine("sectionHead")] : []), _toConsumableArray(requiredApprovals(local.risk).includes("deptHead") ? [approvalLine("deptHead")] : []), ["", "\uD83D\uDCCA *STATUS:* ".concat(eff), local.hasil ? "*Hasil:* ".concat(local.hasil) : "", local.catatanHasil ? "*Catatan:* ".concat(local.catatanHasil) : "", local.problem ? "*Problem:* ".concat(local.problem) : "", local.followUp ? "*Follow Up:* ".concat(local.followUp) : "", "", "\uD83D\uDCF7 *FOTO*", fotoLines("KY Before", local.kySheetBefore), fotoLines("KY After", local.kySheetAfter), fotoLines("Foto Before", local.fotoBefore), fotoLines("Foto After", local.fotoAfter), "", "\uD83D\uDD17 *Link Job:* ".concat(appLink), "\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501", "_Job Monitoring - Casting-2 (ACE) PT AT Indonesia_"]).filter(function (l) {
+      return l !== "";
+    }).join("\n");
+    var url = "https://wa.me/?text=".concat(encodeURIComponent(lines));
+    window.open(url, "_blank");
   };
   var act = function act(role, decision) {
     if (!currentUser || currentUser.role !== role) return;
@@ -1677,13 +1824,22 @@ function JobDetail(_ref15) {
       });
     }
   }))))), /*#__PURE__*/React.createElement("div", {
-    className: "p-4 border-t border-zinc-800 sticky bottom-0 bg-zinc-950 flex items-center justify-between gap-3"
+    className: "p-4 border-t border-zinc-800 sticky bottom-0 bg-zinc-950 flex items-center justify-between gap-2 flex-wrap"
   }, /*#__PURE__*/React.createElement("p", {
-    className: "text-xs text-zinc-500"
-  }, saveMsg ? saveMsg : "Foto & approval tersimpan otomatis. Klik \"Simpan Perubahan\" untuk menyimpan field lainnya ke server."), /*#__PURE__*/React.createElement("button", {
+    className: "text-xs text-zinc-500 flex-1 min-w-0"
+  }, saveMsg ? saveMsg : "Foto & approval tersimpan otomatis. Klik \"Simpan Perubahan\" untuk menyimpan field lainnya ke server."), /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-2 flex-shrink-0"
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: shareWA,
+    className: "px-4 py-2 rounded-lg bg-emerald-600 text-white text-sm font-bold hover:bg-emerald-500 flex items-center gap-2 whitespace-nowrap",
+    title: "Kirim resume job ke WhatsApp"
+  }, /*#__PURE__*/React.createElement(Ico, {
+    name: "MessageCircle",
+    size: 14
+  }), " Report WA"), /*#__PURE__*/React.createElement("button", {
     onClick: handleManualSave,
     disabled: saving,
-    className: "px-5 py-2 rounded-lg bg-orange-500 text-zinc-950 text-sm font-bold hover:bg-orange-400 disabled:opacity-50 flex items-center gap-2 whitespace-nowrap"
+    className: "px-4 py-2 rounded-lg bg-orange-500 text-zinc-950 text-sm font-bold hover:bg-orange-400 disabled:opacity-50 flex items-center gap-2 whitespace-nowrap"
   }, saving ? /*#__PURE__*/React.createElement(Ico, {
     name: "Loader2",
     size: 14,
@@ -1691,38 +1847,38 @@ function JobDetail(_ref15) {
   }) : /*#__PURE__*/React.createElement(Ico, {
     name: "Save",
     size: 14
-  }), saving ? "Menyimpan..." : "Simpan Perubahan"))));
+  }), saving ? "Menyimpan..." : "Simpan")))));
 }
 
 /* =========================================================================
    LOGIN MODAL
    ========================================================================= */
 
-function LoginModal(_ref17) {
+function LoginModal(_ref19) {
   var _2;
-  var accounts = _ref17.accounts,
-    onLogin = _ref17.onLogin,
-    onClose = _ref17.onClose;
-  var _useState15 = useState("foreman"),
-    _useState16 = _slicedToArray(_useState15, 2),
-    role = _useState16[0],
-    setRole = _useState16[1];
-  var _useState17 = useState(((_2 = (accounts.foreman || [])[0]) === null || _2 === void 0 ? void 0 : _2.name) || ""),
-    _useState18 = _slicedToArray(_useState17, 2),
-    name = _useState18[0],
-    setName = _useState18[1];
-  var _useState19 = useState(""),
-    _useState20 = _slicedToArray(_useState19, 2),
-    password = _useState20[0],
-    setPassword = _useState20[1];
-  var _useState21 = useState(""),
+  var accounts = _ref19.accounts,
+    onLogin = _ref19.onLogin,
+    onClose = _ref19.onClose;
+  var _useState21 = useState("foreman"),
     _useState22 = _slicedToArray(_useState21, 2),
-    error = _useState22[0],
-    setError = _useState22[1];
-  var _useState23 = useState(false),
+    role = _useState22[0],
+    setRole = _useState22[1];
+  var _useState23 = useState(((_2 = (accounts.foreman || [])[0]) === null || _2 === void 0 ? void 0 : _2.name) || ""),
     _useState24 = _slicedToArray(_useState23, 2),
-    checking = _useState24[0],
-    setChecking = _useState24[1];
+    name = _useState24[0],
+    setName = _useState24[1];
+  var _useState25 = useState(""),
+    _useState26 = _slicedToArray(_useState25, 2),
+    password = _useState26[0],
+    setPassword = _useState26[1];
+  var _useState27 = useState(""),
+    _useState28 = _slicedToArray(_useState27, 2),
+    error = _useState28[0],
+    setError = _useState28[1];
+  var _useState29 = useState(false),
+    _useState30 = _slicedToArray(_useState29, 2),
+    checking = _useState30[0],
+    setChecking = _useState30[1];
   var people = accounts[role] || [];
   var changeRole = function changeRole(r) {
     var _3;
@@ -1732,7 +1888,7 @@ function LoginModal(_ref17) {
     setError("");
   };
   var submit = /*#__PURE__*/function () {
-    var _ref18 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4() {
+    var _ref20 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4() {
       var res, _t4;
       return _regenerator().w(function (_context4) {
         while (1) switch (_context4.p = _context4.n) {
@@ -1777,7 +1933,7 @@ function LoginModal(_ref17) {
       }, _callee4, null, [[2, 4]]);
     }));
     return function submit() {
-      return _ref18.apply(this, arguments);
+      return _ref20.apply(this, arguments);
     };
   }();
   return /*#__PURE__*/React.createElement("div", {
@@ -1868,35 +2024,35 @@ function LoginModal(_ref17) {
    ADMIN SETTINGS - kelola akun Foreman / Section Head / Dept Head
    ========================================================================= */
 
-function AdminSettings(_ref19) {
-  var accounts = _ref19.accounts,
-    setAccounts = _ref19.setAccounts;
-  var _useState25 = useState(false),
-    _useState26 = _slicedToArray(_useState25, 2),
-    unlocked = _useState26[0],
-    setUnlocked = _useState26[1];
-  var _useState27 = useState(""),
-    _useState28 = _slicedToArray(_useState27, 2),
-    adminPassword = _useState28[0],
-    setAdminPassword = _useState28[1];
-  var _useState29 = useState(""),
-    _useState30 = _slicedToArray(_useState29, 2),
-    pwdInput = _useState30[0],
-    setPwdInput = _useState30[1];
-  var _useState31 = useState(""),
+function AdminSettings(_ref21) {
+  var accounts = _ref21.accounts,
+    setAccounts = _ref21.setAccounts;
+  var _useState31 = useState(false),
     _useState32 = _slicedToArray(_useState31, 2),
-    error = _useState32[0],
-    setError = _useState32[1];
-  var _useState33 = useState(false),
+    unlocked = _useState32[0],
+    setUnlocked = _useState32[1];
+  var _useState33 = useState(""),
     _useState34 = _slicedToArray(_useState33, 2),
-    checking = _useState34[0],
-    setChecking = _useState34[1];
+    adminPassword = _useState34[0],
+    setAdminPassword = _useState34[1];
   var _useState35 = useState(""),
     _useState36 = _slicedToArray(_useState35, 2),
-    saveMsg = _useState36[0],
-    setSaveMsg = _useState36[1];
+    pwdInput = _useState36[0],
+    setPwdInput = _useState36[1];
+  var _useState37 = useState(""),
+    _useState38 = _slicedToArray(_useState37, 2),
+    error = _useState38[0],
+    setError = _useState38[1];
+  var _useState39 = useState(false),
+    _useState40 = _slicedToArray(_useState39, 2),
+    checking = _useState40[0],
+    setChecking = _useState40[1];
+  var _useState41 = useState(""),
+    _useState42 = _slicedToArray(_useState41, 2),
+    saveMsg = _useState42[0],
+    setSaveMsg = _useState42[1];
   var tryUnlock = /*#__PURE__*/function () {
-    var _ref20 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee5() {
+    var _ref22 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee5() {
       var res, _t5;
       return _regenerator().w(function (_context5) {
         while (1) switch (_context5.p = _context5.n) {
@@ -1937,7 +2093,7 @@ function AdminSettings(_ref19) {
       }, _callee5, null, [[2, 4]]);
     }));
     return function tryUnlock() {
-      return _ref20.apply(this, arguments);
+      return _ref22.apply(this, arguments);
     };
   }();
   if (!unlocked) {
@@ -1979,7 +2135,7 @@ function AdminSettings(_ref19) {
     }), checking ? "Memeriksa..." : "Unlock"));
   }
   var saveAccounts = /*#__PURE__*/function () {
-    var _ref21 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee6(next) {
+    var _ref23 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee6(next) {
       var res, _t6;
       return _regenerator().w(function (_context6) {
         while (1) switch (_context6.p = _context6.n) {
@@ -2007,7 +2163,7 @@ function AdminSettings(_ref19) {
       }, _callee6, null, [[1, 3]]);
     }));
     return function saveAccounts(_x6) {
-      return _ref21.apply(this, arguments);
+      return _ref23.apply(this, arguments);
     };
   }();
   var updateRole = function updateRole(role, list) {
@@ -2038,26 +2194,26 @@ function AdminSettings(_ref19) {
     });
   }));
 }
-function AccountRoleEditor(_ref22) {
-  var role = _ref22.role,
-    list = _ref22.list,
-    onChange = _ref22.onChange;
-  var _useState37 = useState(""),
-    _useState38 = _slicedToArray(_useState37, 2),
-    newName = _useState38[0],
-    setNewName = _useState38[1];
-  var _useState39 = useState(""),
-    _useState40 = _slicedToArray(_useState39, 2),
-    newPassword = _useState40[0],
-    setNewPassword = _useState40[1];
-  var _useState41 = useState({}),
-    _useState42 = _slicedToArray(_useState41, 2),
-    showPwd = _useState42[0],
-    setShowPwd = _useState42[1];
+function AccountRoleEditor(_ref24) {
+  var role = _ref24.role,
+    list = _ref24.list,
+    onChange = _ref24.onChange;
   var _useState43 = useState(""),
     _useState44 = _slicedToArray(_useState43, 2),
-    error = _useState44[0],
-    setError = _useState44[1];
+    newName = _useState44[0],
+    setNewName = _useState44[1];
+  var _useState45 = useState(""),
+    _useState46 = _slicedToArray(_useState45, 2),
+    newPassword = _useState46[0],
+    setNewPassword = _useState46[1];
+  var _useState47 = useState({}),
+    _useState48 = _slicedToArray(_useState47, 2),
+    showPwd = _useState48[0],
+    setShowPwd = _useState48[1];
+  var _useState49 = useState(""),
+    _useState50 = _slicedToArray(_useState49, 2),
+    error = _useState50[0],
+    setError = _useState50[1];
   var add = function add() {
     var name = newName.trim();
     if (!name || !newPassword) {
@@ -2169,18 +2325,18 @@ function AccountRoleEditor(_ref22) {
    JOB LIST + FILTERS
    ========================================================================= */
 
-function JobList(_ref23) {
-  var jobs = _ref23.jobs,
-    onOpen = _ref23.onOpen;
-  var _useState45 = useState({
+function JobList(_ref25) {
+  var jobs = _ref25.jobs,
+    onOpen = _ref25.onOpen;
+  var _useState51 = useState({
       area: "",
       status: "",
       pic: "",
       q: ""
     }),
-    _useState46 = _slicedToArray(_useState45, 2),
-    filters = _useState46[0],
-    setFilters = _useState46[1];
+    _useState52 = _slicedToArray(_useState51, 2),
+    filters = _useState52[0],
+    setFilters = _useState52[1];
   var filtered = useMemo(function () {
     return jobs.filter(function (j) {
       var eff = getEffectiveStatus(j);
@@ -2356,27 +2512,27 @@ var emptyForm = {
   stop6: [],
   kySheetBefore: []
 };
-function NewJobForm(_ref24) {
-  var onSubmit = _ref24.onSubmit;
-  var _useState47 = useState(emptyForm),
-    _useState48 = _slicedToArray(_useState47, 2),
-    form = _useState48[0],
-    setForm = _useState48[1];
-  var _useState49 = useState(""),
-    _useState50 = _slicedToArray(_useState49, 2),
-    error = _useState50[0],
-    setError = _useState50[1];
-  var _useState51 = useState(false),
-    _useState52 = _slicedToArray(_useState51, 2),
-    submitting = _useState52[0],
-    setSubmitting = _useState52[1];
+function NewJobForm(_ref26) {
+  var onSubmit = _ref26.onSubmit;
+  var _useState53 = useState(emptyForm),
+    _useState54 = _slicedToArray(_useState53, 2),
+    form = _useState54[0],
+    setForm = _useState54[1];
+  var _useState55 = useState(""),
+    _useState56 = _slicedToArray(_useState55, 2),
+    error = _useState56[0],
+    setError = _useState56[1];
+  var _useState57 = useState(false),
+    _useState58 = _slicedToArray(_useState57, 2),
+    submitting = _useState58[0],
+    setSubmitting = _useState58[1];
   var set = function set(patch) {
     return setForm(function (f) {
       return _objectSpread(_objectSpread({}, f), patch);
     });
   };
   var submit = /*#__PURE__*/function () {
-    var _ref25 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee7() {
+    var _ref27 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee7() {
       var res;
       return _regenerator().w(function (_context7) {
         while (1) switch (_context7.n) {
@@ -2434,7 +2590,7 @@ function NewJobForm(_ref24) {
       }, _callee7);
     }));
     return function submit() {
-      return _ref25.apply(this, arguments);
+      return _ref27.apply(this, arguments);
     };
   }();
   return /*#__PURE__*/React.createElement("div", {
@@ -2673,44 +2829,44 @@ function NewJobForm(_ref24) {
    ========================================================================= */
 
 function App() {
-  var _useState53 = useState([]),
-    _useState54 = _slicedToArray(_useState53, 2),
-    jobs = _useState54[0],
-    setJobs = _useState54[1];
-  var _useState55 = useState({
+  var _useState59 = useState([]),
+    _useState60 = _slicedToArray(_useState59, 2),
+    jobs = _useState60[0],
+    setJobs = _useState60[1];
+  var _useState61 = useState({
       foreman: [],
       sectionHead: [],
       deptHead: []
     }),
-    _useState56 = _slicedToArray(_useState55, 2),
-    accounts = _useState56[0],
-    setAccounts = _useState56[1];
-  var _useState57 = useState(true),
-    _useState58 = _slicedToArray(_useState57, 2),
-    loading = _useState58[0],
-    setLoading = _useState58[1];
-  var _useState59 = useState(""),
-    _useState60 = _slicedToArray(_useState59, 2),
-    loadError = _useState60[0],
-    setLoadError = _useState60[1];
-  var _useState61 = useState("dashboard"),
     _useState62 = _slicedToArray(_useState61, 2),
-    tab = _useState62[0],
-    setTab = _useState62[1];
-  var _useState63 = useState(null),
+    accounts = _useState62[0],
+    setAccounts = _useState62[1];
+  var _useState63 = useState(true),
     _useState64 = _slicedToArray(_useState63, 2),
-    openJobId = _useState64[0],
-    setOpenJobId = _useState64[1];
-  var _useState65 = useState(null),
+    loading = _useState64[0],
+    setLoading = _useState64[1];
+  var _useState65 = useState(""),
     _useState66 = _slicedToArray(_useState65, 2),
-    currentUser = _useState66[0],
-    setCurrentUser = _useState66[1];
-  var _useState67 = useState(false),
+    loadError = _useState66[0],
+    setLoadError = _useState66[1];
+  var _useState67 = useState("dashboard"),
     _useState68 = _slicedToArray(_useState67, 2),
-    showLogin = _useState68[0],
-    setShowLogin = _useState68[1];
+    tab = _useState68[0],
+    setTab = _useState68[1];
+  var _useState69 = useState(null),
+    _useState70 = _slicedToArray(_useState69, 2),
+    openJobId = _useState70[0],
+    setOpenJobId = _useState70[1];
+  var _useState71 = useState(null),
+    _useState72 = _slicedToArray(_useState71, 2),
+    currentUser = _useState72[0],
+    setCurrentUser = _useState72[1];
+  var _useState73 = useState(false),
+    _useState74 = _slicedToArray(_useState73, 2),
+    showLogin = _useState74[0],
+    setShowLogin = _useState74[1];
   var loadData = /*#__PURE__*/function () {
-    var _ref26 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee8() {
+    var _ref28 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee8() {
       var data, _t7;
       return _regenerator().w(function (_context8) {
         while (1) switch (_context8.p = _context8.n) {
@@ -2748,7 +2904,7 @@ function App() {
       }, _callee8, null, [[1, 4]]);
     }));
     return function loadData() {
-      return _ref26.apply(this, arguments);
+      return _ref28.apply(this, arguments);
     };
   }();
   useEffect(function () {
@@ -2781,7 +2937,7 @@ function App() {
     })["catch"](function () {});
   };
   var addJob = /*#__PURE__*/function () {
-    var _ref27 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee9(job) {
+    var _ref29 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee9(job) {
       var res, _t8;
       return _regenerator().w(function (_context9) {
         while (1) switch (_context9.p = _context9.n) {
@@ -2808,7 +2964,7 @@ function App() {
       }, _callee9, null, [[0, 2]]);
     }));
     return function addJob(_x7) {
-      return _ref27.apply(this, arguments);
+      return _ref29.apply(this, arguments);
     };
   }();
   var openJob = jobs.find(function (j) {
@@ -2994,7 +3150,6 @@ function App() {
     className: "border-t border-zinc-800 py-4 text-center text-[11px] text-zinc-600"
   }, "Sistem Job Monitoring Non-Routine / Irregular Job \u2014 Casting-2 (ACE), PT AT Indonesia. Data & foto tersimpan otomatis di server."));
 }
-
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(React.createElement(App, null));
