@@ -37,6 +37,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
 var _excluded = ["name", "size", "className"];
 function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
 function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
+function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t["return"] || t["return"](); } finally { if (u) throw o; } } }; }
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
@@ -79,57 +80,20 @@ function apiGet(_x) {
   return _apiGet.apply(this, arguments);
 }
 function _apiGet() {
-  _apiGet = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee9(action) {
+  _apiGet = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee0(action) {
     var params,
       qs,
-      res,
-      _args9 = arguments;
-    return _regenerator().w(function (_context9) {
-      while (1) switch (_context9.n) {
-        case 0:
-          params = _args9.length > 1 && _args9[1] !== undefined ? _args9[1] : {};
-          qs = new URLSearchParams(_objectSpread({
-            action: action
-          }, params)).toString();
-          _context9.n = 1;
-          return fetch("".concat(CONFIG.API_URL, "?").concat(qs));
-        case 1:
-          res = _context9.v;
-          if (res.ok) {
-            _context9.n = 2;
-            break;
-          }
-          throw new Error("HTTP ".concat(res.status));
-        case 2:
-          return _context9.a(2, res.json());
-      }
-    }, _callee9);
-  }));
-  return _apiGet.apply(this, arguments);
-}
-function apiPost(_x2) {
-  return _apiPost.apply(this, arguments);
-}
-/* Resize foto sebelum diupload ke Google Drive agar lebih cepat & ringan */
-function _apiPost() {
-  _apiPost = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee0(action) {
-    var payload,
       res,
       _args0 = arguments;
     return _regenerator().w(function (_context0) {
       while (1) switch (_context0.n) {
         case 0:
-          payload = _args0.length > 1 && _args0[1] !== undefined ? _args0[1] : {};
+          params = _args0.length > 1 && _args0[1] !== undefined ? _args0[1] : {};
+          qs = new URLSearchParams(_objectSpread({
+            action: action
+          }, params)).toString();
           _context0.n = 1;
-          return fetch(CONFIG.API_URL, {
-            method: "POST",
-            headers: {
-              "Content-Type": "text/plain;charset=utf-8"
-            },
-            body: JSON.stringify(_objectSpread({
-              action: action
-            }, payload))
-          });
+          return fetch("".concat(CONFIG.API_URL, "?").concat(qs));
         case 1:
           res = _context0.v;
           if (res.ok) {
@@ -141,6 +105,43 @@ function _apiPost() {
           return _context0.a(2, res.json());
       }
     }, _callee0);
+  }));
+  return _apiGet.apply(this, arguments);
+}
+function apiPost(_x2) {
+  return _apiPost.apply(this, arguments);
+}
+/* Resize foto sebelum diupload ke Google Drive agar lebih cepat & ringan */
+function _apiPost() {
+  _apiPost = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee1(action) {
+    var payload,
+      res,
+      _args1 = arguments;
+    return _regenerator().w(function (_context1) {
+      while (1) switch (_context1.n) {
+        case 0:
+          payload = _args1.length > 1 && _args1[1] !== undefined ? _args1[1] : {};
+          _context1.n = 1;
+          return fetch(CONFIG.API_URL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "text/plain;charset=utf-8"
+            },
+            body: JSON.stringify(_objectSpread({
+              action: action
+            }, payload))
+          });
+        case 1:
+          res = _context1.v;
+          if (res.ok) {
+            _context1.n = 2;
+            break;
+          }
+          throw new Error("HTTP ".concat(res.status));
+        case 2:
+          return _context1.a(2, res.json());
+      }
+    }, _callee1);
   }));
   return _apiPost.apply(this, arguments);
 }
@@ -649,14 +650,19 @@ function PhotoUploader(_ref9) {
     _useState6 = _slicedToArray(_useState5, 2),
     error = _useState6[0],
     setError = _useState6[1];
-  var handleFiles = /*#__PURE__*/function () {
-    var _ref0 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee(e) {
-      var files, uploaded, _i2, _files, file, dataUrl, base64, safeName, filename, res, _t;
+  var _useState7 = useState(false),
+    _useState8 = _slicedToArray(_useState7, 2),
+    showModal = _useState8[0],
+    setShowModal = _useState8[1];
+  var galleryRef = React.useRef(null);
+  var cameraRef = React.useRef(null);
+  var processFiles = /*#__PURE__*/function () {
+    var _ref0 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee(files) {
+      var uploaded, _iterator, _step, file, dataUrl, base64, safeName, filename, res, _t, _t2;
       return _regenerator().w(function (_context) {
         while (1) switch (_context.p = _context.n) {
           case 0:
-            files = Array.from(e.target.files || []);
-            if (!(files.length === 0)) {
+            if (!(!files || files.length === 0)) {
               _context.n = 1;
               break;
             }
@@ -665,55 +671,85 @@ function PhotoUploader(_ref9) {
             setUploading(true);
             setError("");
             uploaded = [];
-            _i2 = 0, _files = files;
-          case 2:
-            if (!(_i2 < _files.length)) {
-              _context.n = 8;
+            _iterator = _createForOfIteratorHelper(files);
+            _context.p = 2;
+            _iterator.s();
+          case 3:
+            if ((_step = _iterator.n()).done) {
+              _context.n = 9;
               break;
             }
-            file = _files[_i2];
-            _context.p = 3;
-            _context.n = 4;
+            file = _step.value;
+            _context.p = 4;
+            _context.n = 5;
             return resizeImage(file);
-          case 4:
+          case 5:
             dataUrl = _context.v;
             base64 = dataUrl.split(",")[1];
             safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
             filename = "".concat(prefix, "_").concat(Date.now(), "_").concat(safeName, ".jpg");
-            _context.n = 5;
+            _context.n = 6;
             return apiPost("uploadPhoto", {
               filename: filename,
               mimeType: "image/jpeg",
               base64: base64
             });
-          case 5:
+          case 6:
             res = _context.v;
             if (res.success && res.url) {
               uploaded.push(res.url);
             } else {
               setError(res.error || "Upload foto gagal.");
             }
-            _context.n = 7;
+            _context.n = 8;
             break;
-          case 6:
-            _context.p = 6;
+          case 7:
+            _context.p = 7;
             _t = _context.v;
             setError("Upload foto gagal: " + (_t.message || _t));
-          case 7:
-            _i2++;
-            _context.n = 2;
-            break;
           case 8:
+            _context.n = 3;
+            break;
+          case 9:
+            _context.n = 11;
+            break;
+          case 10:
+            _context.p = 10;
+            _t2 = _context.v;
+            _iterator.e(_t2);
+          case 11:
+            _context.p = 11;
+            _iterator.f();
+            return _context.f(11);
+          case 12:
             if (uploaded.length > 0) onChange([].concat(_toConsumableArray(list), uploaded));
             setUploading(false);
-            e.target.value = "";
-          case 9:
+          case 13:
             return _context.a(2);
         }
-      }, _callee, null, [[3, 6]]);
+      }, _callee, null, [[4, 7], [2, 10, 11, 12]]);
     }));
-    return function handleFiles(_x3) {
+    return function processFiles(_x3) {
       return _ref0.apply(this, arguments);
+    };
+  }();
+  var handleChange = /*#__PURE__*/function () {
+    var _ref1 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2(e) {
+      return _regenerator().w(function (_context2) {
+        while (1) switch (_context2.n) {
+          case 0:
+            _context2.n = 1;
+            return processFiles(Array.from(e.target.files || []));
+          case 1:
+            e.target.value = "";
+            setShowModal(false);
+          case 2:
+            return _context2.a(2);
+        }
+      }, _callee2);
+    }));
+    return function handleChange(_x4) {
+      return _ref1.apply(this, arguments);
     };
   }();
   var remove = function remove(idx) {
@@ -724,61 +760,117 @@ function PhotoUploader(_ref9) {
   return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     className: "flex flex-wrap gap-2"
   }, list.map(function (src, i) {
-    return /*#__PURE__*/React.createElement("a", {
+    return /*#__PURE__*/React.createElement("div", {
       key: i,
+      className: "relative w-20 h-20 rounded-lg overflow-hidden border border-zinc-700"
+    }, /*#__PURE__*/React.createElement("a", {
       href: src,
       target: "_blank",
       rel: "noreferrer",
-      className: "relative w-20 h-20 rounded-lg overflow-hidden border border-zinc-700 group block"
+      className: "block w-full h-full"
     }, /*#__PURE__*/React.createElement("img", {
       src: src,
       alt: "Foto ".concat(i + 1),
       className: "w-full h-full object-cover"
-    }), /*#__PURE__*/React.createElement("button", {
+    })), /*#__PURE__*/React.createElement("button", {
       type: "button",
       onClick: function onClick(e) {
         e.preventDefault();
         e.stopPropagation();
         remove(i);
       },
-      className: "absolute top-0.5 right-0.5 bg-black/70 text-zinc-200 rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition-opacity"
+      className: "absolute top-0.5 right-0.5 bg-black/80 text-white rounded-full p-1 leading-none"
     }, /*#__PURE__*/React.createElement(Ico, {
       name: "X",
-      size: 12
+      size: 11
     })));
-  }), /*#__PURE__*/React.createElement("label", {
-    className: "w-20 h-20 flex flex-col items-center justify-center gap-1 rounded-lg border border-dashed text-[10px] cursor-pointer transition-colors border-zinc-700 text-zinc-500 hover:border-orange-500/60 hover:text-orange-300"
-  }, uploading ? /*#__PURE__*/React.createElement(Ico, {
+  }), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    disabled: uploading,
+    onClick: function onClick() {
+      return !uploading && setShowModal(true);
+    },
+    className: "w-20 h-20 flex flex-col items-center justify-center gap-1 rounded-lg border border-dashed text-[10px] cursor-pointer transition-colors border-zinc-700 text-zinc-500 hover:border-orange-500/60 hover:text-orange-300 disabled:opacity-50"
+  }, uploading ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Ico, {
     name: "Loader2",
     size: 16,
     className: "animate-spin"
-  }) : /*#__PURE__*/React.createElement(Ico, {
-    name: "Upload",
+  }), /*#__PURE__*/React.createElement("span", null, "Mengupload...")) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Ico, {
+    name: "Plus",
     size: 16
-  }), uploading ? "Mengupload..." : "Tambah Foto", /*#__PURE__*/React.createElement("input", {
+  }), /*#__PURE__*/React.createElement("span", null, "Tambah Foto")))), error && /*#__PURE__*/React.createElement("p", {
+    className: "text-[11px] text-rose-400 mt-1.5"
+  }, error), hint && /*#__PURE__*/React.createElement("p", {
+    className: "text-[11px] text-zinc-500 mt-1.5"
+  }, hint), /*#__PURE__*/React.createElement("input", {
+    ref: galleryRef,
     type: "file",
     accept: "image/*",
     multiple: true,
     className: "hidden",
-    onChange: handleFiles,
-    disabled: uploading
-  }))), error && /*#__PURE__*/React.createElement("p", {
-    className: "text-[11px] text-rose-400 mt-1.5"
-  }, error), hint && /*#__PURE__*/React.createElement("p", {
-    className: "text-[11px] text-zinc-500 mt-1.5"
-  }, hint));
+    onChange: handleChange
+  }), /*#__PURE__*/React.createElement("input", {
+    ref: cameraRef,
+    type: "file",
+    accept: "image/*",
+    capture: "environment",
+    className: "hidden",
+    onChange: handleChange
+  }), showModal && /*#__PURE__*/React.createElement("div", {
+    className: "fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60",
+    onClick: function onClick() {
+      return setShowModal(false);
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "bg-zinc-900 border border-zinc-700 rounded-t-2xl sm:rounded-2xl w-full sm:max-w-xs p-4 space-y-3",
+    onClick: function onClick(e) {
+      return e.stopPropagation();
+    }
+  }, /*#__PURE__*/React.createElement("p", {
+    className: "text-sm font-bold text-zinc-100 text-center"
+  }, "Tambah Foto"), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    onClick: function onClick() {
+      setShowModal(false);
+      setTimeout(function () {
+        return cameraRef.current && cameraRef.current.click();
+      }, 100);
+    },
+    className: "w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-orange-500/10 border border-orange-500/30 text-orange-300 font-semibold text-sm hover:bg-orange-500/20"
+  }, /*#__PURE__*/React.createElement(Ico, {
+    name: "Camera",
+    size: 20
+  }), " Ambil Foto dari Kamera"), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    onClick: function onClick() {
+      setShowModal(false);
+      setTimeout(function () {
+        return galleryRef.current && galleryRef.current.click();
+      }, 100);
+    },
+    className: "w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-zinc-800 border border-zinc-700 text-zinc-200 font-semibold text-sm hover:bg-zinc-700"
+  }, /*#__PURE__*/React.createElement(Ico, {
+    name: "Image",
+    size: 20
+  }), " Pilih dari Galeri"), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    onClick: function onClick() {
+      return setShowModal(false);
+    },
+    className: "w-full py-2 text-xs text-zinc-500 hover:text-zinc-300"
+  }, "Batal"))));
 }
 
 /* =========================================================================
    DASHBOARD
    ========================================================================= */
 
-function KpiCard(_ref1) {
-  var icon = _ref1.icon,
-    label = _ref1.label,
-    value = _ref1.value,
-    sub = _ref1.sub,
-    accent = _ref1.accent;
+function KpiCard(_ref10) {
+  var icon = _ref10.icon,
+    label = _ref10.label,
+    value = _ref10.value,
+    sub = _ref10.sub,
+    accent = _ref10.accent;
   return /*#__PURE__*/React.createElement("div", {
     className: "bg-zinc-900 border border-zinc-800 rounded-xl p-4 flex items-start gap-3"
   }, /*#__PURE__*/React.createElement("div", {
@@ -794,8 +886,8 @@ function KpiCard(_ref1) {
     className: "text-[11px] text-zinc-500 mt-0.5"
   }, sub)));
 }
-function Dashboard(_ref10) {
-  var jobs = _ref10.jobs;
+function Dashboard(_ref11) {
+  var jobs = _ref11.jobs;
   var data = useMemo(function () {
     var withEff = jobs.map(function (j) {
       return _objectSpread(_objectSpread({}, j), {}, {
@@ -1030,9 +1122,9 @@ function Dashboard(_ref10) {
    KANBAN BOARD
    ========================================================================= */
 
-function KanbanCard(_ref11) {
-  var job = _ref11.job,
-    onOpen = _ref11.onOpen;
+function KanbanCard(_ref12) {
+  var job = _ref12.job,
+    onOpen = _ref12.onOpen;
   var eff = getEffectiveStatus(job);
   var meta = STATUS_META[eff];
   var appStatus = getApprovalStatus(job);
@@ -1094,14 +1186,14 @@ function KanbanCard(_ref11) {
     size: 12
   }), " Delay ", getDelayHours(job), " jam"));
 }
-function KanbanBoard(_ref12) {
-  var jobs = _ref12.jobs,
-    onMove = _ref12.onMove,
-    onOpen = _ref12.onOpen;
-  var _useState7 = useState(null),
-    _useState8 = _slicedToArray(_useState7, 2),
-    dragOver = _useState8[0],
-    setDragOver = _useState8[1];
+function KanbanBoard(_ref13) {
+  var jobs = _ref13.jobs,
+    onMove = _ref13.onMove,
+    onOpen = _ref13.onOpen;
+  var _useState9 = useState(null),
+    _useState0 = _slicedToArray(_useState9, 2),
+    dragOver = _useState0[0],
+    setDragOver = _useState0[1];
   var handleDrop = function handleDrop(e, status) {
     e.preventDefault();
     setDragOver(null);
@@ -1154,13 +1246,13 @@ function KanbanBoard(_ref12) {
    JOB DETAIL / APPROVAL PANEL
    ========================================================================= */
 
-function ApprovalStep(_ref13) {
-  var role = _ref13.role,
-    approval = _ref13.approval,
-    required = _ref13.required,
-    job = _ref13.job,
-    onAct = _ref13.onAct,
-    currentUser = _ref13.currentUser;
+function ApprovalStep(_ref14) {
+  var role = _ref14.role,
+    approval = _ref14.approval,
+    required = _ref14.required,
+    job = _ref14.job,
+    onAct = _ref14.onAct,
+    currentUser = _ref14.currentUser;
   if (!required) {
     return /*#__PURE__*/React.createElement("div", {
       className: "flex-1 bg-zinc-800/40 border border-zinc-800 rounded-lg p-3 opacity-50"
@@ -1203,23 +1295,23 @@ function ApprovalStep(_ref13) {
     className: "text-[10px] text-zinc-500 mt-1.5"
   }, canAct ? "Sebagai: ".concat(currentUser.name) : "Belum login sesuai role ini."));
 }
-function JobDetail(_ref14) {
-  var job = _ref14.job,
-    onUpdate = _ref14.onUpdate,
-    onClose = _ref14.onClose,
-    currentUser = _ref14.currentUser;
-  var _useState9 = useState(job),
-    _useState0 = _slicedToArray(_useState9, 2),
-    local = _useState0[0],
-    setLocal = _useState0[1];
-  var _useState1 = useState(false),
+function JobDetail(_ref15) {
+  var job = _ref15.job,
+    onUpdate = _ref15.onUpdate,
+    onClose = _ref15.onClose,
+    currentUser = _ref15.currentUser;
+  var _useState1 = useState(job),
     _useState10 = _slicedToArray(_useState1, 2),
-    saving = _useState10[0],
-    setSaving = _useState10[1];
-  var _useState11 = useState(""),
+    local = _useState10[0],
+    setLocal = _useState10[1];
+  var _useState11 = useState(false),
     _useState12 = _slicedToArray(_useState11, 2),
-    saveMsg = _useState12[0],
-    setSaveMsg = _useState12[1];
+    saving = _useState12[0],
+    setSaving = _useState12[1];
+  var _useState13 = useState(""),
+    _useState14 = _slicedToArray(_useState13, 2),
+    saveMsg = _useState14[0],
+    setSaveMsg = _useState14[1];
   var eff = getEffectiveStatus(local);
   var req = requiredApprovals(local.risk);
   var save = function save(patch) {
@@ -1228,41 +1320,41 @@ function JobDetail(_ref14) {
     });
   };
   var persist = /*#__PURE__*/function () {
-    var _ref15 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2(jobToSave) {
-      var res, _t2;
-      return _regenerator().w(function (_context2) {
-        while (1) switch (_context2.p = _context2.n) {
+    var _ref16 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3(jobToSave) {
+      var res, _t3;
+      return _regenerator().w(function (_context3) {
+        while (1) switch (_context3.p = _context3.n) {
           case 0:
             setSaving(true);
             setSaveMsg("");
-            _context2.p = 1;
-            _context2.n = 2;
+            _context3.p = 1;
+            _context3.n = 2;
             return apiPost("updateJob", {
               job: jobToSave
             });
           case 2:
-            res = _context2.v;
+            res = _context3.v;
             if (res.success) {
               onUpdate(jobToSave);
               setSaveMsg("Tersimpan ke server.");
             } else {
               setSaveMsg("Gagal menyimpan: " + (res.error || "unknown error"));
             }
-            _context2.n = 4;
+            _context3.n = 4;
             break;
           case 3:
-            _context2.p = 3;
-            _t2 = _context2.v;
-            setSaveMsg("Gagal menyimpan: " + (_t2.message || _t2));
+            _context3.p = 3;
+            _t3 = _context3.v;
+            setSaveMsg("Gagal menyimpan: " + (_t3.message || _t3));
           case 4:
             setSaving(false);
           case 5:
-            return _context2.a(2);
+            return _context3.a(2);
         }
-      }, _callee2, null, [[1, 3]]);
+      }, _callee3, null, [[1, 3]]);
     }));
-    return function persist(_x4) {
-      return _ref15.apply(this, arguments);
+    return function persist(_x5) {
+      return _ref16.apply(this, arguments);
     };
   }();
   var handleManualSave = function handleManualSave() {
@@ -1606,31 +1698,31 @@ function JobDetail(_ref14) {
    LOGIN MODAL
    ========================================================================= */
 
-function LoginModal(_ref16) {
+function LoginModal(_ref17) {
   var _2;
-  var accounts = _ref16.accounts,
-    onLogin = _ref16.onLogin,
-    onClose = _ref16.onClose;
-  var _useState13 = useState("foreman"),
-    _useState14 = _slicedToArray(_useState13, 2),
-    role = _useState14[0],
-    setRole = _useState14[1];
-  var _useState15 = useState(((_2 = (accounts.foreman || [])[0]) === null || _2 === void 0 ? void 0 : _2.name) || ""),
+  var accounts = _ref17.accounts,
+    onLogin = _ref17.onLogin,
+    onClose = _ref17.onClose;
+  var _useState15 = useState("foreman"),
     _useState16 = _slicedToArray(_useState15, 2),
-    name = _useState16[0],
-    setName = _useState16[1];
-  var _useState17 = useState(""),
+    role = _useState16[0],
+    setRole = _useState16[1];
+  var _useState17 = useState(((_2 = (accounts.foreman || [])[0]) === null || _2 === void 0 ? void 0 : _2.name) || ""),
     _useState18 = _slicedToArray(_useState17, 2),
-    password = _useState18[0],
-    setPassword = _useState18[1];
+    name = _useState18[0],
+    setName = _useState18[1];
   var _useState19 = useState(""),
     _useState20 = _slicedToArray(_useState19, 2),
-    error = _useState20[0],
-    setError = _useState20[1];
-  var _useState21 = useState(false),
+    password = _useState20[0],
+    setPassword = _useState20[1];
+  var _useState21 = useState(""),
     _useState22 = _slicedToArray(_useState21, 2),
-    checking = _useState22[0],
-    setChecking = _useState22[1];
+    error = _useState22[0],
+    setError = _useState22[1];
+  var _useState23 = useState(false),
+    _useState24 = _slicedToArray(_useState23, 2),
+    checking = _useState24[0],
+    setChecking = _useState24[1];
   var people = accounts[role] || [];
   var changeRole = function changeRole(r) {
     var _3;
@@ -1640,29 +1732,29 @@ function LoginModal(_ref16) {
     setError("");
   };
   var submit = /*#__PURE__*/function () {
-    var _ref17 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3() {
-      var res, _t3;
-      return _regenerator().w(function (_context3) {
-        while (1) switch (_context3.p = _context3.n) {
+    var _ref18 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4() {
+      var res, _t4;
+      return _regenerator().w(function (_context4) {
+        while (1) switch (_context4.p = _context4.n) {
           case 0:
             if (!(!name || !password)) {
-              _context3.n = 1;
+              _context4.n = 1;
               break;
             }
             setError("Pilih nama & isi password.");
-            return _context3.a(2);
+            return _context4.a(2);
           case 1:
             setChecking(true);
             setError("");
-            _context3.p = 2;
-            _context3.n = 3;
+            _context4.p = 2;
+            _context4.n = 3;
             return apiPost("login", {
               role: role,
               name: name,
               password: password
             });
           case 3:
-            res = _context3.v;
+            res = _context4.v;
             if (res.success) {
               onLogin({
                 role: role,
@@ -1671,21 +1763,21 @@ function LoginModal(_ref16) {
             } else {
               setError(res.error || "Nama atau password salah.");
             }
-            _context3.n = 5;
+            _context4.n = 5;
             break;
           case 4:
-            _context3.p = 4;
-            _t3 = _context3.v;
-            setError("Gagal terhubung ke server: " + (_t3.message || _t3));
+            _context4.p = 4;
+            _t4 = _context4.v;
+            setError("Gagal terhubung ke server: " + (_t4.message || _t4));
           case 5:
             setChecking(false);
           case 6:
-            return _context3.a(2);
+            return _context4.a(2);
         }
-      }, _callee3, null, [[2, 4]]);
+      }, _callee4, null, [[2, 4]]);
     }));
     return function submit() {
-      return _ref17.apply(this, arguments);
+      return _ref18.apply(this, arguments);
     };
   }();
   return /*#__PURE__*/React.createElement("div", {
@@ -1776,76 +1868,76 @@ function LoginModal(_ref16) {
    ADMIN SETTINGS - kelola akun Foreman / Section Head / Dept Head
    ========================================================================= */
 
-function AdminSettings(_ref18) {
-  var accounts = _ref18.accounts,
-    setAccounts = _ref18.setAccounts;
-  var _useState23 = useState(false),
-    _useState24 = _slicedToArray(_useState23, 2),
-    unlocked = _useState24[0],
-    setUnlocked = _useState24[1];
-  var _useState25 = useState(""),
+function AdminSettings(_ref19) {
+  var accounts = _ref19.accounts,
+    setAccounts = _ref19.setAccounts;
+  var _useState25 = useState(false),
     _useState26 = _slicedToArray(_useState25, 2),
-    adminPassword = _useState26[0],
-    setAdminPassword = _useState26[1];
+    unlocked = _useState26[0],
+    setUnlocked = _useState26[1];
   var _useState27 = useState(""),
     _useState28 = _slicedToArray(_useState27, 2),
-    pwdInput = _useState28[0],
-    setPwdInput = _useState28[1];
+    adminPassword = _useState28[0],
+    setAdminPassword = _useState28[1];
   var _useState29 = useState(""),
     _useState30 = _slicedToArray(_useState29, 2),
-    error = _useState30[0],
-    setError = _useState30[1];
-  var _useState31 = useState(false),
+    pwdInput = _useState30[0],
+    setPwdInput = _useState30[1];
+  var _useState31 = useState(""),
     _useState32 = _slicedToArray(_useState31, 2),
-    checking = _useState32[0],
-    setChecking = _useState32[1];
-  var _useState33 = useState(""),
+    error = _useState32[0],
+    setError = _useState32[1];
+  var _useState33 = useState(false),
     _useState34 = _slicedToArray(_useState33, 2),
-    saveMsg = _useState34[0],
-    setSaveMsg = _useState34[1];
+    checking = _useState34[0],
+    setChecking = _useState34[1];
+  var _useState35 = useState(""),
+    _useState36 = _slicedToArray(_useState35, 2),
+    saveMsg = _useState36[0],
+    setSaveMsg = _useState36[1];
   var tryUnlock = /*#__PURE__*/function () {
-    var _ref19 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4() {
-      var res, _t4;
-      return _regenerator().w(function (_context4) {
-        while (1) switch (_context4.p = _context4.n) {
+    var _ref20 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee5() {
+      var res, _t5;
+      return _regenerator().w(function (_context5) {
+        while (1) switch (_context5.p = _context5.n) {
           case 0:
             if (pwdInput) {
-              _context4.n = 1;
+              _context5.n = 1;
               break;
             }
-            return _context4.a(2);
+            return _context5.a(2);
           case 1:
             setChecking(true);
             setError("");
-            _context4.p = 2;
-            _context4.n = 3;
+            _context5.p = 2;
+            _context5.n = 3;
             return apiPost("updateAccounts", {
               adminPassword: pwdInput,
               accounts: accounts
             });
           case 3:
-            res = _context4.v;
+            res = _context5.v;
             if (res.success) {
               setAdminPassword(pwdInput);
               setUnlocked(true);
             } else {
               setError(res.error || "Password admin salah.");
             }
-            _context4.n = 5;
+            _context5.n = 5;
             break;
           case 4:
-            _context4.p = 4;
-            _t4 = _context4.v;
-            setError("Gagal terhubung ke server: " + (_t4.message || _t4));
+            _context5.p = 4;
+            _t5 = _context5.v;
+            setError("Gagal terhubung ke server: " + (_t5.message || _t5));
           case 5:
             setChecking(false);
           case 6:
-            return _context4.a(2);
+            return _context5.a(2);
         }
-      }, _callee4, null, [[2, 4]]);
+      }, _callee5, null, [[2, 4]]);
     }));
     return function tryUnlock() {
-      return _ref19.apply(this, arguments);
+      return _ref20.apply(this, arguments);
     };
   }();
   if (!unlocked) {
@@ -1887,35 +1979,35 @@ function AdminSettings(_ref18) {
     }), checking ? "Memeriksa..." : "Unlock"));
   }
   var saveAccounts = /*#__PURE__*/function () {
-    var _ref20 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee5(next) {
-      var res, _t5;
-      return _regenerator().w(function (_context5) {
-        while (1) switch (_context5.p = _context5.n) {
+    var _ref21 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee6(next) {
+      var res, _t6;
+      return _regenerator().w(function (_context6) {
+        while (1) switch (_context6.p = _context6.n) {
           case 0:
             setAccounts(next);
             setSaveMsg("Menyimpan...");
-            _context5.p = 1;
-            _context5.n = 2;
+            _context6.p = 1;
+            _context6.n = 2;
             return apiPost("updateAccounts", {
               adminPassword: adminPassword,
               accounts: next
             });
           case 2:
-            res = _context5.v;
+            res = _context6.v;
             setSaveMsg(res.success ? "Tersimpan ke server." : "Gagal: " + (res.error || "unknown"));
-            _context5.n = 4;
+            _context6.n = 4;
             break;
           case 3:
-            _context5.p = 3;
-            _t5 = _context5.v;
-            setSaveMsg("Gagal menyimpan: " + (_t5.message || _t5));
+            _context6.p = 3;
+            _t6 = _context6.v;
+            setSaveMsg("Gagal menyimpan: " + (_t6.message || _t6));
           case 4:
-            return _context5.a(2);
+            return _context6.a(2);
         }
-      }, _callee5, null, [[1, 3]]);
+      }, _callee6, null, [[1, 3]]);
     }));
-    return function saveAccounts(_x5) {
-      return _ref20.apply(this, arguments);
+    return function saveAccounts(_x6) {
+      return _ref21.apply(this, arguments);
     };
   }();
   var updateRole = function updateRole(role, list) {
@@ -1946,26 +2038,26 @@ function AdminSettings(_ref18) {
     });
   }));
 }
-function AccountRoleEditor(_ref21) {
-  var role = _ref21.role,
-    list = _ref21.list,
-    onChange = _ref21.onChange;
-  var _useState35 = useState(""),
-    _useState36 = _slicedToArray(_useState35, 2),
-    newName = _useState36[0],
-    setNewName = _useState36[1];
+function AccountRoleEditor(_ref22) {
+  var role = _ref22.role,
+    list = _ref22.list,
+    onChange = _ref22.onChange;
   var _useState37 = useState(""),
     _useState38 = _slicedToArray(_useState37, 2),
-    newPassword = _useState38[0],
-    setNewPassword = _useState38[1];
-  var _useState39 = useState({}),
+    newName = _useState38[0],
+    setNewName = _useState38[1];
+  var _useState39 = useState(""),
     _useState40 = _slicedToArray(_useState39, 2),
-    showPwd = _useState40[0],
-    setShowPwd = _useState40[1];
-  var _useState41 = useState(""),
+    newPassword = _useState40[0],
+    setNewPassword = _useState40[1];
+  var _useState41 = useState({}),
     _useState42 = _slicedToArray(_useState41, 2),
-    error = _useState42[0],
-    setError = _useState42[1];
+    showPwd = _useState42[0],
+    setShowPwd = _useState42[1];
+  var _useState43 = useState(""),
+    _useState44 = _slicedToArray(_useState43, 2),
+    error = _useState44[0],
+    setError = _useState44[1];
   var add = function add() {
     var name = newName.trim();
     if (!name || !newPassword) {
@@ -2077,18 +2169,18 @@ function AccountRoleEditor(_ref21) {
    JOB LIST + FILTERS
    ========================================================================= */
 
-function JobList(_ref22) {
-  var jobs = _ref22.jobs,
-    onOpen = _ref22.onOpen;
-  var _useState43 = useState({
+function JobList(_ref23) {
+  var jobs = _ref23.jobs,
+    onOpen = _ref23.onOpen;
+  var _useState45 = useState({
       area: "",
       status: "",
       pic: "",
       q: ""
     }),
-    _useState44 = _slicedToArray(_useState43, 2),
-    filters = _useState44[0],
-    setFilters = _useState44[1];
+    _useState46 = _slicedToArray(_useState45, 2),
+    filters = _useState46[0],
+    setFilters = _useState46[1];
   var filtered = useMemo(function () {
     return jobs.filter(function (j) {
       var eff = getEffectiveStatus(j);
@@ -2264,48 +2356,48 @@ var emptyForm = {
   stop6: [],
   kySheetBefore: []
 };
-function NewJobForm(_ref23) {
-  var onSubmit = _ref23.onSubmit;
-  var _useState45 = useState(emptyForm),
-    _useState46 = _slicedToArray(_useState45, 2),
-    form = _useState46[0],
-    setForm = _useState46[1];
-  var _useState47 = useState(""),
+function NewJobForm(_ref24) {
+  var onSubmit = _ref24.onSubmit;
+  var _useState47 = useState(emptyForm),
     _useState48 = _slicedToArray(_useState47, 2),
-    error = _useState48[0],
-    setError = _useState48[1];
-  var _useState49 = useState(false),
+    form = _useState48[0],
+    setForm = _useState48[1];
+  var _useState49 = useState(""),
     _useState50 = _slicedToArray(_useState49, 2),
-    submitting = _useState50[0],
-    setSubmitting = _useState50[1];
+    error = _useState50[0],
+    setError = _useState50[1];
+  var _useState51 = useState(false),
+    _useState52 = _slicedToArray(_useState51, 2),
+    submitting = _useState52[0],
+    setSubmitting = _useState52[1];
   var set = function set(patch) {
     return setForm(function (f) {
       return _objectSpread(_objectSpread({}, f), patch);
     });
   };
   var submit = /*#__PURE__*/function () {
-    var _ref24 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee6() {
+    var _ref25 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee7() {
       var res;
-      return _regenerator().w(function (_context6) {
-        while (1) switch (_context6.n) {
+      return _regenerator().w(function (_context7) {
+        while (1) switch (_context7.n) {
           case 0:
             if (!(!form.requester || !form.deskripsi || !form.lokasi || !form.plannedDate || !form.estDuration)) {
-              _context6.n = 1;
+              _context7.n = 1;
               break;
             }
             setError("Lengkapi seluruh field wajib (*) sebelum submit.");
-            return _context6.a(2);
+            return _context7.a(2);
           case 1:
             if (!((form.risk !== "Low" || form.needShutdown === "Yes") && form.kySheetBefore.length === 0)) {
-              _context6.n = 2;
+              _context7.n = 2;
               break;
             }
             setError("Pekerjaan dengan risiko Medium/High atau yang memerlukan shutdown wajib upload foto KY Sheet (Sebelum Bekerja) terlebih dahulu.");
-            return _context6.a(2);
+            return _context7.a(2);
           case 2:
             setError("");
             setSubmitting(true);
-            _context6.n = 3;
+            _context7.n = 3;
             return onSubmit(_objectSpread(_objectSpread({}, form), {}, {
               requestDate: new Date().toISOString().slice(0, 10),
               approvals: {
@@ -2329,7 +2421,7 @@ function NewJobForm(_ref23) {
               kySheetAfter: []
             }));
           case 3:
-            res = _context6.v;
+            res = _context7.v;
             setSubmitting(false);
             if (res && res.success) {
               setForm(emptyForm);
@@ -2337,12 +2429,12 @@ function NewJobForm(_ref23) {
               setError("Gagal menyimpan job: " + (res && res.error || "unknown error"));
             }
           case 4:
-            return _context6.a(2);
+            return _context7.a(2);
         }
-      }, _callee6);
+      }, _callee7);
     }));
     return function submit() {
-      return _ref24.apply(this, arguments);
+      return _ref25.apply(this, arguments);
     };
   }();
   return /*#__PURE__*/React.createElement("div", {
@@ -2581,57 +2673,57 @@ function NewJobForm(_ref23) {
    ========================================================================= */
 
 function App() {
-  var _useState51 = useState([]),
-    _useState52 = _slicedToArray(_useState51, 2),
-    jobs = _useState52[0],
-    setJobs = _useState52[1];
-  var _useState53 = useState({
+  var _useState53 = useState([]),
+    _useState54 = _slicedToArray(_useState53, 2),
+    jobs = _useState54[0],
+    setJobs = _useState54[1];
+  var _useState55 = useState({
       foreman: [],
       sectionHead: [],
       deptHead: []
     }),
-    _useState54 = _slicedToArray(_useState53, 2),
-    accounts = _useState54[0],
-    setAccounts = _useState54[1];
-  var _useState55 = useState(true),
     _useState56 = _slicedToArray(_useState55, 2),
-    loading = _useState56[0],
-    setLoading = _useState56[1];
-  var _useState57 = useState(""),
+    accounts = _useState56[0],
+    setAccounts = _useState56[1];
+  var _useState57 = useState(true),
     _useState58 = _slicedToArray(_useState57, 2),
-    loadError = _useState58[0],
-    setLoadError = _useState58[1];
-  var _useState59 = useState("dashboard"),
+    loading = _useState58[0],
+    setLoading = _useState58[1];
+  var _useState59 = useState(""),
     _useState60 = _slicedToArray(_useState59, 2),
-    tab = _useState60[0],
-    setTab = _useState60[1];
-  var _useState61 = useState(null),
+    loadError = _useState60[0],
+    setLoadError = _useState60[1];
+  var _useState61 = useState("dashboard"),
     _useState62 = _slicedToArray(_useState61, 2),
-    openJobId = _useState62[0],
-    setOpenJobId = _useState62[1];
+    tab = _useState62[0],
+    setTab = _useState62[1];
   var _useState63 = useState(null),
     _useState64 = _slicedToArray(_useState63, 2),
-    currentUser = _useState64[0],
-    setCurrentUser = _useState64[1];
-  var _useState65 = useState(false),
+    openJobId = _useState64[0],
+    setOpenJobId = _useState64[1];
+  var _useState65 = useState(null),
     _useState66 = _slicedToArray(_useState65, 2),
-    showLogin = _useState66[0],
-    setShowLogin = _useState66[1];
+    currentUser = _useState66[0],
+    setCurrentUser = _useState66[1];
+  var _useState67 = useState(false),
+    _useState68 = _slicedToArray(_useState67, 2),
+    showLogin = _useState68[0],
+    setShowLogin = _useState68[1];
   var loadData = /*#__PURE__*/function () {
-    var _ref25 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee7() {
-      var data, _t6;
-      return _regenerator().w(function (_context7) {
-        while (1) switch (_context7.p = _context7.n) {
+    var _ref26 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee8() {
+      var data, _t7;
+      return _regenerator().w(function (_context8) {
+        while (1) switch (_context8.p = _context8.n) {
           case 0:
             setLoading(true);
             setLoadError("");
-            _context7.p = 1;
-            _context7.n = 2;
+            _context8.p = 1;
+            _context8.n = 2;
             return apiGet("getData");
           case 2:
-            data = _context7.v;
+            data = _context8.v;
             if (!data.error) {
-              _context7.n = 3;
+              _context8.n = 3;
               break;
             }
             throw new Error(data.error);
@@ -2642,21 +2734,21 @@ function App() {
               sectionHead: [],
               deptHead: []
             });
-            _context7.n = 5;
+            _context8.n = 5;
             break;
           case 4:
-            _context7.p = 4;
-            _t6 = _context7.v;
-            setLoadError(_t6.message || String(_t6));
+            _context8.p = 4;
+            _t7 = _context8.v;
+            setLoadError(_t7.message || String(_t7));
           case 5:
             setLoading(false);
           case 6:
-            return _context7.a(2);
+            return _context8.a(2);
         }
-      }, _callee7, null, [[1, 4]]);
+      }, _callee8, null, [[1, 4]]);
     }));
     return function loadData() {
-      return _ref25.apply(this, arguments);
+      return _ref26.apply(this, arguments);
     };
   }();
   useEffect(function () {
@@ -2689,34 +2781,34 @@ function App() {
     })["catch"](function () {});
   };
   var addJob = /*#__PURE__*/function () {
-    var _ref26 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee8(job) {
-      var res, _t7;
-      return _regenerator().w(function (_context8) {
-        while (1) switch (_context8.p = _context8.n) {
+    var _ref27 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee9(job) {
+      var res, _t8;
+      return _regenerator().w(function (_context9) {
+        while (1) switch (_context9.p = _context9.n) {
           case 0:
-            _context8.p = 0;
-            _context8.n = 1;
+            _context9.p = 0;
+            _context9.n = 1;
             return apiPost("addJob", {
               job: job
             });
           case 1:
-            res = _context8.v;
+            res = _context9.v;
             if (res.success && res.job) setJobs(function (js) {
               return [res.job].concat(_toConsumableArray(js));
             });
-            return _context8.a(2, res);
+            return _context9.a(2, res);
           case 2:
-            _context8.p = 2;
-            _t7 = _context8.v;
-            return _context8.a(2, {
+            _context9.p = 2;
+            _t8 = _context9.v;
+            return _context9.a(2, {
               success: false,
-              error: _t7.message || String(_t7)
+              error: _t8.message || String(_t8)
             });
         }
-      }, _callee8, null, [[0, 2]]);
+      }, _callee9, null, [[0, 2]]);
     }));
-    return function addJob(_x6) {
-      return _ref26.apply(this, arguments);
+    return function addJob(_x7) {
+      return _ref27.apply(this, arguments);
     };
   }();
   var openJob = jobs.find(function (j) {
@@ -2900,7 +2992,7 @@ function App() {
     }
   }), /*#__PURE__*/React.createElement("footer", {
     className: "border-t border-zinc-800 py-4 text-center text-[11px] text-zinc-600"
-  }, "Sistem Job Monitoring Non-Routine / Irregular Job \u2014 Melting & Molding ACE, PT AT Indonesia. Data & foto tersimpan otomatis di server."));
+  }, "Sistem Job Monitoring Non-Routine / Irregular Job \u2014 Casting-2 (ACE), PT AT Indonesia. Data & foto tersimpan otomatis di server."));
 }
 
 
